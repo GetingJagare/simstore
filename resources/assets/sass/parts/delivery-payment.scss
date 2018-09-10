@@ -1,0 +1,275 @@
+.home-page .delivery-payment {
+  padding: 63px 0 159px 0;
+}
+
+.delivery-payment {
+
+  padding: 63px 0;
+  background: #fff;
+
+  .container {
+    position: relative;
+  }
+  
+  .delivery-payment__left {
+    width: 700px;
+  }
+
+  .delivery-payment__item {
+    position: relative;
+    width: 300px;
+    padding: 78px 0 0 50px;
+    line-height: 1.35;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      background: url("/images/dp-sprite.png");
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+
+    &.technology {
+      &:before {
+        background-position: -0px -120px;
+      }
+    }
+
+    &.airplane {
+      &:before {
+        background-position: -0px -0px;
+      }
+    }
+
+    &.check-form {
+      &:before {
+        background-position: -60px -0px;
+      }
+    }
+
+    &.delivery {
+      &:before {
+        background-position: -0px -60px;
+      }
+    }
+
+    &.discuss-issue {
+      &:before {
+        background-position: -60px -60px;
+      }
+    }
+
+    &.text-line-form {
+      &:before {
+        background-position: -60px -120px;
+      }
+    }
+
+    &.world-wide-web {
+      &:before {
+        background-position: -0px -180px;
+      }
+    }
+
+  }
+
+  .row-2 {
+    margin: 38px 0 0 0;
+  }
+
+  .row-3 {
+    margin: 87px 0 0 0;
+  }
+
+
+  .delivery-payment__right {
+    padding: 102px 0 0 0;
+
+    .big-h1 {
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 19px;
+      margin-top: 16px;
+    }
+
+  }
+  
+  .delivery-payment__lines {
+    background: url("/images/delivery-payment-lines.jpg");
+    width: 611px;
+    height: 405px;
+    position: absolute;
+    top: 29px;
+    left: 40px;
+    z-index: 0;
+  }
+  
+}
+
+@include media-breakpoint-only(lg) {
+  .delivery-payment .delivery-payment__right {
+    padding: 0 0 40px 0;
+  }
+
+  .delivery-payment .delivery-payment__lines {
+    background-size: 570px;
+    background-repeat: no-repeat;
+    top: 190px;
+  }
+
+  .delivery-payment .delivery-payment__item {
+    width: 280px;
+  }
+
+  .delivery-payment .row-2 {
+    margin: 28px 0 0 0;
+  }
+
+  .delivery-payment .row-3 {
+    margin: 77px 0 0 0;
+  }
+
+}
+
+
+@include media-breakpoint-between(sm, md) {
+
+  .delivery-payment .delivery-payment__lines {
+    background-image: url('/images/delivery-payment-lines-mob.jpg');
+    width: 304px;
+    height: 521px;
+    left: 50px;
+  }
+
+  .delivery-payment__item.item-1 {
+    position: absolute;
+    top: -25px;
+    left: 20px;
+  }
+
+  .delivery-payment__item.item-2 {
+    position: absolute;
+    top: 160px;
+    left: 30px;
+  }
+
+  .delivery-payment__item.item-3 {
+    position: absolute;
+    top: 160px;
+    left: 325px;
+  }
+
+  .delivery-payment__item.item-4 {
+    position: absolute;
+    top: 340px;
+    left: 30px;
+  }
+
+  .delivery-payment__item.item-5 {
+    position: absolute;
+    top: 340px;
+    left: 325px;
+  }
+
+  .delivery-payment__item.item-6 {
+    position: absolute;
+    top: 515px;
+    left: 30px;
+  }
+
+  .delivery-payment__item.item-7 {
+    position: absolute;
+    top: 515px;
+    left: 325px;
+  }
+
+  .delivery-payment .delivery-payment__right {
+    padding: 0;
+
+    .big-h1 {
+      font-size: 25px;
+      line-height: 1.1;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+  }
+
+  .delivery-payment__right-col {
+    width: 355px;
+    position: absolute;
+    right: 40px;
+    top: -30px;
+  }
+
+
+
+  .delivery-payment {
+    height: 760px;
+  }
+
+
+  .home-page .delivery-payment {
+    height: 870px;
+  }
+
+}
+
+@include media-breakpoint-only(xs) {
+  .delivery-payment .delivery-payment__lines {
+    display: none;
+  }
+
+  .delivery-payment .delivery-payment__right {
+    padding: 0;
+    margin: 0 0 40px 0;
+  }
+
+  .delivery-payment .delivery-payment__right p {
+    font-size: 16px;
+  }
+
+  .delivery-payment .row-2, .delivery-payment .row-3 {
+    margin: 0;
+  }
+
+  .delivery-payment .delivery-payment__item {
+    width: 100%;
+    margin-bottom: 35px;
+  }
+
+  .delivery-payment .delivery-payment__item:after {
+    content: '';
+    width: 4px;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    background: url(https://i.imgur.com/5yEwKG6.jpg);
+    left: 25px;
+    top: 40px;
+  }
+
+  .delivery-payment .delivery-payment__item.item-7:after {
+    display: none;
+  }
+
+  .home-page .delivery-payment {
+    padding: 50px 0 110px 0;
+  }
+
+  .delivery-payment {
+    padding-bottom: 0;
+  }
+
+
+
+}
+

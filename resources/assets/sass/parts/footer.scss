@@ -1,0 +1,129 @@
+footer {
+  background: #343441;
+  color: #fff;
+
+
+  .footer-wrap {
+    min-height: 200px;
+  }
+
+  a {
+    color: #fff;
+  }
+
+  .footer-logo {
+
+    b {
+      font-size: 25px;
+      font-family: 'GothamPro';
+    }
+
+    span {
+      font-weight: 300;
+    }
+
+  }
+
+  .footer-right {
+    line-height: 1.8;
+
+    b {
+      font-size: 20px;
+      font-family: 'GothamPro';
+    }
+
+    a {
+      text-decoration: none;
+      border-bottom: 2px solid #f7d23e;
+    }
+
+  }
+
+  .footer-socials {
+
+    a {
+      display: inline-block;
+      background: url('/images/socials.png') no-repeat;
+      overflow: hidden;
+      text-indent: -9999px;
+      text-align: left;
+      margin: 0 5px;
+
+      &.fb { background-position: -0px -0px; width: 50px; height: 50px; }
+      &.ok { background-position: -50px -0px; width: 50px; height: 50px; }
+      &.tw { background-position: -0px -50px; width: 50px; height: 50px; }
+      &.vk { background-position: -50px -50px; width: 50px; height: 50px; }
+      &.yt { background-position: -0px -100px; width: 50px; height: 50px; }
+
+    }
+
+  }
+
+}
+
+@include media-breakpoint-only(lg) {
+
+  footer .footer-socials a {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+}
+
+@include media-breakpoint-between(sm, md) {
+
+  footer .footer-right {
+    font-size: 13px;
+  }
+
+}
+
+@include media-breakpoint-only(xs) {
+
+  .footer-socials {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  footer .footer-socials a.fb {
+    background-position: -0px -0px;
+    width: 35px;
+    height: 35px;
+  }
+
+  footer .footer-socials a.tw {
+    background-position: -0px -35px;
+    width: 35px;
+    height: 35px;
+  }
+
+  footer .footer-socials a.vk {
+    background-position: -35px -35px;
+    width: 35px;
+    height: 35px;
+  }
+
+  footer .footer-socials a.ok {
+    background-position: -35px -0px;
+    width: 35px;
+    height: 35px;
+  }
+
+  footer .footer-socials a.yt {
+    background-position: -0px -70px;
+    width: 35px;
+    height: 35px;
+  }
+
+  footer .footer-socials a {
+    margin: 0 3px;
+    background-size: 70px;
+  }
+
+  footer {
+    padding: 30px 0;
+  }
+
+
+
+}

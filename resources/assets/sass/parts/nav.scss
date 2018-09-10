@@ -1,0 +1,174 @@
+nav {
+
+  background: #373943;
+  font-size: 19px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    /*width: 100%;*/
+    display: inline-block;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+
+  .nav-menu {
+    list-style: none;
+
+    > li {
+      position: relative;
+
+      > a {
+        display: inline-block;
+        padding: 12px 30px;
+      }
+
+    }
+
+  }
+
+
+  .nav-menu > li:first-child > a {
+    padding-left: 0;
+  }
+
+  .nav-basket {
+    background: #282930;
+    padding: 0 38px;
+
+    span {
+
+      position: relative;
+      z-index: 2;
+      font-size: 15px;
+      font-weight: bold;
+      color: #181818;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      display: inline-block;
+      text-align: center;
+      margin-left: 5px;
+      background: url(/images/sprite.png);
+      background-position: -119px 0;
+      vertical-align: middle;
+      
+    }
+
+    > a {
+
+      &:before {
+        content: '';
+        background: url(/images/sprite.png);
+        background-position: -147px 0px;
+        display: inline-block;
+        width: 30px;
+        height: 22px;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+    }
+    
+  }
+
+}
+
+@include media-breakpoint-between(xs, md) {
+
+  nav .nav-menu > li.has-dropdown > a {
+    padding-right: 20px!important;
+  }
+
+  span.open-dropdown {
+    display: inline-block;
+    background: url(//i.imgur.com/1WcMyne.png) no-repeat center center;
+    vertical-align: middle;
+    margin: 0 0 0 5px;
+    width: 14px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 12px;
+  }
+}
+
+@include media-breakpoint-only(xs) {
+
+  span.open-dropdown {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(//i.imgur.com/1WcMyne.png) no-repeat center center;
+    vertical-align: middle;
+    margin: 0 0 0 5px;
+  }
+
+  nav .has-dropdown .dropdown {
+    background: #181818;
+    margin: 0 -15px;
+    padding: 10px 0;
+
+    > li {
+      padding: 5px 25px;
+      font-size: 15px;
+    }
+
+  }
+
+  span.open-dropdown {
+    width: 40px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 10px;
+  }
+
+
+  nav .has-dropdown .dropdown.opened {
+    display: block!important;
+  }
+
+
+}
+
+@include media-breakpoint-between(sm, md) {
+
+  nav {
+    font-size: 15px;
+  }
+
+  nav .nav-menu > li > a {
+    padding: 12px 20px;
+  }
+
+  nav .nav-basket {
+    padding: 0 15px;
+  }
+
+}
+
+@include media-breakpoint-only(xs) {
+  nav {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+  }
+
+  nav.opened {
+    max-height: 1000px;
+  }
+
+  nav .nav-menu > li {
+    display: block;
+    width: 100%;
+  }
+
+  nav .nav-menu > li > a {
+    padding: 12px 10px!important;
+  }
+}

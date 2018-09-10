@@ -1,0 +1,20 @@
+
+// Body
+$body-bg: #f5fbff;
+
+$container-max-widths: (
+        sm: 720px,
+        md: 720px,
+        lg: 960px,
+        xl: 1200px
+) !default;
+
+// Typography
+$font-family-sans-serif: "Roboto", sans-serif;
+//$font-size-base: 0.9rem;
+//$line-height-base: 1.6;
+
+@mixin non-default-link() {
+  color: #181818;
+  text-decoration: none;
+}
