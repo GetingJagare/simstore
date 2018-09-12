@@ -138,6 +138,8 @@
                         width: 400
                     });
 
+                    addToDataLayer({'event':'lead_one_click_form'});
+
                 }, response => {
 
                     alert('Произошла ошибка при загрузке данных');

@@ -25,13 +25,14 @@
 <script>
     import InfoPopup from './InfoPopup.vue';
     export default {
-        props: ['subject'],
+        props: ['subject', 'leadName'],
 
         data() {
 
             return {
                 form: {
                     subject: this.subject,
+                    leadName: this.leadName,
                     name: '',
                     phone: ''
                 }
@@ -70,6 +71,10 @@
                         adaptive: true,
                         width: 400
                     });
+
+                    if (this.leadName) {
+                        addToDataLayer({event: this.leadName});
+                    }
 
                 }, response => {
 

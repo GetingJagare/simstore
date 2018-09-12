@@ -236,6 +236,8 @@
 
                     this.policy = false;
 
+                    addToDataLayer({'event':'lead_make_order_form'});
+
                 }, response => {
 
                     alert('Произошла ошибка при загрузке данных');

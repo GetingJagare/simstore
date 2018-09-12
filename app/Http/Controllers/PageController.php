@@ -37,7 +37,7 @@ class PageController extends Controller
         return $this->get($region, 'pass');
     }
 
-    public function redirectToRegionSubdomain($slug = null)
+    public function redirectToRegionSubdomain($slug = null, $redirect = true)
     {
         // Знаем ли мы текущий город
         $current = session('region', null);

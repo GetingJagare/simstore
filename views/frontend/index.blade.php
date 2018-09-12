@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="advantages-block__button">
-                            <a href="#" class="button" v-on:click.prevent="openCallbackPopup('Подключить')">Подключить</a>
+                            <a href="#" class="button" v-on:click.prevent="openCallbackPopup('Подключить', 'lead_upper_popup_form')">Подключить</a>
                         </div>
 
                     </div>

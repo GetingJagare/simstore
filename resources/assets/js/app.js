@@ -49,6 +49,13 @@ $(document).ready(function(){
     });*/
 });
 
+window.addToDataLayer = function(data) {
+    if (window.dataLayer) {
+        dataLayer.push(data);
+    }
+    console.log('dataLayer pushed');
+};
+
 window.Vue = require('vue');
 window.VueEvent = require('vue-event-manager');
 
@@ -74,6 +81,7 @@ Vue.component('promo-numbers', require('./components/PromoNumbers.vue'));
 Vue.component('promo-tariffs', require('./components/PromoTariffs.vue'));
 Vue.component('countdown', require('./components/Countdown.vue'));
 Vue.component('callback-popup', require('./components/CallbackPopup.vue'));
+Vue.component('callback-modal', require('./components/modals/CallbackModal'));
 //Vue.component('order', require('./components/Order.vue'));
 
 import CallbackModal from './components/modals/CallbackModal.vue';
@@ -108,11 +116,16 @@ const app = new Vue({
 
     methods: {
         
-        openCallbackPopup: function (subject) {
+        openCallbackPopup: function (subject, leadName) {
 
-            this.$modal.show(CallbackModal, {
+            var params = {
                 subject: subject
-            }, {
+            };
+            if (leadName) {
+                params = Object.assign({}, params, {leadName: leadName});
+            }
+
+            this.$modal.show(CallbackModal, params, {
                 height: 'auto',
                 adaptive: true,
                 width: 400
@@ -184,6 +197,8 @@ const app = new Vue({
                     adaptive: true,
                     width: 400
                 });
+
+                addToDataLayer({'event':'lead_questions_form'});
 
             }, response => {
 

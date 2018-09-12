@@ -73,6 +73,8 @@
                         width: 400
                     });
 
+                    addToDataLayer({'event':'lead_number_request_form'});
+
                 }, response => {
 
                     alert('Произошла ошибка.')

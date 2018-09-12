@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="filter-block__range">
-                            <vue-slider ref="priceSlider" :speed="0" v-model="form.price" :min="0" :max="this.price_max" :process-dragable="true" :tooltip="false" :process-style="processStyle"></vue-slider>
+                            <vue-slider ref="priceSlider" :speed="0" v-model="form.price" :min="0" :max="this.price_max" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="w-xs-100 offer-help">
-                    <a href="#" class="button no-bg" v-on:click.prevent="openModal('Помогите с выбором')">
+                    <a href="#" class="button no-bg" v-on:click.prevent="openModal('Помогите с выбором', 'lead_upper_popup_form')">
                         <span class="d-inline d-lg-none d-xl-inline">Помогите с выбором</span>
                         <span class="d-none d-lg-inline d-xl-none">Помощь</span>
                     </a>
@@ -128,7 +128,8 @@
                         <td class="offers-item__buy text-right">
                             <a href="#" class="offers-item__one-click button" v-on:click.prevent="oneClick(number)">Купить в 1 клик</a>
                             <a href="#" v-if="cart.numbers.includes(number.id)" class="offers-item__basket active" v-on:click.prevent="showNumberAlreadyInCartModal">В корзину</a>
-                            <a href="#" class="offers-item__basket" v-on:click.prevent="addNumberToCart(number)" v-else>В корзину</a>
+                            <a href="#" class="offers-item__basket"
+                               v-on:click.prevent="addNumberToCart(number)" v-else>В корзину</a>
                         </td>
                     </tr>
 
@@ -256,11 +257,17 @@
             this.form.perpage = this.perpage_options[0];
             this.form.sort = this.sort_options[0];
             this.search();
+
+            $(this.$el).find('.filter-block__checkboxes .checkbox input').on('change', this.dataLayerFunction);
+            $(this.$el).find('.filter-block__price input').on('input', this.dataLayerFunction);
         },
 
         data() {
 
             return {
+                dataLayerFunction: function () {
+                    addToDataLayer({'event':'lead__touch_beauty_number_form'});
+                },
                 modalWidth: 300,
                 number: {},
                 order: {
@@ -311,6 +318,12 @@
 
             }
 
+        },
+
+        watch: {
+            'form.search': function (newValue, oldValue) {
+                this.dataLayerFunction();
+            }
         },
 
         created() {
@@ -384,11 +397,16 @@
 
             },
 
-            openModal(subject) {
+            openModal(subject, leadName) {
 
-                return this.$modal.show(CallbackModal, {
+                var params = {
                     subject: subject
-                }, {
+                };
+
+                if (leadName) {
+                    params = Object.assign({}, params, {leadName: leadName});
+                }
+                return this.$modal.show(CallbackModal, params, {
                     height: 'auto',
                     adaptive: true,
                     width: 400
@@ -437,7 +455,6 @@
             },
 
             addNumberToCart(item) {
-
                 this.$http.post('/cart/add-number', {id: item.id}).then(response => {
 
                     //this.numbers = response.body.numbers;
@@ -456,6 +473,7 @@
                     document.getElementsByClassName('basket-count')[0].innerHTML = response.body.count;
                     document.getElementsByClassName('basket-mobile-count')[0].innerHTML =  response.body.count;
 
+                    addToDataLayer({'event':'basket_add'});
                 }, response => {
 
                     alert('Произошла ошибка при загрузке данных');

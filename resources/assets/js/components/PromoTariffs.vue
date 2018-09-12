@@ -104,6 +104,8 @@
                     document.getElementsByClassName('basket-count')[0].innerHTML = response.body.count;
                     document.getElementsByClassName('basket-mobile-count')[0].innerHTML =  response.body.count;
 
+                    addToDataLayer({'event':'basket_add'});
+
                 }, response => {
 
                     alert('Произошла ошибка при загрузке данных');

@@ -38,7 +38,7 @@
                                     </div>
 
                                     <div class="filter-block__range">
-                                        <vue-slider v-model="form.minutes" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle"></vue-slider>
+                                        <vue-slider v-model="form.minutes" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
                                     </div>
                                 </div>
                                 <div class="filter-block__price">
@@ -51,7 +51,7 @@
                                     </div>
 
                                     <div class="filter-block__range">
-                                        <vue-slider v-model="form.price" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle"></vue-slider>
+                                        <vue-slider v-model="form.price" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
                                     </div>
 
                                 </div>
@@ -68,7 +68,7 @@
                                     </div>
 
                                     <div class="filter-block__range">
-                                        <vue-slider v-model="form.traffic" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle"></vue-slider>
+                                        <vue-slider v-model="form.traffic" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
                                     </div>
 
                                 </div>
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="w-xs-100 offer-help">
-                                <a href="#" class="button no-bg icon-phone" v-on:click.prevent="openModal('Помогите с выбором')">Помогите с выбором</a>
+                                <a href="#" class="button no-bg icon-phone" v-on:click.prevent="openModal('Помогите с выбором', 'lead_upper_popup_form')">Помогите с выбором</a>
                             </div>
                         </div>
                     </div>
@@ -176,12 +176,16 @@
             this.form.sort = this.sort_options[1];
             this.search();
 
+            $(this.$el).find('.filter-block__checkboxes .checkbox input').on('change', this.dataLayerFunction);
+            $(this.$el).find('.filter-block__price input').on('input', this.dataLayerFunction);
         },
 
         data() {
 
             return {
-
+                dataLayerFunction: function () {
+                    addToDataLayer({'event':'lead__touch_beauty_number_form'});
+                },
                 tariffs: [],
                 tariff_detail: {},
 
@@ -242,11 +246,15 @@
 
         },
 
-            openModal(subject) {
-
-                return this.$modal.show(CallbackModal, {
+            openModal(subject, leadName) {
+                var params = {
                     subject: subject
-                }, {
+                };
+                if (leadName) {
+                    params = Object.assign({}, params, {leadName: leadName});
+                }
+
+                return this.$modal.show(CallbackModal, params, {
                     height: 'auto',
                     adaptive: true,
                     width: 400
@@ -302,6 +310,8 @@
                     this.$trigger('updateCart', {tariffs: response.body.tariffs});
                     document.getElementsByClassName('basket-count')[0].innerHTML = response.body.count;
                     document.getElementsByClassName('basket-mobile-count')[0].innerHTML =  response.body.count;
+
+                    addToDataLayer({'event':'basket_add'});
 
                 }, response => {
 

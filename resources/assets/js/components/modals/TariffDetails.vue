@@ -63,6 +63,8 @@
                     document.getElementsByClassName('basket-count')[0].innerHTML = response.body.count;
                     document.getElementsByClassName('basket-mobile-count')[0].innerHTML =  response.body.count;
 
+                    addToDataLayer({'event':'lead_set_tariff_form'});
+
                 }, response => {
 
                     alert('Произошла ошибка при загрузке данных');
