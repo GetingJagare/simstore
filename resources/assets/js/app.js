@@ -53,7 +53,6 @@ window.addToDataLayer = function(data) {
     if (window.dataLayer) {
         dataLayer.push(data);
     }
-    console.log('dataLayer pushed');
 };
 
 window.Vue = require('vue');
