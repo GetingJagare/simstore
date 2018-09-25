@@ -55,6 +55,31 @@ window.addToDataLayer = function(data) {
     }
 };
 
+window.getInfiniteUTCDateString = function () {
+    const date = new Date();
+    date.setUTCHours(23, 59, 59);
+    date.setUTCFullYear(2038, 0, 18);
+    return date.toUTCString();
+};
+
+window.getCookie = function (key) {
+    const regEx = new RegExp(key + '=([^;]+)');
+    if (regEx.test(document.cookie)) {
+        return document.cookie.match(regEx)[1];
+    }
+    return null;
+};
+
+window.setCookie = function (key, value, expires) {
+    document.cookie = key + '=' + value + ';path=/;domain=.sim-store.ru;expires=' + expires;
+};
+
+window.deleteCookie = function (key) {
+    const date = new Date();
+    const previousDate = (new Date(date.getTime() - 1)).toUTCString();
+    document.cookie = key + '=;path=/;domain=.sim-store.ru;expires=' + previousDate;
+};
+
 window.Vue = require('vue');
 window.VueEvent = require('vue-event-manager');
 

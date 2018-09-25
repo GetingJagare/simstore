@@ -54,13 +54,28 @@ return [
             'engine' => null,
         ],
 
-        'partner' => [
+        /*'partner' => [
             'driver' => 'mysql',
             'host' => 'uk239871.mysql.tools',
             'port' => '3306',
             'database' => 'uk239871_sim',
             'username' => 'uk239871_sim',
             'password' => 'e372ga3n',
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],*/
+
+        'numbers_db' => [
+            'driver' => 'mysql',
+            'host' => '188.65.210.23',
+            'port' => '3306',
+            'database' => 'Test',
+            'username' => 'simstore',
+            'password' => 'ke5vFHu33mqIIdv',
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

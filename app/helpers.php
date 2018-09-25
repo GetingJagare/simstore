@@ -295,3 +295,17 @@ function getSimilarNumbers($numbers, $price_sort = 'asc') {
     return collect($result);
 
 }
+
+/**
+ * @param $number
+ * @param bool $saled
+ * @param bool $saled
+ */
+function bookNumberInStore($number, $saled = true)
+{
+    $curl = curl_init("http://188.65.210.23:8081/php/SimStorZakaz.php?phone=$number&sale=" . (int)$saled);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_HEADER, 1);
+    curl_exec($curl);
+    curl_close($curl);
+}

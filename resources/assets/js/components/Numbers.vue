@@ -266,7 +266,10 @@
 
             return {
                 dataLayerFunction: function () {
-                    addToDataLayer({'event':'lead__touch_beauty_number_form'});
+                    if (!getCookie('lead__touch_beauty_number_form_done')) {
+                        addToDataLayer({'event':'lead__touch_beauty_number_form'});
+                        setCookie('lead__touch_beauty_number_form_done', 1, getInfiniteUTCDateString());
+                    }
                 },
                 modalWidth: 300,
                 number: {},

@@ -98,6 +98,8 @@ class CartController extends Controller
             $numbersToString[] = $number->value;
             $number->saled = 1;
             $number->save();
+
+            bookNumberInStore($number->value);
         }
 
         $numbers = formatNumbers($numbers);

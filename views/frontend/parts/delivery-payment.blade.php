@@ -26,7 +26,19 @@
             <div class="delivery-payment__right-col col-md-12 order-1 order-sm-2 order-md-1 order-xl-2 col-xl-5">
                 <div class="delivery-payment__right">
                     <div class="big-h1">Условия доставки и оплаты</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</p>
+                    <ol>
+                        <li>Выберите номер</li>
+                        <li>Выберите тариф</li>
+                        <li>Оставьте заявку</li>
+                        <li>В течение 5 минут с вами свяжется менеджер для уточнения деталей заказа</li>
+                        <li>Бесплатная курьерская доставка, в удобное вам время и прямо до вашей двери</li>
+                        <li>Пользуйтесь вашим номером с удовольствием!</li>
+                    </ol>
+
+                    Бесплатная доставка по РФ.
+                    Мы осуществляем доставку сим карт компанией СДЭК.
+                    Вам, просто, нужно выбрать удобное время и встретить курьера.
+                    Доставка бесплатна по всей территории России.
                 </div>
             </div>
         </div>

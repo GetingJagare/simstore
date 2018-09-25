@@ -43,7 +43,7 @@
                 <div class="flex-nowrap d-none d-sm-flex">
                     <div class="header-phone d-inline-flex align-items-center">
                     <span>
-                        8 800 123 45 67
+                        8 800 100 87 18
                     </span>
                     </div>
                     <div class="header-divider d-inline-flex align-items-center">
@@ -90,7 +90,7 @@
             </div>
             <div class="d-block d-md-none">
                 <div class="mobile-info text-center">
-                    <b>8 800 123 45 67</b><br>
+                    <b>8 800 100 87 18</b><br>
                     Отдел продаж: с 9:00 до 19:00<br>
                     support@sim-store.ru
                 </div>
@@ -111,7 +111,7 @@
                     <span>Минуты и гигабайты не сгорают</span>
                 </div>
                 <div class="advantages-item ai-4">
-                    <span>Более 500 000 номеров на выбор</span>
+                    <span>Более 15 000 номеров на выбор</span>
                 </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
                 </div>
                 <div class="col-sm-4 col-md-4 d-flex align-items-center justify-content-center justify-content-sm-end">
                     <div class="text-center text-sm-right footer-right">
-                        <b>8 800 123 45 67</b><br>
+                        <b>8 800 100 87 18</b><br>
                         Отдел продаж: с 9:00 до 19:00<br>
                         support@sim-store.ru<br>
                         <a href="/policy">Политика конфиденциальности</a>
