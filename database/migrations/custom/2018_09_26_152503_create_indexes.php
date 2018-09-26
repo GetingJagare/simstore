@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTableColumns extends Migration
+class CreateIndexes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddTableColumns extends Migration
      */
     public function up()
     {
-        Schema::table('tariffs', function (Blueprint $table) {
-            $table->string('code');
+        Schema::table('number', function (Blueprint $table) {
+            $table->index(['block_po', 'saled'], 'block_po_saled');
         });
     }
 
@@ -25,8 +25,8 @@ class AddTableColumns extends Migration
      */
     public function down()
     {
-        Schema::table('tariffs', function (Blueprint $table) {
-            $table->dropColumn('code');
+        Schema::table('number', function (Blueprint $table) {
+            $table->dropIndex('block_po_saled');
         });
     }
 }

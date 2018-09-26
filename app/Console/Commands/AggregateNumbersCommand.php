@@ -3,13 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Console\Traits\Loggable;
-use App\StoreGroup;
-use App\Tariff;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use App\Number;
 use App\Provider;
-use App\Store;
 
 class AggregateNumbersCommand extends Command
 {
@@ -52,13 +49,14 @@ class AggregateNumbersCommand extends Command
      */
     public function handle()
     {
-        exec("{$this->appRootDir}artisan backup:db");
+        exec("php {$this->appRootDir}artisan backup:db");
 
         $this->log("Numbers DB Reading started");
         $connection = DB::connection('numbers_db');
         $blockedNumbers = $connection->table('blocked')->select(['number']);
         $numbersCount = $connection->table('simstore')
             ->whereIn('number', $blockedNumbers, 'and', true)
+            //->where('sync', '=', 0)
             ->count('number');
         $this->log("Numbers DB Reading ended");
 
@@ -81,45 +79,21 @@ class AggregateNumbersCommand extends Command
                             $provider->save();
                         }
 
-                        $storeGroup = StoreGroup::where('code', $number->grskladkod)->first();
-                        if (!$storeGroup) {
-                            $storeGroup = new StoreGroup();
-                            $storeGroup->name = $number->grsklad;
-                            $storeGroup->code = $number->grskladkod;
-                            $storeGroup->save();
-                        }
-
-                        $store = Store::where('code', $number->skladkod)->first();
-                        if (!$store) {
-                            $store = new Store();
-                            $store->group_id = $storeGroup->id;
-                            $store->name = $number->sklad;
-                            $store->code = $number->skladkod;
-                            $store->save();
-                        }
-
-                        $tariff = Tariff::where('code', $number->tarifkod)->first();
-                        if (!$tariff) {
-                            $tariff = new Tariff();
-                            $tariff->name = $number->tarif;
-                            $tariff->code = $number->tarifkod;
-                            $tariff->save();
-                        }
-
                         $phoneNumber = new Number();
                         $phoneNumber->provider_id = $provider->id;
                         $phoneNumber->value = $number->number;
                         $phoneNumber->price = $number->cena ?: 0;
                         $phoneNumber->block_po = $number->blocklk;
-                        $phoneNumber->store_id = $store->id;
-                        $phoneNumber->tariff_id = $tariff->id;
+                        $phoneNumber->on_sale = 1;
                         $phoneNumber->save();
                     }
                 }
             }
             $this->log("Local numbers saving ended");
         } catch (\Exception $e) {
-            $this->log("Error occured (code {$e->getCode()}, message: {$e->getMessage()})");
+            $errorMessage = "Error occured (code {$e->getCode()}, message: {$e->getMessage()})";
+            print $errorMessage;
+            $this->log($errorMessage);
         }
     }
 }
