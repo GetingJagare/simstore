@@ -124,7 +124,7 @@ Route::middleware('auth')->group(function () {
 });
 
 commonRoutes();
-Route::get('{slug?}', function ($slug) {
+Route::get('{slug?}', function ($slug = null) {
     return app()->make('\App\Http\Controllers\PageController')->redirectToRegionSubdomain($slug, 'moscow');
 })->where('slug', '(.*)?');
 
