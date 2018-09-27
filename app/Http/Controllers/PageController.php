@@ -101,27 +101,27 @@ class PageController extends Controller
         return $region;
     }
 
-    public function getGoldNumbersPage($region) {
+    public function getGoldNumbersPage($region = 'moscow') {
         return $this->get($region, 'numbers/gold', ['price_range' => [10000, 100000]]);
     }
 
-    public function getPlatinumNumbersPage($region) {
+    public function getPlatinumNumbersPage($region = 'moscow') {
         return $this->get($region, 'numbers/platinum', ['price_range' => [100000, 900000]]);
     }
 
-    public function getPromoNumbersPage($region) {
+    public function getPromoNumbersPage($region = 'moscow') {
         return $this->get($region, 'numbers/promo', ['promo' => true]);
     }
 
-    public function getUnlimitedTariffsPage($region) {
+    public function getUnlimitedTariffsPage($region = 'moscow') {
         return $this->get($region, 'tarifs/unlimited', ['unlimited' => true]);
     }
 
-    public function getUnlimitedRuTariffsPage($region) {
+    public function getUnlimitedRuTariffsPage($region = 'moscow') {
         return $this->get($region, 'tarifs/unlimited-ru', ['unlimited_ru' => true]);
     }
 
-    public function getInternetTariffsPage($region) {
+    public function getInternetTariffsPage($region = 'moscow') {
         return $this->get($region, 'tarifs/internet', ['for_internet' => true]);
     }
 }
