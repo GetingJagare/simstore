@@ -43,7 +43,7 @@
                     <a href="#" class="header-mobile__menu" v-on:click="openMenu">Меню</a>
                 </div>
                 <div class="flex-nowrap d-none d-sm-flex">
-                    <div class="header-phone d-inline-flex align-items-xl-center">
+                    <div class="header-phone d-inline-flex align-items-center">
                         <span class="header-phone__label">Отдел продаж:</span>
                         <span>8 800 100 87 18</span>
                     </div>

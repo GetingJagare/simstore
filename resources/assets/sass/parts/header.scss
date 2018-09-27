@@ -64,7 +64,9 @@ header {
 
     @include media-breakpoint-down(lg) {
       flex-wrap: wrap;
+      justify-content: center;
       text-align: center;
+      flex-direction: column;
     }
 
     &__label {
