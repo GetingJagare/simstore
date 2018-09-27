@@ -112,6 +112,7 @@
                         <td></td>
                         <td></td>
                         <td class="text-center"><b>Цена</b></td>
+                        <td></td>
                         <td class="text-center"><b>Аренда</b></td>
                     </tr>
                     </thead>
