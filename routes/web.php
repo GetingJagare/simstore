@@ -43,8 +43,10 @@ Route::get('test2', function () {
 
 });*/
 
-Route::domain('{region}.sim-store.ru')->group(function () {
+$httpHost = app('request')->getHttpHost();
+$httpHostWithoutSubDomain = preg_replace('/^([^\.]+\.)([^\.]+\..*)$/', '$2', $httpHost);
 
+function commonRoutes() {
     Route::get('numbers-promo', 'NumbersController@getPromo');
     Route::get('tariffs-promo', 'TariffsController@getPromo');
     Route::post('cart', 'CartController@getCart');
@@ -69,7 +71,10 @@ Route::domain('{region}.sim-store.ru')->group(function () {
     Route::get('tarifs/unlimited-ru', 'PageController@getUnlimitedRuTariffsPage');
     Route::get('tarifs/internet', 'PageController@getInternetTariffsPage');
     Route::get('{slug?}', 'PageController@get')->where('slug', '(.*)?')->name('page');
+}
 
+Route::domain("{region}.$httpHostWithoutSubDomain")->group(function () {
+    commonRoutes();
 });
 
 /*
@@ -118,8 +123,9 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/orders/get', 'AdminController@gerOrder');
 });
 
-
-
-Route::get('{slug?}', 'PageController@redirectToRegionSubdomain')->where('slug', '(.*)?');
+commonRoutes();
+Route::get('{slug?}', function ($slug) {
+    return app()->make('\App\Http\Controllers\PageController')->redirectToRegionSubdomain($slug, 'moscow');
+})->where('slug', '(.*)?');
 
 

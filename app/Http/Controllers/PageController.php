@@ -37,15 +37,21 @@ class PageController extends Controller
         return $this->get($region, 'pass');
     }
 
-    public function redirectToRegionSubdomain($slug = null)
+    public function redirectToRegionSubdomain($slug = null, $region = null)
     {
         // Знаем ли мы текущий город
-        $current = session('region', null);
+        $current = $region ?: session('region', null);
 
         // Если да, сразу отправляем пользователя на поддомен региона
         // Если нет, то ищем местонахождение пользователя
+
+        $region = $current ? (is_array($current) ? $current['subdomain'] : $current) : $this->setRegion()->subdomain;
+        if ($region === 'moscow') {
+            return $this->get($region, $slug);
+        }
+
         return redirect(route('page', [
-            'region' => $current ? $current['subdomain'] : $this->setRegion()->subdomain,
+            'region' => $region,
             'slug' => $slug
         ]));
     }

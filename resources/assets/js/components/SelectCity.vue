@@ -37,9 +37,8 @@
             },
 
             setRegion(selectedOption, id) {
-
-                location.href = '//' + selectedOption.subdomain + '.' + APP_DOMAIN + location.pathname;
-
+                console.log(selectedOption);
+                location.href = '//' + (selectedOption.subdomain !== 'moscow' ? selectedOption.subdomain + '.' : '') + APP_DOMAIN + location.pathname;
             }
 
         }
