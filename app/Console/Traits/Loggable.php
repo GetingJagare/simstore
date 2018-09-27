@@ -11,14 +11,13 @@ namespace App\Console\Traits;
 
 trait Loggable
 {
-    private function log($message)
+    private function log($message, $includeDate = true)
     {
         if (!file_exists($this->logFile)) {
             $fHandler = fopen($this->logFile, 'w+');
             fclose($fHandler);
         }
 
-        $dateTime = date('d-m-Y H:i:s');
-        exec("echo \"$message at $dateTime\" >> {$this->logFile}");
+        exec("echo \"$message" . ($includeDate ? " at " . date('d-m-Y H:i:s') : "") . "\" >> {$this->logFile}");
     }
 }

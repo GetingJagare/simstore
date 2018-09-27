@@ -62,6 +62,20 @@ header {
       @include non-default-link();
     }
 
+    @include media-breakpoint-down(lg) {
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    &__label {
+      margin-right: 10px;
+      @include media-breakpoint-down(lg) {
+        display: block;
+        margin-right: 0;
+        width: 100%;
+      }
+    }
+
   }
 
   .header-divider > span {

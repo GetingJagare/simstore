@@ -270,6 +270,15 @@ class AdminController extends Controller
         return response()->json(['success' => true, 'message' => 'Номер успешно изменен']);
     }
 
+    public function editNumberRentalPrice(Request $request)
+    {
+        $number = Number::find($request->id);
+        $number->price_rental = $request->price;
+        $number->save();
+
+        return response()->json(['success' => true, 'message' => 'Номер успешно изменен']);
+    }
+
     public function gerOrders()
     {
         $orders = Order::orderByDesc('created_at')->get();

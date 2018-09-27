@@ -108,6 +108,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admin/numbers', 'AdminController@getNumbers');
     Route::post('admin/numbers/edit', 'AdminController@editNumber');
+    Route::post('admin/numbers/edit-rental-price', 'AdminController@editNumberRentalPrice');
     Route::post('admin/numbers/mass-price-edit', 'AdminController@massEditNumbersPrice');
     Route::post('admin/numbers/discount', 'AdminController@setDiscountToNumbers');
     Route::post('admin/numbers/saled', 'AdminController@setSaledNumbers');

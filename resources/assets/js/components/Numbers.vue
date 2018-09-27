@@ -107,6 +107,15 @@
             </div>
             <div class="offers-items" v-if="numbers.length > 0">
                 <table class="w-100">
+                    <thead>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b>Цена</b></td>
+                        <td><b>Аренда</b></td>
+                    </tr>
+                    </thead>
+
                     <tbody>
 
                     <tr v-for="number in numbers">
@@ -121,6 +130,12 @@
                         </td>
                         <td class="offers-item__price text-center" v-else>
                             Договорная
+                        </td>
+                        <td class="offers-item__price text-center" v-if="number.price_rental > 0">
+                            {{ number.price_rental }} ₽/мес <span class="offers-item__price__rental" v-tooltip="'Вы можете арендовать номер вместо его покупки. Стоимость аренды включена в тариф.'">?</span>
+                        </td>
+                        <td class="offers-item__price text-center" v-else>
+                            Договорная <span class="offers-item__price__rental" v-tooltip="'Вы можете арендовать номер вместо его покупки. Стоимость аренды включена в тариф.'">?</span>
                         </td>
                         <td class="offers-item__old-price text-center">
                             <span v-if="number.price_new != number.final_price">{{ number.price_new }} ₽</span>
@@ -248,6 +263,8 @@
     import VueTheMask from 'vue-the-mask'
     Vue.use(VueTheMask);
     import vueSlider from 'vue-slider-component'
+    import VTooltip from 'v-tooltip'
+    Vue.use(VTooltip);
 
 
     export default {

@@ -51,6 +51,7 @@
                 <th>Номер</th>
                 <th>Цена партнера</th>
                 <th>Цена на сайте</th>
+                <th>Цена номера</th>
             </tr>
             </thead>
             <tbody>
@@ -85,6 +86,23 @@
                             {{ number.discount_price }}
                         </span>
                         <a class="ml-3" href="#" v-on:click.prevent="editNumber(number)">Изменить</a>
+                    </div>
+                </td>
+                <td>
+                    <div v-if="rentalPriceEdit.id == number.id">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" style="width: auto" v-model="rentalPriceEdit.price">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" v-on:click.prevent="setRentalPrice(index)">Сохранить</button>
+                                <button class="btn btn-outline-secondary" type="button" v-on:click.prevent="cancelEditRentalPrice">Отмена</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div v-else>
+                        <span>{{ number.price_rental }} руб/мес</span>
+                        <a class="ml-3" href="#" v-on:click.prevent="editRentalPrice(number)">Изменить</a>
                     </div>
                 </td>
             </tr>
@@ -125,6 +143,11 @@
                 },
 
                 edit: {
+                    id: null,
+                    price: null
+                },
+
+                rentalPriceEdit: {
                     id: null,
                     price: null
                 },
@@ -330,6 +353,20 @@
 
             },
 
+            editRentalPrice(number) {
+                this.rentalPriceEdit.id = number.id;
+                this.rentalPriceEdit.price = number.price_rental;
+            },
+
+            cancelEditRentalPrice() {
+
+                this.rentalPriceEdit = {
+                    id: null,
+                    price: null
+                };
+
+            },
+
             cancelEditNumber() {
                 this.edit = {
                     id: null,
@@ -343,6 +380,19 @@
 
                     this.numbers[index].price_new = this.edit.price;
                     this.cancelEditNumber();
+
+                }, response => {
+
+                });
+
+            },
+
+            setRentalPrice(index) {
+
+                this.$http.post('/admin/numbers/edit-rental-price', this.rentalPriceEdit).then(response => {
+
+                    this.numbers[index].price_rental = this.edit.price_rental;
+                    this.cancelEditRentalPrice();
 
                 }, response => {
 

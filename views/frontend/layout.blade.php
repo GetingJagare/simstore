@@ -7,7 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic-ext"
+          rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -36,21 +37,22 @@
                     <select-city :current='{!! json_encode($region) !!}'></select-city>
                 </div>
                 <div class="header-mobile-menu d-flex align-items-center d-sm-none">
-                    <a href="/cart" class="header-mobile__basket"><span class="basket-mobile-count">{{ cartCount() }}</span>Корзина</a>
+                    <a href="/cart" class="header-mobile__basket"><span
+                                class="basket-mobile-count">{{ cartCount() }}</span>Корзина</a>
                     <a href="/profile" class="header-mobile__profile">Профиль</a>
                     <a href="#" class="header-mobile__menu" v-on:click="openMenu">Меню</a>
                 </div>
                 <div class="flex-nowrap d-none d-sm-flex">
-                    <div class="header-phone d-inline-flex align-items-center">
-                    <span>
-                        8 800 100 87 18
-                    </span>
+                    <div class="header-phone d-inline-flex align-items-xl-center">
+                        <span class="header-phone__label">Отдел продаж:</span>
+                        <span>8 800 100 87 18</span>
                     </div>
                     <div class="header-divider d-inline-flex align-items-center">
                         <span></span>
                     </div>
                     <div class="header-lk d-inline-flex align-items-center">
-                        <a href="/profile"><span class="d-md-none d-sm-none d-lg-inline-block">Войти в аккаунт</span></a>
+                        <a href="/profile"><span
+                                    class="d-md-none d-sm-none d-lg-inline-block">Войти в аккаунт</span></a>
                     </div>
                 </div>
             </div>

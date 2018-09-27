@@ -13,13 +13,12 @@ trait MySQLBin
 {
     protected function getExecutor($name = "mysql")
     {
-        $os = PHP_OS;
-        switch (mb_strtolower(substr($os, 0, 3))) {
+        switch (mb_strtolower(substr(PHP_OS, 0, 3))) {
             case 'win':
                 if (!file_exists('C:\xampp\mysql\bin\mysql.exe')) {
                     return null;
                 }
-                return 'C:\xampp\mysql\bin\mysql.exe';
+                return "C:\xampp\mysql\bin\.$name.exe";
                 break;
             case 'lin':
                 if (empty(exec("which $name"))) {
@@ -28,6 +27,6 @@ trait MySQLBin
                 return $name;
                 break;
         }
-        return $os;
+        return $name;
     }
 }

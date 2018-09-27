@@ -42,19 +42,12 @@ class PageController extends Controller
         // Знаем ли мы текущий город
         $current = session('region', null);
 
-        if($current) {
-
-            // Если да, сразу отправляем пользователя на поддомен региона
-            return redirect(route('page', ['region' => $current['subdomain'], 'slug' => $slug]));
-
-        } else {
-
-            // Ищем местонахождение пользователя
-            $region = $this->setRegion();
-
-            return redirect(route('page', ['region' => $region->subdomain, 'slug' => $slug]));
-        }
-
+        // Если да, сразу отправляем пользователя на поддомен региона
+        // Если нет, то ищем местонахождение пользователя
+        return redirect(route('page', [
+            'region' => $current ? $current['subdomain'] : $this->setRegion()->subdomain,
+            'slug' => $slug
+        ]));
     }
 
     public function setRegion($region = null)
