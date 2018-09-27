@@ -234,6 +234,43 @@ form.profile-login__form input {
     display: block!important;
   }
 
+
+}
+
+@include media-breakpoint-between(xs, lg) {
+
+  main .main-content .offers-items table thead {
+    display: none;
+  }
+
+  main .main-content .offers-items table tbody tr {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #f0f0f0;
+    margin: 0 0 20px 0;
+    padding: 0 0 20px 40px;
+  }
+
+  main .main-content .offers-items .offers-item__operator {margin-left: -40px;}
+
+  main .main-content .offers-items .offers-item__number {
+    width: 100%;
+  }
+
+  main .main-content .offers-items tbody td.offers-item__price {
+    width: 33.33%;
+    text-align: left!important;
+  }
+
+  .main-content td.offers-item__buy {
+    text-align: left!important;
+    width: 100%;
+  }
+
+  main .main-content .offers-items tbody td {
+    border-bottom: 0;
+    padding: 5px 0;
+  }
 }
 
 
@@ -257,6 +294,10 @@ form.profile-login__form input {
 @include media-breakpoint-only(xs) {
   .big-h1 {
     font-size: 25px;
+  }
+
+  main .main-content .offers-items tbody td.offers-item__price {
+    width: 100%;
   }
 }
 
@@ -282,6 +323,7 @@ form.profile-login__form input {
   font-weight: 600;
   margin: 0 0 0 5px;
   cursor: pointer;
+  text-align: center;
 }
 
 .tooltip {
