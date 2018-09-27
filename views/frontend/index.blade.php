@@ -30,8 +30,9 @@
                         </div>
                         <div class="d-inline-flex order-1 order-sm-2 align-items-center">
                             <div class="slider-item__text">
-                                <b>Бесплатная доставка</b><br>
-                                <span>при покупке в интернет-магазине SIM-STORE</span>
+                                <b>Честно и прозрачно</b><br>
+                                <span>Главное преимущество аренды номера в Sim-Store: НЕТ ДОПОЛНИТЕЛЬНЫХ ПЛАТЕЖЕЙ,
+                                    Вы платите только абонентскую плату по выбранному тарифу.</span>
                             </div>
                         </div>
                     </div>
