@@ -57,7 +57,6 @@ class GenerateSitemapCommand extends Command
                     );
                 }
 
-                $sitemap->
                 $sitemap->store("xml", "sitemap" . ($region->subdomain !== "moscow" ? "-{$region->subdomain}" : ""));
             }
         }
