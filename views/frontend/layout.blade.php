@@ -68,18 +68,18 @@
                             <a href="/">Красивые номера</a>
                             <span class="open-dropdown"></span>
                             <ul class="dropdown d-none">
-                                <li><a href="/numbers/gold">Золотые</a></li>
-                                <li><a href="/numbers/platinum">Платиновые</a></li>
-                                <li><a href="/numbers/promo">Акционные</a></li>
+                                <li><a href="/nomera/zolotye">Золотые</a></li>
+                                <li><a href="/nomera/platinovye">Платиновые</a></li>
+                                <li><a href="/nomera/aktsionnye">Акционные</a></li>
                             </ul>
                         </li>
                         <li class="has-dropdown">
                             <a href="/tarify">Тарифы</a>
                             <span class="open-dropdown"></span>
                             <ul class="dropdown d-none">
-                                <li><a href="/tarifs/unlimited">Безлимитные</a></li>
-                                <li><a href="/tarifs/unlimited-ru">Безлимитные Россия</a></li>
-                                <li><a href="/tarifs/internet">Для Интернета</a></li>
+                                <li><a href="/tarify/bezlimitnye">Безлимитные</a></li>
+                                <li><a href="/tarify/dlja-zvonkov-po-rossii">Безлимитные Россия</a></li>
+                                <li><a href="/tarify/internet">Для Интернета</a></li>
                             </ul>
                         </li>
                         <li><a href="/informatsiya">Информация</a></li>
@@ -87,7 +87,7 @@
                     </ul>
                 </div>
                 <div class="nav-basket d-none d-sm-inline-flex align-items-center">
-                    <a href="/cart">Корзина: <span class="basket-count">{{ cartCount() }}</span></a>
+                    <a href="/korzina">Корзина: <span class="basket-count">{{ cartCount() }}</span></a>
                 </div>
             </div>
             <div class="d-block d-md-none">

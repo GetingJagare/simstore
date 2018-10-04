@@ -59,17 +59,17 @@ function commonRoutes() {
     Route::post('cart/add-tariff', 'CartController@addTariffToCart');
     Route::get('regions', 'AdminController@getRegions');
     Route::post('tariffs', 'TariffsController@search');
-    Route::get('numbers', 'NumbersController@index');
+    Route::get('nomera', 'NumbersController@index');
     Route::post('numbers', 'NumbersController@search');
 
     Route::post('crm', 'AdminController@sendToCRM');
 
-    Route::get('numbers/gold', 'PageController@getGoldNumbersPage');
-    Route::get('numbers/platinum', 'PageController@getPlatinumNumbersPage');
-    Route::get('numbers/promo', 'PageController@getPromoNumbersPage');
-    Route::get('tarifs/unlimited', 'PageController@getUnlimitedTariffsPage');
-    Route::get('tarifs/unlimited-ru', 'PageController@getUnlimitedRuTariffsPage');
-    Route::get('tarifs/internet', 'PageController@getInternetTariffsPage');
+    Route::get('nomera/zolotye', 'PageController@getGoldNumbersPage');
+    Route::get('nomera/platinovye', 'PageController@getPlatinumNumbersPage');
+    Route::get('nomera/aktsionnye', 'PageController@getPromoNumbersPage');
+    Route::get('tarify/bezlimitnye', 'PageController@getUnlimitedTariffsPage');
+    Route::get('tarify/dlja-zvonkov-po-rossii', 'PageController@getUnlimitedRuTariffsPage');
+    Route::get('tarify/internet', 'PageController@getInternetTariffsPage');
     Route::get('{slug?}', 'PageController@get')->where('slug', '(.*)?')->name('page');
 }
 
