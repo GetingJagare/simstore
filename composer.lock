@@ -1,77 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1014493dee201bc485a8d4ea8cf21ac",
+    "content-hash": "4c75b884104772294e5b3cf34ba9435f",
     "packages": [
-        {
-            "name": "artesaos/seotools",
-            "version": "v0.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/artesaos/seotools.git",
-                "reference": "8f3691fb88f46087e36e22ffe65caf19ad2182e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/artesaos/seotools/zipball/8f3691fb88f46087e36e22ffe65caf19ad2182e4",
-                "reference": "8f3691fb88f46087e36e22ffe65caf19ad2182e4",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/config": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "illuminate/support": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~1.0",
-                "orchestra/testbench": "~3.0",
-                "phpspec/phpspec": "~4.0",
-                "phpunit/phpunit": "~6.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Artesaos\\SEOTools\\Providers\\SEOToolsServiceProvider"
-                    ],
-                    "aliases": {
-                        "SEOMeta": "Artesaos\\SEOTools\\Facades\\SEOMeta",
-                        "OpenGraph": "Artesaos\\SEOTools\\Facades\\OpenGraph",
-                        "Twitter": "Artesaos\\SEOTools\\Facades\\TwitterCard",
-                        "SEO": "Artesaos\\SEOTools\\Facades\\SEOTools"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Artesaos\\SEOTools\\": "src/SEOTools/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vinicius",
-                    "email": "luiz.vinicius73@gmail.com"
-                }
-            ],
-            "description": "SEO Tools for Laravel and Lumen",
-            "keywords": [
-                "laravel5",
-                "lumen",
-                "metatags",
-                "opengraph",
-                "seo",
-                "seotools",
-                "webmaster"
-            ],
-            "time": "2018-04-19T20:48:13+00:00"
-        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
@@ -1332,6 +1266,63 @@
             "time": "2018-01-20T00:28:24+00:00"
         },
         {
+            "name": "roumen/sitemap",
+            "version": "v2.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laravelium/laravel-sitemap.git",
+                "reference": "c3448eaeb17b8656d160a03882fdb7ef6796cdd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laravelium/laravel-sitemap/zipball/c3448eaeb17b8656d160a03882fdb7ef6796cdd9",
+                "reference": "c3448eaeb17b8656d160a03882fdb7ef6796cdd9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.6.*",
+                "php": ">=7.1.3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.6.x-dev",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Roumen\\Sitemap\\SitemapServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Roumen\\Sitemap": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roumen Damianoff",
+                    "email": "roumen@damianoff.com",
+                    "homepage": "https://damianoff.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A not so simple sitemap generator for Laravel.",
+            "homepage": "https://laravelium.com",
+            "keywords": [
+                "Sitemap",
+                "generator",
+                "laravel"
+            ],
+            "abandoned": "laravelium/sitemap",
+            "time": "2018-02-07T20:36:32+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v6.0.2",
             "source": {
@@ -2296,79 +2287,6 @@
             "time": "2017-11-27T11:13:29+00:00"
         },
         {
-            "name": "torann/geoip",
-            "version": "1.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Torann/laravel-geoip.git",
-                "reference": "45f528171d777615c4dc5babd439617e31f15faf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Torann/laravel-geoip/zipball/45f528171d777615c4dc5babd439617e31f15faf",
-                "reference": "45f528171d777615c4dc5babd439617e31f15faf",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "illuminate/support": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "geoip2/geoip2": "~2.1",
-                "mockery/mockery": "^0.9.4",
-                "phpunit/phpunit": "^4.8"
-            },
-            "suggest": {
-                "geoip2/geoip2": "Required to use the MaxMind database or web service with GeoIP (~2.1).",
-                "monolog/monolog": "Allows for storing location not found errors to the log"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Torann\\GeoIP\\GeoIPServiceProvider"
-                    ],
-                    "aliases": {
-                        "GeoIP": "Torann\\GeoIP\\Facades\\GeoIP"
-                    }
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Torann\\GeoIP\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Stainback",
-                    "email": "torann@gmail.com"
-                }
-            ],
-            "description": "Support for multiple GeoIP services.",
-            "keywords": [
-                "IP API",
-                "geoip",
-                "geolocation",
-                "infoDB",
-                "laravel",
-                "laravel 5",
-                "location",
-                "maxmind"
-            ],
-            "time": "2018-04-12T14:16:13+00:00"
-        },
-        {
             "name": "vlucas/phpdotenv",
             "version": "v2.4.0",
             "source": {
@@ -2420,6 +2338,72 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "artesaos/seotools",
+            "version": "v0.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artesaos/seotools.git",
+                "reference": "8f3691fb88f46087e36e22ffe65caf19ad2182e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artesaos/seotools/zipball/8f3691fb88f46087e36e22ffe65caf19ad2182e4",
+                "reference": "8f3691fb88f46087e36e22ffe65caf19ad2182e4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "illuminate/support": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.0",
+                "orchestra/testbench": "~3.0",
+                "phpspec/phpspec": "~4.0",
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Artesaos\\SEOTools\\Providers\\SEOToolsServiceProvider"
+                    ],
+                    "aliases": {
+                        "SEOMeta": "Artesaos\\SEOTools\\Facades\\SEOMeta",
+                        "OpenGraph": "Artesaos\\SEOTools\\Facades\\OpenGraph",
+                        "Twitter": "Artesaos\\SEOTools\\Facades\\TwitterCard",
+                        "SEO": "Artesaos\\SEOTools\\Facades\\SEOTools"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Artesaos\\SEOTools\\": "src/SEOTools/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vinicius",
+                    "email": "luiz.vinicius73@gmail.com"
+                }
+            ],
+            "description": "SEO Tools for Laravel and Lumen",
+            "keywords": [
+                "laravel5",
+                "lumen",
+                "metatags",
+                "opengraph",
+                "seo",
+                "seotools",
+                "webmaster"
+            ],
+            "time": "2018-04-19T20:48:13+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.1.0",
@@ -4110,6 +4094,79 @@
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
             "time": "2017-04-07T12:08:54+00:00"
+        },
+        {
+            "name": "torann/geoip",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Torann/laravel-geoip.git",
+                "reference": "45f528171d777615c4dc5babd439617e31f15faf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Torann/laravel-geoip/zipball/45f528171d777615c4dc5babd439617e31f15faf",
+                "reference": "45f528171d777615c4dc5babd439617e31f15faf",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "illuminate/support": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "geoip2/geoip2": "~2.1",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^4.8"
+            },
+            "suggest": {
+                "geoip2/geoip2": "Required to use the MaxMind database or web service with GeoIP (~2.1).",
+                "monolog/monolog": "Allows for storing location not found errors to the log"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Torann\\GeoIP\\GeoIPServiceProvider"
+                    ],
+                    "aliases": {
+                        "GeoIP": "Torann\\GeoIP\\Facades\\GeoIP"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Torann\\GeoIP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Stainback",
+                    "email": "torann@gmail.com"
+                }
+            ],
+            "description": "Support for multiple GeoIP services.",
+            "keywords": [
+                "IP API",
+                "geoip",
+                "geolocation",
+                "infoDB",
+                "laravel",
+                "laravel 5",
+                "location",
+                "maxmind"
+            ],
+            "time": "2018-04-12T14:16:13+00:00"
         },
         {
             "name": "webmozart/assert",

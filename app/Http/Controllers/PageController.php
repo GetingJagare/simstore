@@ -102,26 +102,26 @@ class PageController extends Controller
     }
 
     public function getGoldNumbersPage($region = 'moscow') {
-        return $this->get($region, 'numbers/gold', ['price_range' => [10000, 100000]]);
+        return $this->get($region, 'nomera/zolotye', ['price_range' => [10000, 100000]]);
     }
 
     public function getPlatinumNumbersPage($region = 'moscow') {
-        return $this->get($region, 'numbers/platinum', ['price_range' => [100000, 900000]]);
+        return $this->get($region, 'nomera/platinovye', ['price_range' => [100000, 900000]]);
     }
 
     public function getPromoNumbersPage($region = 'moscow') {
-        return $this->get($region, 'numbers/promo', ['promo' => true]);
+        return $this->get($region, 'nomera/aktsionnye', ['promo' => true]);
     }
 
     public function getUnlimitedTariffsPage($region = 'moscow') {
-        return $this->get($region, 'tarifs/unlimited', ['unlimited' => true]);
+        return $this->get($region, 'tarify/bezlimitnye', ['unlimited' => true]);
     }
 
     public function getUnlimitedRuTariffsPage($region = 'moscow') {
-        return $this->get($region, 'tarifs/unlimited-ru', ['unlimited_ru' => true]);
+        return $this->get($region, 'tarify/dlja-zvonkov-po-rossii', ['unlimited_ru' => true]);
     }
 
     public function getInternetTariffsPage($region = 'moscow') {
-        return $this->get($region, 'tarifs/internet', ['for_internet' => true]);
+        return $this->get($region, 'tarify/internet', ['for_internet' => true]);
     }
 }
