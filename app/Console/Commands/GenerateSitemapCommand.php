@@ -37,13 +37,16 @@ class GenerateSitemapCommand extends Command
      */
     public function handle()
     {
+        $isDebug = config('app.debug');
         $pages = \App\Page::all();
         foreach (\App\Region::all() as $region) {
             /** @var \Roumen\Sitemap\Sitemap $sitemap */
             $sitemap = \Illuminate\Support\Facades\App::make('sitemap');
 
             if (!empty($region->subdomain)) {
-                $host = "{$region->subdomain}." . config('app.domain');
+                $isMoscow = $region->subdomain !== "moscow";
+                $host = "http" . (!$isDebug ? "s" : "") . "://" . (!$isMoscow ? $region->subdomain . "." : "")
+                    . config('app.domain');
                 foreach ($pages as $page) {
                     $pageUrl = $host . (empty($page->slug) ? $page->slug : "/{$page->slug}");
                     $modTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $page->updated_at)
@@ -57,7 +60,7 @@ class GenerateSitemapCommand extends Command
                     );
                 }
 
-                $sitemap->store("xml", "sitemap" . ($region->subdomain !== "moscow" ? "-{$region->subdomain}" : ""));
+                $sitemap->store("xml", "sitemap" . (!$isMoscow ? "-{$region->subdomain}" : ""));
             }
         }
     }
