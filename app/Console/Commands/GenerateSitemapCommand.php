@@ -44,7 +44,7 @@ class GenerateSitemapCommand extends Command
             $sitemap = \Illuminate\Support\Facades\App::make('sitemap');
 
             if (!empty($region->subdomain)) {
-                $isMoscow = $region->subdomain !== "moscow";
+                $isMoscow = $region->subdomain === "moscow";
                 $host = "http" . (!$isDebug ? "s" : "") . "://" . (!$isMoscow ? $region->subdomain . "." : "")
                     . config('app.domain');
                 foreach ($pages as $page) {
