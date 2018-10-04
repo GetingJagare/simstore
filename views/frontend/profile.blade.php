@@ -35,7 +35,7 @@ if(isset($_POST['X_username']) && isset($_POST['X_password'])){
                     </form>
 
                     <div class="abonent_url">
-                        <div><a href="/pass">Восстановление пароля / Регистрация</a></div>
+                        <div><a href="/vosstanovlenie-dostupa-registratsiya">Восстановление пароля / Регистрация</a></div>
                         <!--<div><a href="/diler/">&lt;&lt; Кабинет дилера</a></div>-->
                     </div>
 

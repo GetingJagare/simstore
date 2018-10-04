@@ -39,7 +39,7 @@ if(isset($_POST['X_username'])){
                     </form>
 
                     <div class="abonent_url">
-                        <div><a href="/profile">Войти в аккаунт</a></div>
+                        <div><a href="/kabinet-abonenta">Войти в аккаунт</a></div>
                         <!--<div><a href="/diler/">&lt;&lt; Кабинет дилера</a></div>-->
                     </div>
 

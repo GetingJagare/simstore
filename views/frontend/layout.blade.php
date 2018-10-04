@@ -37,9 +37,9 @@
                     <select-city :current='{!! json_encode($region) !!}'></select-city>
                 </div>
                 <div class="header-mobile-menu d-flex align-items-center d-sm-none">
-                    <a href="/cart" class="header-mobile__basket"><span
+                    <a href="/korzina" class="header-mobile__basket"><span
                                 class="basket-mobile-count">{{ cartCount() }}</span>Корзина</a>
-                    <a href="/profile" class="header-mobile__profile">Профиль</a>
+                    <a href="/kabinet-abonenta" class="header-mobile__profile">Профиль</a>
                     <a href="#" class="header-mobile__menu" v-on:click="openMenu">Меню</a>
                 </div>
                 <div class="flex-nowrap d-none d-sm-flex">
@@ -51,7 +51,7 @@
                         <span></span>
                     </div>
                     <div class="header-lk d-inline-flex align-items-center">
-                        <a href="/profile"><span
+                        <a href="/kabinet-abonenta"><span
                                     class="d-md-none d-sm-none d-lg-inline-block">Войти в аккаунт</span></a>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                         <b>8 800 100 87 18</b><br>
                         Отдел продаж: с 9:00 до 19:00<br>
                         support@sim-store.ru<br>
-                        <a href="/policy">Политика конфиденциальности</a>
+                        <a href="/politika-konfidentsialnosti">Политика конфиденциальности</a>
                     </div>
                 </div>
             </div>
