@@ -8,3 +8,5 @@ Disallow: *openstat=
 Disallow: /politika
 Disallow: */index.php
 Disallow: *roistat
+
+Sitemap: https://sim-store.ru/sitemap.xml
