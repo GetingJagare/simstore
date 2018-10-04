@@ -156,5 +156,6 @@
 
 <link rel="stylesheet" href="{{ asset('/css/vendor.css') }}">
 <script src="{{ asset('/js/app.js?id=27dbec76a89168c47e9d') }}" async></script>
+@include('counters.ya')
 </body>
 </html>
