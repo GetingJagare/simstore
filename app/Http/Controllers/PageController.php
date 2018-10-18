@@ -25,6 +25,7 @@ class PageController extends Controller
 
         // SEO
         $this->seo()->setTitle($page->seo_title ? str_replace('{region}', $currentRegion['name_pr'], $page->seo_title) : $page->name . $toponym);
+        $this->seo()->setDescription($page->seo_description);
 
         return view($page->template ? $page->template : 'frontend.static', ['page' => $page, 'region' => $currentRegion, 'params' => $params]);
     }
