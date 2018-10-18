@@ -110,7 +110,8 @@ class AdminController extends Controller
     {
         $page = Page::find($request->id);
         $page->name = $request->name;
-        $page->slug = $request->slug;
+        $page->alter_name = $request->alter_name;
+        $page->slug = $request->slug ?: '';
         $page->seo_title = $request->seo_title;
         $page->seo_description = $request->seo_description;
         $page->content = request('content');

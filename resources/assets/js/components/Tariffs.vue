@@ -1,86 +1,80 @@
 <template>
     <div>
-        <div class="container">
-            <div class="main-wrap d-flex flex-nowrap justify-content-between">
-                <div class="main-content main-content-tariffs">
-                    <div class="main-content__header d-flex flex-nowrap justify-content-between">
-                        <div class="big-h1">Тарифы</div>
-                    </div>
+        <div class="main-wrap d-flex flex-nowrap justify-content-between">
+            <div class="main-content main-content-tariffs">
+                <form @submit.prevent="search">
+                    <div class="filter-block filter-tariffs">
+                        <div class="filter-block__checkboxes">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="form.promo" />
+                                <span class="checkbox__text">Акция</span>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="form.no_limit" />
+                                <span class="checkbox__text">Безлимитные</span>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="form.no_limit_ru" />
+                                <span class="checkbox__text">Безлимит — Россия</span>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="form.for_internet" />
+                                <span class="checkbox__text">Для интернета</span>
+                            </label>
+                        </div>
+                        <div class="d-flex flex-wrap flex-sm-nowrap">
+                            <div class="filter-block__price filter-minutes">
 
-                    <form @submit.prevent="search">
-                        <div class="filter-block filter-tariffs">
-                            <div class="filter-block__checkboxes">
-                                <label class="checkbox">
-                                    <input type="checkbox" v-model="form.promo" />
-                                    <span class="checkbox__text">Акция</span>
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" v-model="form.no_limit" />
-                                    <span class="checkbox__text">Безлимитные</span>
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" v-model="form.no_limit_ru" />
-                                    <span class="checkbox__text">Безлимит — Россия</span>
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" v-model="form.for_internet" />
-                                    <span class="checkbox__text">Для интернета</span>
-                                </label>
-                            </div>
-                            <div class="d-flex flex-wrap flex-sm-nowrap">
-                                <div class="filter-block__price filter-minutes">
-
-                                    <div class="d-flex flex-nowrap align-items-center">
-                                        <span class="filter-block__price-name">Количество <span class="md-br">минут:</span></span>
-                                        <input type="text" placeholder="от" v-model="form.minutes[0]">
-                                        <span>–</span>
-                                        <input type="text" placeholder="до" v-model="form.minutes[1]">
-                                    </div>
-
-                                    <div class="filter-block__range">
-                                        <vue-slider v-model="form.minutes" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
-                                    </div>
+                                <div class="d-flex flex-nowrap align-items-center">
+                                    <span class="filter-block__price-name">Количество <span class="md-br">минут:</span></span>
+                                    <input type="text" placeholder="от" v-model="form.minutes[0]">
+                                    <span>–</span>
+                                    <input type="text" placeholder="до" v-model="form.minutes[1]">
                                 </div>
-                                <div class="filter-block__price">
 
-                                    <div class="d-flex flex-nowrap align-items-center">
-                                        <span class="filter-block__price-name">Абонентская <span class="md-br">плата:</span></span>
-                                        <input type="text" placeholder="от" v-model="form.price[0]">
-                                        <span>–</span>
-                                        <input type="text" placeholder="до" v-model="form.price[1]">
-                                    </div>
-
-                                    <div class="filter-block__range">
-                                        <vue-slider v-model="form.price" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
-                                    </div>
-
+                                <div class="filter-block__range">
+                                    <vue-slider v-model="form.minutes" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
                                 </div>
                             </div>
+                            <div class="filter-block__price">
 
-                            <div class="d-flex flex-wrap flex-sm-nowrap">
-                                <div class="filter-block__price">
-
-                                    <div class="d-flex flex-nowrap align-items-center">
-                                        <span class="filter-block__price-name">Объем <span class="md-br">трафика:</span></span>
-                                        <input type="text" placeholder="от" v-model="form.traffic[0]">
-                                        <span>–</span>
-                                        <input type="text" placeholder="до" v-model="form.traffic[1]">
-                                    </div>
-
-                                    <div class="filter-block__range">
-                                        <vue-slider v-model="form.traffic" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
-                                    </div>
-
+                                <div class="d-flex flex-nowrap align-items-center">
+                                    <span class="filter-block__price-name">Абонентская <span class="md-br">плата:</span></span>
+                                    <input type="text" placeholder="от" v-model="form.price[0]">
+                                    <span>–</span>
+                                    <input type="text" placeholder="до" v-model="form.price[1]">
                                 </div>
-                            </div>
 
-                            <div class="filter-block__buttons">
-                                <button class="filter-block__buttons-search" type="submit">Найти</button>
+                                <div class="filter-block__range">
+                                    <vue-slider v-model="form.price" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
+                                </div>
+
                             </div>
                         </div>
-                    </form>
 
-                </div>
+                        <div class="d-flex flex-wrap flex-sm-nowrap">
+                            <div class="filter-block__price">
+
+                                <div class="d-flex flex-nowrap align-items-center">
+                                    <span class="filter-block__price-name">Объем <span class="md-br">трафика:</span></span>
+                                    <input type="text" placeholder="от" v-model="form.traffic[0]">
+                                    <span>–</span>
+                                    <input type="text" placeholder="до" v-model="form.traffic[1]">
+                                </div>
+
+                                <div class="filter-block__range">
+                                    <vue-slider v-model="form.traffic" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="filter-block__buttons">
+                            <button class="filter-block__buttons-search" type="submit">Найти</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
 

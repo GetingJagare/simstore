@@ -3,7 +3,7 @@
     <main>
         <section class="static-page">
             <div class="container">
-                <div class="big-h1">{{ $page->name }}</div>
+                <h1 class="big-h1">{{ $page->alter_name ?: $page->name }}</h1>
                 <div>
                     {!! $page->content !!}
                 </div>

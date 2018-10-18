@@ -18,7 +18,7 @@ if(isset($_POST['X_username']) && isset($_POST['X_password'])){
 
                 <div class="profile-login text-center">
 
-                    <div class="big-h1">Кабинет абонента</div>
+                    <h1 class="big-h1">{{ $page->alter_name ?: $page->name }}</h1>
                     <div class="diler_text">
                         <p>Центр обслуживания клиентов.<br>Тут вы можете найти онлайн - счета и другую полезную информацию.</p>
                     </div>

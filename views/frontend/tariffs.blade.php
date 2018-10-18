@@ -1,7 +1,10 @@
 @extends('frontend.layout')
 @section('content')
     <main class="home-page">
-        <tariffs :cart="cart" {!! isset($params['for_internet']) ? ':for_internet="true"' : '' !!} {!! isset($params['unlimited']) ? ':unlimited="true"' : '' !!} {!! isset($params['unlimited_ru']) ? ':unlimited_ru="true"' : '' !!}></tariffs>
+        <div class="container">
+            <h1 class="big-h1">{{ $page->alter_name ?: $page->name }}</h1>
+            <tariffs :cart="cart" {!! isset($params['for_internet']) ? ':for_internet="true"' : '' !!} {!! isset($params['unlimited']) ? ':unlimited="true"' : '' !!} {!! isset($params['unlimited_ru']) ? ':unlimited_ru="true"' : '' !!}></tariffs>
+        </div>
         <section class="slider">
             <div class="slider-wrap owl-slider-home owl-carousel">
                 <div class="slider-item container">

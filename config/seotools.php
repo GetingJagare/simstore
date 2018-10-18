@@ -6,9 +6,9 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults'       => [
-            'title'        => "SimStore", // set false to total remove
+            'title'        => "", // set false to total remove
             'description'  => false, // set false to total remove
-            'separator'    => ' - ',
+            'separator'    => '',
             'keywords'     => [],
             'canonical'    => false, // Set null for using Url::current(), set false to total remove
         ],

@@ -2,6 +2,7 @@
 @section('content')
     <main class="home-page">
         <div class="container">
+            <h1 class="big-h1 big-h1_numbers">{{ $page->alter_name ?: $page->name }}</h1>
             <div class="main-wrap d-flex flex-wrap flex-lg-nowrap justify-content-between">
                 <div class="main-content">
                     <numbers :cart="cart" :price_max="{{ maxNumbersPrice() }}" {!! isset($params['promo']) ? ':promo="true"' : '' !!} {!! isset($params['price_range']) ? ':price_range="' . json_encode($params['price_range']) .'"' : '' !!}></numbers>

@@ -15,6 +15,10 @@
                         <b-form-input type="text" v-model="page.name" required placeholder="Информация" autocomplete="off"></b-form-input>
                     </b-form-group>
 
+                    <b-form-group label="Альтернативное название:">
+                        <b-form-input type="text" v-model="page.alter_name" required placeholder="Информация" autocomplete="off"></b-form-input>
+                    </b-form-group>
+
                     <b-form-group label="Адрес:">
                         <b-input-group>
                             <b-input-group-text slot="prepend">{{ domain }}/</b-input-group-text>
@@ -65,6 +69,7 @@
                 page: {
                     id: '',
                     name: '',
+                    alter_name: '',
                     slug: '',
                     seo_title: '',
                     seo_description: '',
@@ -81,6 +86,7 @@
 
                     this.page.id = response.body.page.id;
                     this.page.name = response.body.page.name;
+                    this.page.alter_name = response.body.page.alter_name;
                     this.page.slug = response.body.page.slug;
                     this.page.seo_title = response.body.page.seo_title ? response.body.page.seo_title : '';
                     this.page.seo_description = response.body.page.seo_description ? response.body.page.seo_description : '';

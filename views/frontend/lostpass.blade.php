@@ -20,7 +20,7 @@ if(isset($_POST['X_username'])){
 
                 <div class="profile-login text-center">
 
-                    <div class="big-h1">Восстановление пароля / Регистрация</div>
+                    <h1 class="big-h1">{{ $page->alter_name ?: $page->name }}</h1>
 
                     <form class="profile-login__form" method="post" accept-charset="windows-1251">
 

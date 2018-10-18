@@ -1,8 +1,6 @@
 <template>
     <div>
         <div class="main-content__header d-flex flex-wrap flex-sm-nowrap justify-content-between">
-            <div class="big-h1">Красивые номера</div>
-
             <div class="d-flex flex-wrap flex-sm-nowrap align-items-center">
                 <div class="main-content__select-count">Выводить на странице:</div>
                 <multiselect v-model="form.perpage" @select="perpage" :options="perpage_options" track-by="name" label="name" :allow-empty="false" :searchable="false" :close-on-select="true" :show-labels="false">
