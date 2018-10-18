@@ -16,7 +16,7 @@
                     </b-form-group>
 
                     <b-form-group label="Альтернативное название:">
-                        <b-form-input type="text" v-model="page.alter_name" required placeholder="Информация" autocomplete="off"></b-form-input>
+                        <b-form-input type="text" v-model="page.alter_name" placeholder="Информация" autocomplete="off"></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="Адрес:">
