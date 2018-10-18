@@ -26,7 +26,7 @@
       display: inline-block;
       width: 60px;
       height: 60px;
-      background: url("/images/dp-sprite.png");
+      background: url("/images/dp-sprite_2.png");
       position: absolute;
       top: 0;
       left: 0;
@@ -35,24 +35,25 @@
 
     &.technology {
       &:before {
-        background-position: -0px -120px;
+        background-position: -60px -120px;
       }
     }
 
     &.airplane {
       &:before {
-        background-position: -0px -0px;
+        background-position: -120px -0px;
       }
     }
 
     &.check-form {
       &:before {
-        background-position: -60px -0px;
+        background-position: -120px -60px;
       }
     }
 
     &.delivery {
       &:before {
+        background: url("/images/dp-sprite.png");
         background-position: -0px -60px;
       }
     }
@@ -65,7 +66,7 @@
 
     &.text-line-form {
       &:before {
-        background-position: -60px -120px;
+        background-position: -0px -120px;
       }
     }
 
