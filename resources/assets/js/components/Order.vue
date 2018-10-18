@@ -21,7 +21,7 @@
             <div class="order-form__checkbox">
                 <label class="checkbox d-flex">
                     <input type="checkbox" />
-                    <span class="checkbox__text">Нажимая кнопку, Вы принимаете <a href="/policy">условия</a></span>
+                    <span class="checkbox__text">Нажимая кнопку, Вы принимаете <a href="/politika-konfidentsialnosti">условия</a></span>
                 </label>
             </div>
             <div>
