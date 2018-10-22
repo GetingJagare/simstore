@@ -38,6 +38,6 @@ class DeleteNumbersCommand extends Command
      */
     public function handle()
     {
-        DB::table('number')->delete();
+        DB::table('number')->truncate();
     }
 }
