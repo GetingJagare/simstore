@@ -110,10 +110,10 @@ class AggregateNumbersCommand extends Command
                         $store->save();
                     }
 
-                    $number->region_id = 1;
+                    $phoneNumber->region_id = 1;
                     foreach ($regions as $region) {
-                        if (stripos($number->tarif, $region['city'])) {
-                            $number->region_id = $region->id;
+                        if (stripos($number->tarif, $region['city']) !== false) {
+                            $phoneNumber->region_id = $region->id;
                             break;
                         }
                     }
