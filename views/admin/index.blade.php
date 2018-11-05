@@ -29,6 +29,7 @@
                         <router-link class="nav-link" to="/orders">Заказы</router-link>
                         <router-link class="nav-link" to="/users">Пользователи</router-link>
                         <router-link class="nav-link" to="/settings">Настройки</router-link>
+                        <router-link class="nav-link" to="/numbers/import">Импорт номеров</router-link>
                     </div>
 
                 </div>

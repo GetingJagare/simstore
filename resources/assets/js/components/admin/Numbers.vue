@@ -46,7 +46,7 @@
         <table class="mt-4 table b-table table-hover border">
             <thead>
             <tr>
-                <th></th>
+                <th><input type="checkbox" v-model="checkAllNumbers"></th>
                 <th>ID</th>
                 <th>Номер</th>
                 <th>Цена партнера</th>
@@ -131,6 +131,8 @@
         data() {
 
             return {
+                checkAllNumbers: false,
+                checkAllNumbersProcessing: false,
                 checked_numbers: [],
                 checked_option: null,
                 mass_price: null,
@@ -404,7 +406,32 @@
                 this.checked_numbers = [];
             }
 
-        }
+        },
+        watch: {
+            checkAllNumbers: function (value) {
+                this.checkAllNumbersProcessing = true;
+                if (value) {
+                    this.$el.querySelector('.table').querySelector('tbody').querySelectorAll('tr').forEach(function (row) {
+                        var checkBox = row.querySelectorAll('input')[0];
+                        if (!checkBox.checked) {
+                            checkBox.click();
+                        }
+                    });
+                } else {
+                    if (this.checked_numbers.length === this.numbers.length) {
+                        this.checked_numbers = [];
+                    }
+                    this.$el.querySelector('.table').querySelector('thead').querySelectorAll('input')[0].click();
+                }
+                this.checkAllNumbersProcessing = false;
+            },
+            checked_numbers: function (value) {
+                if (this.checkAllNumbersProcessing) {
+                    return;
+                }
+                this.checkAllNumbers = value.length === this.numbers.length;
+            }
+        },
     }
 </script>
 

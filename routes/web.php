@@ -118,6 +118,7 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/numbers/discount', 'AdminController@setDiscountToNumbers');
     Route::post('admin/numbers/saled', 'AdminController@setSaledNumbers');
     Route::post('admin/numbers/sale', 'AdminController@addToSale');
+    Route::post('admin/numbers/import', 'AdminController@importNumbers');
 
     Route::get('admin/orders', 'AdminController@gerOrders');
     Route::get('admin/orders/get', 'AdminController@gerOrder');

@@ -79,6 +79,11 @@ const router = new VueRouter({
             path: '/orders/:id',
             name: 'orders_detail',
             component: require('./components/admin/orders/OrdersDetail.vue')
+        },
+        {
+            path: '/numbers/import',
+            name: 'numbers_import',
+            component: require('./components/admin/NumbersImport.vue')
         }
     ],
 });

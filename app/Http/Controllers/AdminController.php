@@ -401,4 +401,38 @@ class AdminController extends Controller
         dd($numbers->get());
 
     }
+
+    public function importNumbers(Request $request)
+    {
+    	$file = $request->file('numbers');
+	    $fileType = \PHPExcel_IOFactory::identify($file);
+	    $xlsReader = \PHPExcel_IOFactory::createReader($fileType);
+
+	    $xls = $xlsReader->load($file);
+	    $xls->setActiveSheetIndex(0);
+	    $activeSheet = $xls->getActiveSheet();
+
+	    $i = 2;
+	    while (1) {
+		    $numberValue = trim($activeSheet->getCellByColumnAndRow(0, $i)->getValue());
+		    if (empty($numberValue)) {
+		    	break;
+		    }
+
+		    if (preg_match('/^[+]?7|8\d{3}\s*\d{3}\s*\d{2}\s*\d{2}$/', $numberValue)) {
+		    	$numberValue = substr(str_replace(' ', '', $numberValue), 1);
+		    	$numberEntity = Number::where('value', $numberValue)->first() ?: new Number();
+		    	$numberEntity->value = $numberValue;
+		    	$numberEntity->price_rental = (float)(trim($activeSheet->getCellByColumnAndRow(1, $i)->getValue()) ?: 0);
+		    	$numberEntity->price = (float)trim($activeSheet->getCellByColumnAndRow(2, $i)->getValue()) ?: 0;
+
+		    	$cityName = trim($activeSheet->getCellByColumnAndRow(3, $i)->getValue());
+
+		    	$numberEntity->save();
+		    }
+
+	    	$i ++;
+	    }
+
+    }
 }

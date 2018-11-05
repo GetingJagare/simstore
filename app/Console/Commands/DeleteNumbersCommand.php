@@ -21,6 +21,8 @@ class DeleteNumbersCommand extends Command
      */
     protected $description = 'Command description';
 
+    private $appDir = __DIR__ . '/../../../';
+
     /**
      * Create a new command instance.
      *
@@ -38,6 +40,7 @@ class DeleteNumbersCommand extends Command
      */
     public function handle()
     {
+    	exec("php {$this->appDir}artisan backup:db");
         DB::table('number')->truncate();
     }
 }
