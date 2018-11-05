@@ -427,8 +427,12 @@ class AdminController extends Controller
 		    	$numberEntity->price = (float)trim($activeSheet->getCellByColumnAndRow(2, $i)->getValue()) ?: 0;
 
 		    	$cityName = trim($activeSheet->getCellByColumnAndRow(3, $i)->getValue());
+		    	$region = Region::where('city', $cityName ?: 'Москва')->first() ?: Region::where('subdomain', 'moscow')->first();
 
-		    	$numberEntity->save();
+		    	if ($region) {
+		    		$numberEntity->region_id = $region->id;
+				    $numberEntity->save();
+			    }
 		    }
 
 	    	$i ++;
