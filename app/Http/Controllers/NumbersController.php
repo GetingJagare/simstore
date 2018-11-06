@@ -171,17 +171,17 @@ class NumbersController extends Controller
         $now = Carbon::now();
 
         // Текущий регион
-        $currentRegion = session('region', null);
+        $currentRegion = session('region');
 
         $data = Cache::remember('numbers_on_sale_' . $currentRegion['id'], $now->addHours(3), function () use ($currentRegion, $now) {
 
-            $numbers = Number::where(['on_sale' => 1, 'saled' => 0])->get();
+            $numbers = Number::where(['saled' => 0, 'region_id' => $currentRegion['id']])->get();
 
             // Телефонные коды региона
-            $codes = getRegionPhoneCodes($currentRegion['id']);
+            //$codes = getRegionPhoneCodes($currentRegion['id']);
 
             // Выводим только номера текущего региона
-            $numbers = $numbers->each(function ($number, $key) use ($codes) {
+            /*$numbers = $numbers->each(function ($number, $key) use ($codes) {
 
                 foreach ($codes as $code) {
                     $s = stripos($number->value, $code);
@@ -192,7 +192,7 @@ class NumbersController extends Controller
 
             })->filter(function ($number) {
                 return $number->regional == true;
-            });
+            });*/
 
             $numbers = formatNumbers($numbers, true);
 
