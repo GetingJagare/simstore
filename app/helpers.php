@@ -299,7 +299,6 @@ function getSimilarNumbers($numbers, $price_sort = 'asc') {
 /**
  * @param $number
  * @param bool $saled
- * @param bool $saled
  */
 function bookNumberInStore($number, $saled = true)
 {

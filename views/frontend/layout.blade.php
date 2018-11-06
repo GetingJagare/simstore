@@ -9,7 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/app.css?v=2.0.1') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css?v=2.0.2') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 
@@ -31,8 +31,9 @@
             <div class="d-flex flex-nowrap justify-content-between">
                 <div class="d-flex flex-nowrap">
                     <div class="header-logo" data-href="/">
-                        <b class="d-block">Sim-Store</b>
-                        <span>Мы предоставляем в пользование статусные номера золотой и серебряной серий.</span>
+                        <img src="/images/logo.png" alt="" class="header-logo__image"/>
+                        {{--<b class="d-block">Sim-Store</b>
+                        <span>Мы предоставляем в пользование статусные номера золотой и серебряной серий.</span>--}}
                     </div>
                     <select-city :current='{!! json_encode($region) !!}'></select-city>
                 </div>
