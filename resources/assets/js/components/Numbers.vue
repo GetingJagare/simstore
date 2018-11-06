@@ -326,8 +326,8 @@
                 ],
 
                 sort_options: [
-                    {name: 'От дешевых к дорогим', field: 'price_new', by: 'asc'},
-                    {name: 'От дорогих к дешевым', field: 'price_new', by: 'desc'},
+                    {name: 'От дешевых к дорогим', field: 'price', by: 'asc'},
+                    {name: 'От дорогих к дешевым', field: 'price', by: 'desc'},
                     {name: 'Новизне', field: 'id', by: 'desc'},
                 ],
 
