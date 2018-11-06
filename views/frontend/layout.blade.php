@@ -32,7 +32,7 @@
                 <div class="d-flex flex-nowrap">
                     <div class="header-logo" data-href="/">
                         <b class="d-block">Sim-Store</b>
-                        <span>Описание что мы предлагаем</span>
+                        <span>Мы предоставляем в пользование статусные номера золотой и серебряной серий.</span>
                     </div>
                     <select-city :current='{!! json_encode($region) !!}'></select-city>
                 </div>
@@ -134,7 +134,7 @@
                     <div class="footer-socials text-center">
                         <a href="#" class="fb">Мы на Facebook</a>
                         <a href="#" class="tw">Мы в Twitter</a>
-                        <a href="#" class="vk">Мы во Вконтакте</a>
+                        <a href="https://vk.com/sim_store_rus" class="vk">Мы во Вконтакте</a>
                         <a href="#" class="ok">Мы в Одноклассниках</a>
                         <a href="#" class="yt">Мы на YouTube</a>
                     </div>

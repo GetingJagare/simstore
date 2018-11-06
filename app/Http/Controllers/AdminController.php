@@ -421,19 +421,21 @@ class AdminController extends Controller
 
 		    if (preg_match('/^[+]?7|8\d{3}\s*\d{3}\s*\d{2}\s*\d{2}$/', $numberValue)) {
 		    	$numberValue = substr(str_replace(' ', '', $numberValue), 1);
-		    	$numberEntity = Number::where('value', $numberValue)->first() ?: new Number();
-		    	$numberEntity->value = $numberValue;
-		    	$numberEntity->price_rental = (float)(trim($activeSheet->getCellByColumnAndRow(1, $i)->getValue()) ?: 0);
-		    	$numberEntity->price = (float)trim($activeSheet->getCellByColumnAndRow(2, $i)->getValue()) ?: 0;
-
-		    	$cityName = trim($activeSheet->getCellByColumnAndRow(3, $i)->getValue());
-		    	$region = Region::where('city', $cityName ?: 'Москва')->first() ?: Region::where('subdomain', 'moscow')->first();
-
-		    	if ($region) {
-		    		$numberEntity->region_id = $region->id;
-				    $numberEntity->save();
-			    }
 		    }
+
+            $numberEntity = Number::where('value', $numberValue)->first() ?: new Number();
+            $numberEntity->value = $numberValue;
+            $numberEntity->price_rental = (float)(trim($activeSheet->getCellByColumnAndRow(1, $i)->getValue()) ?: 0);
+            $numberEntity->price = (float)trim($activeSheet->getCellByColumnAndRow(2, $i)->getValue()) ?: 0;
+
+            $cityName = mb_convert_encoding(trim($activeSheet->getCellByColumnAndRow(3, $i)->getValue()), 'utf-8');
+            print_r($cityName);
+            $region = Region::where('city', $cityName ?: 'Москва')->first() ?: Region::where('subdomain', 'moscow')->first();
+
+            if ($region) {
+                $numberEntity->region_id = $region->id;
+                $numberEntity->save();
+            }
 
 	    	$i ++;
 	    }

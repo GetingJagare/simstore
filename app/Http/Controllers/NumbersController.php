@@ -48,14 +48,17 @@ class NumbersController extends Controller
         $currentRegion = session('region', null);
 
         // Предверительная коллекция
-        $numbers = $numbers->get();
-        $numbers = $numbers->where('block_po', '=', '0')->where('saled', '=', '0');
+        $numbers = $numbers
+            ->where('block_po', '=', '0')
+            ->where('saled', '=', '0')
+            ->where('region_id', $currentRegion['id'])
+            ->get();
 
         // Телефонные коды региона
-        $codes = getRegionPhoneCodes($currentRegion['id']);
+        //$codes = getRegionPhoneCodes($currentRegion['id']);
 
         // Выводим только номера текущего региона
-        $numbers = $numbers->each(function ($number, $key) use ($codes) {
+        /*$numbers = $numbers->each(function ($number, $key) use ($codes) {
 
             foreach ($codes as $code) {
                 $s = stripos($number->value, $code);
@@ -66,7 +69,7 @@ class NumbersController extends Controller
 
         })->filter(function ($number) {
             return $number->regional == true;
-        });
+        });*/
         /*
 
         // Телефонные коды региона

@@ -11,6 +11,7 @@ header {
     margin: 27px 0 25px 0;
     line-height: 1.2;
     position: relative;
+    width: 220px;
     
     &:before {
       content: '';
@@ -29,6 +30,9 @@ header {
   .header-logo > span {
     font-size: 15px;
     font-weight: 300;
+    @include media-breakpoint-down(lg) {
+      font-size: 13px;
+    }
   }
 
   .header-city > a {
@@ -192,13 +196,13 @@ header {
 @include media-breakpoint-only(xs) {
 
   header .header-logo {
-    width: 110px;
+    width: 150px;
     margin: 14px 0 6px 0;
   }
 
   header .header-logo > span {
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.2;
   }
 

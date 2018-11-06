@@ -128,7 +128,7 @@
                             {{ number.final_price }} ₽
                         </td>
                         <td class="offers-item__price text-center" v-else>
-                            Договорная
+                            {{ number.price}} <span v-if="!isNaN(number.price)">₽</span>
                         </td>
                         <td class="offers-item__old-price text-center">
                             <span v-if="number.price_new != number.final_price">{{ number.price_new }} ₽</span>

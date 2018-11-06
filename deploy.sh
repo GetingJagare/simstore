@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+composer install
+
 git fetch
 git merge origin/master
 
