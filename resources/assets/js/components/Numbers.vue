@@ -3,7 +3,9 @@
         <div class="main-content__header d-flex flex-wrap flex-sm-nowrap justify-content-between">
             <div class="d-flex flex-wrap flex-sm-nowrap align-items-center">
                 <div class="main-content__select-count">Выводить на странице:</div>
-                <multiselect v-model="form.perpage" @select="perpage" :options="perpage_options" track-by="name" label="name" :allow-empty="false" :searchable="false" :close-on-select="true" :show-labels="false">
+                <multiselect v-model="form.perpage" @select="perpage" :options="perpage_options" track-by="name"
+                             label="name" :allow-empty="false" :searchable="false" :close-on-select="true"
+                             :show-labels="false">
                     <template slot="singleLabel" slot-scope="{ option }">{{ option.name }}</template>
                 </multiselect>
             </div>
@@ -29,27 +31,27 @@
                 </div>
                 <div class="filter-block__checkboxes">
                     <label class="checkbox">
-                        <input type="checkbox" v-model="form.position_start" />
+                        <input type="checkbox" v-model="form.position_start"/>
                         <span class="checkbox__text">В начале</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" v-model="form.position_middle" />
+                        <input type="checkbox" v-model="form.position_middle"/>
                         <span class="checkbox__text">В середине</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" v-model="form.position_end" />
+                        <input type="checkbox" v-model="form.position_end"/>
                         <span class="checkbox__text">В конце</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" v-model="form.promo" />
+                        <input type="checkbox" v-model="form.promo"/>
                         <span class="checkbox__text">Акция</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" v-model="form.similar" />
+                        <input type="checkbox" v-model="form.similar"/>
                         <span class="checkbox__text">Похожие</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" v-model="form.birth" />
+                        <input type="checkbox" v-model="form.birth"/>
                         <span class="checkbox__text">Год рождения</span>
                     </label>
                     <!--<label class="checkbox">
@@ -73,14 +75,18 @@
                         </div>
 
                         <div class="filter-block__range">
-                            <vue-slider ref="priceSlider" :speed="0" v-model="form.price" :min="0" :max="this.price_max" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
+                            <vue-slider ref="priceSlider" :speed="0" v-model="form.price" :min="0" :max="this.price_max"
+                                        :process-dragable="true" :tooltip="false" :process-style="processStyle"
+                                        @drag-end="dataLayerFunction"></vue-slider>
                         </div>
                     </div>
                 </div>
 
                 <div class="filter-block__buttons">
                     <button class="filter-block__buttons-search" type="submit">Найти</button>
-                    <button class="filter-block__buttons-order no-bg" v-on:click.prevent="openNumberOrderPopup">Номер под заказ</button>
+                    <button class="filter-block__buttons-order no-bg" v-on:click.prevent="openNumberOrderPopup">Номер
+                        под заказ
+                    </button>
                 </div>
             </div>
         </form>
@@ -91,13 +97,16 @@
 
                 <div class="d-flex flex-wrap flex-sm-nowrap align-items-center">
                     <div class="main-content__select-count">Сортировать по:</div>
-                    <multiselect @select="sort" v-model="form.sort" :options="sort_options" track-by="name" label="name" :allow-empty="false" :searchable="false" :close-on-select="true" :show-labels="false">
+                    <multiselect @select="sort" v-model="form.sort" :options="sort_options" track-by="name" label="name"
+                                 :allow-empty="false" :searchable="false" :close-on-select="true" :show-labels="false"
+                                 class="main-content__multiselect">
                         <template slot="singleLabel" slot-scope="{ option }">{{ option.name }}</template>
                     </multiselect>
                 </div>
 
                 <div class="w-xs-100 offer-help">
-                    <a href="#" class="button no-bg" v-on:click.prevent="openModal('Помогите с выбором', 'lead_upper_popup_form')">
+                    <a href="#" class="button no-bg"
+                       v-on:click.prevent="openModal('Помогите с выбором', 'lead_upper_popup_form')">
                         <span class="d-inline d-lg-none d-xl-inline">Помогите с выбором</span>
                         <span class="d-none d-lg-inline d-xl-none">Помощь</span>
                     </a>
@@ -134,14 +143,18 @@
                             <span v-if="number.price_new != number.final_price">{{ number.price_new }} ₽</span>
                         </td>
                         <td class="offers-item__price text-center" v-if="number.price_rental > 0">
-                            {{ number.price_rental }} ₽/мес <span class="offers-item__price__rental" v-tooltip="'Вы можете арендовать номер вместо его покупки. Стоимость аренды включена в тариф.'">?</span>
+                            {{ number.price_rental }} ₽/мес <span class="offers-item__price__rental"
+                                                                  v-tooltip="'Вы можете арендовать номер вместо его покупки. Стоимость аренды включена в тариф.'">?</span>
                         </td>
                         <td class="offers-item__price text-center" v-else>
-                            Договорная <span class="offers-item__price__rental" v-tooltip="'Вы можете арендовать номер вместо его покупки. Стоимость аренды включена в тариф.'">?</span>
+                            Договорная <span class="offers-item__price__rental"
+                                             v-tooltip="'Вы можете арендовать номер вместо его покупки. Стоимость аренды включена в тариф.'">?</span>
                         </td>
                         <td class="offers-item__buy text-right">
-                            <a href="#" class="offers-item__one-click button" v-on:click.prevent="oneClick(number)">Купить в 1 клик</a>
-                            <a href="#" v-if="cart.numbers.includes(number.id)" class="offers-item__basket active" v-on:click.prevent="showNumberAlreadyInCartModal">В корзину</a>
+                            <a href="#" class="offers-item__one-click button" v-on:click.prevent="oneClick(number)">Купить
+                                в 1 клик</a>
+                            <a href="#" v-if="cart.numbers.includes(number.id)" class="offers-item__basket active"
+                               v-on:click.prevent="showNumberAlreadyInCartModal">В корзину</a>
                             <a href="#" class="offers-item__basket"
                                v-on:click.prevent="addNumberToCart(number)" v-else>В корзину</a>
                         </td>
@@ -260,9 +273,11 @@
     import CallbackModal from './modals/CallbackModal.vue';
 
     import VueTheMask from 'vue-the-mask'
+
     Vue.use(VueTheMask);
     import vueSlider from 'vue-slider-component'
     import VTooltip from 'v-tooltip'
+
     Vue.use(VTooltip);
 
 
@@ -283,7 +298,7 @@
             return {
                 dataLayerFunction: function () {
                     if (!getCookie('lead__touch_beauty_number_form_done')) {
-                        addToDataLayer({'event':'lead__touch_beauty_number_form'});
+                        addToDataLayer({'event': 'lead__touch_beauty_number_form'});
                         setCookie('lead__touch_beauty_number_form_done', 1, getInfiniteUTCDateString());
                     }
                 },
@@ -346,11 +361,11 @@
         },
 
         created() {
-            if(this.price_range) {
+            if (this.price_range) {
                 this.form.price = this.price_range;
             }
 
-            if(this.promo) {
+            if (this.promo) {
                 this.form.promo = true;
             }
 
@@ -373,9 +388,7 @@
             },
 
             openNumberOrderPopup() {
-                this.$modal.show(NumberOrderModal, {
-
-                }, {
+                this.$modal.show(NumberOrderModal, {}, {
                     height: 'auto',
                     adaptive: true,
                     width: 400
@@ -388,7 +401,7 @@
 
             submitOrderPopup() {
 
-                if(this.number_order.phone.length < 18) {
+                if (this.number_order.phone.length < 18) {
                     this.$modal.show('dialog', {
                         title: 'Ошибка!',
                         text: 'Проверьте корректность введенного номера телефона',
@@ -490,9 +503,9 @@
 
                     this.$trigger('updateCart', {numbers: response.body.numbers});
                     document.getElementsByClassName('basket-count')[0].innerHTML = response.body.count;
-                    document.getElementsByClassName('basket-mobile-count')[0].innerHTML =  response.body.count;
+                    document.getElementsByClassName('basket-mobile-count')[0].innerHTML = response.body.count;
 
-                    addToDataLayer({'event':'basket_add'});
+                    addToDataLayer({'event': 'basket_add'});
                 }, response => {
 
                     alert('Произошла ошибка при загрузке данных');
