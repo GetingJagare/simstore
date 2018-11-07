@@ -14,7 +14,7 @@ class AlterTariffsTable extends Migration
     public function up()
     {
         Schema::table('tariffs', function (Blueprint $table) {
-            $table->string('code')->length(191)->default('')->change();
+            $table->dropColumn('code');
         });
     }
 
@@ -25,6 +25,8 @@ class AlterTariffsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('tariffs', function (Blueprint $table) {
+            $table->string('code')->length(191)->default('');
+        });
     }
 }
