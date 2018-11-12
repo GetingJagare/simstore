@@ -53,7 +53,7 @@
                     this.$modal.show(InfoPopup, {
                         title: 'Добавлено в корзину',
                         text: 'Выбранный тариф добавлен в корзину. Вы можете перейти к оформлению заказа или продолжить покупки.',
-                        link: {name: 'Перейти в корзину', href: '/cart'}
+                        link: {name: 'Перейти в корзину', href: '/korzina'}
                     }, {
                         height: 'auto',
                         adaptive: true,

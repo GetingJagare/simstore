@@ -1,6 +1,6 @@
 User-agent: *
 
-Disallow: /cart
+Disallow: /korzina
 Disallow: /pass
 Disallow: /profile
 Disallow: *utm*=
