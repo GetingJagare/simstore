@@ -70,14 +70,14 @@ function commonRoutes() {
     Route::get('tarify/bezlimitnye', 'PageController@getUnlimitedTariffsPage');
     Route::get('tarify/dlja-zvonkov-po-rossii', 'PageController@getUnlimitedRuTariffsPage');
     Route::get('tarify/internet', 'PageController@getInternetTariffsPage');
-    Route::get('tarify/dlja-zvonkov-po-{region_slug_pr}', function ($region_slug_pr) {
-        return app()->make('\App\Http\Controllers\PageController')->getRegionTariffsPage($region_slug_pr);
-    });
-    Route::get('{slug?}', 'PageController@get')->where('slug', '(.*)?')->name('page');
 }
 
 Route::domain("{region}.$httpHostWithoutSubDomain")->group(function () {
     commonRoutes();
+    Route::get('tarify/dlja-zvonkov-po-{region_slug_pr}', function ($region, $region_slug_dat) {
+        return app()->make('\App\Http\Controllers\PageController')->getRegionTariffsPage($region_slug_dat, $region);
+    });
+    Route::get('{slug?}', 'PageController@get')->where('slug', '(.*)?')->name('page');
 });
 
 /*
@@ -128,6 +128,9 @@ Route::middleware('auth')->group(function () {
 });
 
 commonRoutes();
+Route::get('tarify/dlja-zvonkov-po-{region_slug_pr}', function ($region_slug_dat) {
+    return app()->make('\App\Http\Controllers\PageController')->getRegionTariffsPage($region_slug_dat);
+});
 Route::get('{slug?}', function ($slug = null) {
     return app()->make('\App\Http\Controllers\PageController')->redirectToRegionSubdomain($slug, 'moscow');
 })->where('slug', '(.*)?');

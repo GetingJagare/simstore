@@ -115,11 +115,13 @@ class PageController extends Controller
         return $this->get($region, 'tarify/internet', ['for_internet' => true]);
     }
 
-    public function getRegionTariffsPage($region_slug_pr) {
-        $currentRegion = session('region', null);
-        if ($region_slug_pr !== str_slug($currentRegion['name_dat'])) {
+    public function getRegionTariffsPage($region_slug_dat, $regionSlug = 'moscow') {
+        /** @var Region $region */
+        $region = Region::where('subdomain', $regionSlug)->firstOrFail();
+        if (str_slug($region->name_dat) !== $region_slug_dat) {
             abort(404);
         }
-        return $this->get($currentRegion['subdomain'], 'dlya-zvonkov-po');
+        $region->writeToSession();
+        return $this->get($region->subdomain, 'dlya-zvonkov-po');
     }
 }
