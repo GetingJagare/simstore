@@ -29,6 +29,10 @@
                     <b-form-input type="text" v-model="form.name_pr" required placeholder="Москве" autocomplete="off"></b-form-input>
                 </b-form-group>
 
+                <b-form-group label="Подставляемое название региона (дат. падеж):" description="Текст, который будет подставляться в УРЛы типа 'Для звонков по...'.">
+                    <b-form-input type="text" v-model="form.name_dat" required placeholder="Москве" autocomplete="off"></b-form-input>
+                </b-form-group>
+
                 <b-button type="submit" variant="primary">Обновить</b-button>
             </b-form>
         </b-card>
@@ -58,6 +62,7 @@
                     name: '',
                     city: '',
                     name_pr: '',
+                    name_dat: '',
                     subdomain: '',
                     codes: []
                 },

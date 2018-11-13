@@ -20,6 +20,7 @@ class PageController extends Controller
         }
 
         $page = Page::where('slug', $slug ? $slug : '')->firstOrFail();
+        $page->name = preg_replace("/\s*\{region_dat\}/", " {$currentRegion['name_dat']}", $page->name);
 
         $toponym = (is_null($slug) ? '' : ' | ' . (!empty($currentRegion['city']) ? $currentRegion['city'] . ' и ' : '') . $currentRegion['name']);
 
@@ -63,18 +64,11 @@ class PageController extends Controller
     {
         // Если нужно установить конкретный регион
         if($region) {
+            /** @var Region $region */
             $region = Region::where('subdomain', $region)->firstOrFail();
 
             // Записываем регион в сессию
-            session(['region' => [
-                'id' => $region->id,
-                'name' => $region->name,
-                'name_pr' => $region->name_pr,
-                'city' => $region->city,
-                'subdomain' => $region->subdomain,
-                'created_at' => $region->created_at,
-                'updated_at' => $region->updated_at
-            ]]);
+            $region->writeToSession();
 
             return $region;
         }
@@ -87,19 +81,12 @@ class PageController extends Controller
 
         // Если нет, ставим Москву
         if(!$region) {
+            /** @var Region $region */
             $region = Region::where('city', 'Москва')->first();
         }
 
         // Записываем регион в сессию
-        session(['region' => [
-            'id' => $region->id,
-            'name' => $region->name,
-            'name_pr' => $region->name_pr,
-            'city' => $region->city,
-            'subdomain' => $region->subdomain,
-            'created_at' => $region->created_at,
-            'updated_at' => $region->updated_at
-        ]]);
+        $region->writeToSession();
 
         return $region;
     }
@@ -126,5 +113,13 @@ class PageController extends Controller
 
     public function getInternetTariffsPage($region = 'moscow') {
         return $this->get($region, 'tarify/internet', ['for_internet' => true]);
+    }
+
+    public function getRegionTariffsPage($region_slug_pr) {
+        $currentRegion = session('region', null);
+        if ($region_slug_pr !== str_slug($currentRegion['name_dat'])) {
+            abort(404);
+        }
+        return $this->get($currentRegion['subdomain'], 'dlya-zvonkov-po');
     }
 }

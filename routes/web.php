@@ -70,6 +70,9 @@ function commonRoutes() {
     Route::get('tarify/bezlimitnye', 'PageController@getUnlimitedTariffsPage');
     Route::get('tarify/dlja-zvonkov-po-rossii', 'PageController@getUnlimitedRuTariffsPage');
     Route::get('tarify/internet', 'PageController@getInternetTariffsPage');
+    Route::get('tarify/dlja-zvonkov-po-{region_slug_pr}', function ($region_slug_pr) {
+        return app()->make('\App\Http\Controllers\PageController')->getRegionTariffsPage($region_slug_pr);
+    });
     Route::get('{slug?}', 'PageController@get')->where('slug', '(.*)?')->name('page');
 }
 

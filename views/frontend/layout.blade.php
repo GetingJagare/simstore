@@ -66,12 +66,15 @@
                 <div>
                     <ul class="d-flex flex-wrap flex-sm-nowrap nav-menu">
                         <li class="has-dropdown">
-                            <a href="/">Красивые номера</a>
+                            <a href="/nomera/krasivye">Красивые номера</a>
                             <span class="open-dropdown"></span>
                             <ul class="dropdown d-none">
                                 <li><a href="/nomera/zolotye">Золотые</a></li>
-                                <li><a href="/nomera/platinovye">Платиновые</a></li>
+                                {{--<li><a href="/nomera/platinovye">Платиновые</a></li>--}}
                                 <li><a href="/nomera/aktsionnye">Акционные</a></li>
+                                <li><a href="/nomera/arenda-nomera">Аренда</a></li>
+                                <li><a href="/nomera/kupit-simkarti">Сим-карты</a></li>
+                                <li><a href="/nomera/nomer-na-zakaz">Номер на заказ</a></li>
                             </ul>
                         </li>
                         <li class="has-dropdown">
@@ -81,6 +84,13 @@
                                 <li><a href="/tarify/bezlimitnye">Безлимитные</a></li>
                                 <li><a href="/tarify/dlja-zvonkov-po-rossii">Безлимитные Россия</a></li>
                                 <li><a href="/tarify/internet">Для Интернета</a></li>
+                                <li>
+                                    <a href="/tarify/dlja-zvonkov-po-{{ str_slug($region['name_pr']) }}">
+                                        Для звонков по {{ $region['name_pr'] }}
+                                    </a>
+                                </li>
+                                <li><a href="/tarify/vygodnye">Выгодные</a></li>
+                                <li><a href="/tarify/dlja-zvonkov-za-granicu">Для звонков за границу</a></li>
                             </ul>
                         </li>
                         <li><a href="/informatsiya">Информация</a></li>

@@ -63,6 +63,7 @@ class AdminController extends Controller
 
         $region->name = $request->name;
         $region->name_pr = $request->name_pr;
+        $region->name_dat = $request->name_dat;
         $region->city = $request->city;
         $region->subdomain = $request->subdomain;
         $region->codes = json_encode($request->codes);
@@ -93,7 +94,17 @@ class AdminController extends Controller
     public function getPage(Request $request)
     {
         $page = Page::find($request->id);
-        return response()->json(['success' => true, 'page' => $page]);
+        $templates = [];
+        $templateResult = Page::query()->distinct()->where('template', '<>', NULL)
+            ->orderBy('template')->get(['template']);
+        foreach ($templateResult as $tmpl) {
+            $templates[$tmpl->template] = $tmpl->template;
+        }
+        return response()->json([
+            'success' => true,
+            'page' => $page,
+            'templates' => array_merge(['frontend.static' => 'По умолчанию'], $templates)
+        ]);
     }
 
     public function addPage(Request $request)
@@ -115,6 +126,8 @@ class AdminController extends Controller
         $page->seo_title = $request->seo_title;
         $page->seo_description = $request->seo_description;
         $page->content = request('content');
+        $page->template = $request->template;
+        $page->show_on_site = $request->show_on_site;
         $page->save();
 
         return response()->json(['success' => true, 'message' => 'Страница успешно обновлена']);

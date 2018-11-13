@@ -12,11 +12,17 @@
                 <b-form @submit="onSubmit">
 
                     <b-form-group label="Название:">
-                        <b-form-input type="text" v-model="page.name" required placeholder="Информация" autocomplete="off"></b-form-input>
+                        <b-form-input type="text" v-model="page.name" required placeholder="Информация"
+                                      autocomplete="off"></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="Альтернативное название:">
-                        <b-form-input type="text" v-model="page.alter_name" placeholder="Информация" autocomplete="off"></b-form-input>
+                        <b-form-input type="text" v-model="page.alter_name" placeholder="Информация"
+                                      autocomplete="off"></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group label="Показывать на сайте">
+                        <b-form-checkbox @change="isShowOnSiteChecked" v-model="showOnSite"></b-form-checkbox>
                     </b-form-group>
 
                     <b-form-group label="Адрес:">
@@ -26,17 +32,25 @@
                         </b-input-group>
                     </b-form-group>
 
-                    <b-form-group label="SEO-заголовок:" description="Вместо {region} автоматически подставляется название региона.">
-                        <b-form-input type="text" v-model="page.seo_title" placeholder="Информация" autocomplete="off"></b-form-input>
+                    <b-form-group label="SEO-заголовок:"
+                                  description="Вместо {region} автоматически подставляется название региона.">
+                        <b-form-input type="text" v-model="page.seo_title" placeholder="Информация"
+                                      autocomplete="off"></b-form-input>
                     </b-form-group>
 
-                    <b-form-group label="SEO-описание:" description="Вместо {region} автоматически подставляется название региона.">
-                        <b-form-textarea autocomplete="off" v-model="page.seo_description" placeholder="Информация" :rows="3" :max-rows="6">
+                    <b-form-group label="SEO-описание:"
+                                  description="Вместо {region} автоматически подставляется название региона.">
+                        <b-form-textarea autocomplete="off" v-model="page.seo_description" placeholder="Информация"
+                                         :rows="3" :max-rows="6">
                         </b-form-textarea>
                     </b-form-group>
 
                     <b-form-group label="Содержимое страницы:">
                         <textarea id="content" cols="30" rows="10">{{ page.content }}</textarea>
+                    </b-form-group>
+
+                    <b-form-group label="Шаблон:" class="mt-5">
+                        <b-form-select :options="templates" class="mt-0 mb-0" v-model="page.template"></b-form-select>
                     </b-form-group>
 
                     <b-button type="submit" variant="primary">Обновить информацию</b-button>
@@ -63,6 +77,7 @@
 
             return {
                 domain: location.host,
+                showOnSite: false,
                 mess: {
                     success: ''
                 },
@@ -73,8 +88,11 @@
                     slug: '',
                     seo_title: '',
                     seo_description: '',
-                    content: ''
-                }
+                    content: '',
+                    template: '',
+                    show_on_site: 0,
+                },
+                templates: {}
             }
         },
 
@@ -91,6 +109,9 @@
                     this.page.seo_title = response.body.page.seo_title ? response.body.page.seo_title : '';
                     this.page.seo_description = response.body.page.seo_description ? response.body.page.seo_description : '';
                     this.page.content = response.body.page.content ? response.body.page.content : '';
+                    this.page.template = response.body.page.template ? response.body.page.template : 'frontend.static';
+                    this.page.show_on_site = response.body.page.show_on_site;
+                    this.showOnSite = !!response.body.page.show_on_site;
 
                     tinymce.init({
                         selector: '#content',
@@ -110,13 +131,15 @@
 
                     tinymce.get('content').setContent(this.page.content);
 
+                    this.templates = response.body.templates;
+
                 }, response => {
 
                 });
 
             },
 
-            onSubmit (evt) {
+            onSubmit(evt) {
 
                 evt.preventDefault();
                 this.$http.post('/admin/pages/edit', this.page).then(response => {
@@ -134,9 +157,14 @@
 
             },
 
+            isShowOnSiteChecked (checked) {
+                this.page.show_on_site = checked ? 1 : 0;
+                this.showOnSite = this.checked;
+            }
+
         },
 
-        beforeRouteLeave (to, from, next) {
+        beforeRouteLeave(to, from, next) {
 
             tinymce.remove("#content");
             //tinymce.get('content').setContent('dss');
@@ -154,10 +182,10 @@
 
 <style>
     .mce-panel {
-        border: 0 solid #ced4da!important
+        border: 0 solid #ced4da !important
     }
 
     .mce-tinymce {
-        box-shadow: none!important
+        box-shadow: none !important
     }
 </style>
