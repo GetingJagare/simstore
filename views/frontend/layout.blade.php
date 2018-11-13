@@ -85,8 +85,8 @@
                                 <li><a href="/tarify/dlja-zvonkov-po-rossii">Безлимитные Россия</a></li>
                                 <li><a href="/tarify/internet">Для Интернета</a></li>
                                 <li>
-                                    <a href="/tarify/dlja-zvonkov-po-{{ str_slug($region['name_pr']) }}">
-                                        Для звонков по {{ $region['name_pr'] }}
+                                    <a href="/tarify/dlja-zvonkov-po-{{ str_slug($region['name_dat']) }}">
+                                        Для звонков по {{ $region['name_dat'] }}
                                     </a>
                                 </li>
                                 <li><a href="/tarify/vygodnye">Выгодные</a></li>

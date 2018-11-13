@@ -5,17 +5,7 @@
             <div class="col-md-6 text-right"><b-btn v-b-toggle.collapse1 variant="primary">Добавить</b-btn></div>
         </div>
 
-        <b-table class="mt-4" hover :items="pages" :fields="table_fields" :outlined="true">
-            <template slot="slug" slot-scope="data">
-                <a :href="'/' + data.value" target="_blank">Перейти</a>
-            </template>
-            <template slot="id" slot-scope="data">
-                <router-link :to="'/pages/' + data.value">Изменить</router-link>
-            </template>
-
-        </b-table>
-
-        <div class="mt-4">
+        <div class="mb-4">
             <b-collapse id="collapse1" class="mt-4">
                 <b-card title="Добавить страницу">
 
@@ -33,6 +23,16 @@
                 </b-card>
             </b-collapse>
         </div>
+
+        <b-table class="mt-4" hover :items="pages" :fields="table_fields" :outlined="true">
+            <template slot="slug" slot-scope="data">
+                <a :href="'/' + data.value" target="_blank">Перейти</a>
+            </template>
+            <template slot="id" slot-scope="data">
+                <router-link :to="'/pages/' + data.value">Изменить</router-link>
+            </template>
+
+        </b-table>
 
     </div>
 </template>
