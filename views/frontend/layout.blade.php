@@ -9,7 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/app.css?v=2.0.3') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css?v=2.0.4') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 

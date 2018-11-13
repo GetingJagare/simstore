@@ -1,26 +1,41 @@
 <section class="delivery-payment">
     <div class="container">
-        <div class="delivery-payment__lines"></div>
+        {{--<div class="delivery-payment__lines"></div>--}}
         <div class="row">
             <div class="col-md-8 order-2 order-sm-1 order-md-2 order-xl-1 col-xl-7">
                 <div class="delivery-payment__row d-flex flex-wrap flex-sm-nowrap">
                     <div class="delivery-payment__item item-1 technology">
-                        Есть вопросы?<br/>
-                        — Позвоните по телефону<br/>
-                        — Закажите звонок с сайта<br/>
-                        — Отправьте нам запрос
+                        1. Выберите номер<br />
+                        2. Выберите тариф
                     </div>
-                    <div class="delivery-payment__item item-2 discuss-issue">
+                    {{--<div class="delivery-payment__item item-2 discuss-issue">
                         Получите ответы о тарифах, сроках и условиях доставки
+                    </div>--}}
+                    <div class="delivery-payment__item delivery-payment__item_right-line item-2 check-form">
+                        3. Оставьте заявку
                     </div>
                 </div>
                 <div class="delivery-payment__row row-2 d-flex flex-wrap flex-sm-nowrap">
-                    <div class="delivery-payment__item item-3 text-line-form">
-                        Встретьте курьера и заполните адресной бланк
-                    </div>
-                    <div class="delivery-payment__item item-4 check-form">
+                   {{-- <div class="delivery-payment__item item-4 check-form">
                         Оформите заявку на вызов курьера по телефону или на сайте
+                    </div>--}}
+                    <div class="delivery-payment__item delivery-payment__item_left-line item-3 delivery">
+                        5. Бесплатная курьерская доставка, в удобное вам время и прямо до вашей двери
                     </div>
+                    <div class="delivery-payment__item item-4 text-line-form">
+                        4. В течение 5 минут с вами свяжется менеджер для уточнения деталей заказа
+                    </div>
+                </div>
+                <div class="delivery-payment__row row-3 d-flex flex-wrap flex-sm-nowrap">
+                    <div class="delivery-payment__item delivery-payment__item_no-line item-5 airplane">
+                        6. Пользуйтесь вашим номером с удовольствием!
+                    </div>
+                    {{--<div class="delivery-payment__item item-5 world-wide-web">
+                        Гарантпост обрабатывает отправление в Сортировочном центре
+                    </div>
+                    <div class="delivery-payment__item item-7 delivery">
+                        Курьер доставляет отправление получателю
+                    </div>--}}
                 </div>
             </div>
             <div class="delivery-payment__right-col col-md-12 order-1 order-sm-2 order-md-1 order-xl-2 col-xl-5">
@@ -40,18 +55,6 @@
                     Вам, просто, нужно выбрать удобное время и встретить курьера.
                     Доставка бесплатна по всей территории России.
                 </div>
-            </div>
-        </div>
-
-        <div class="delivery-payment__row row-3 d-flex flex-wrap flex-sm-nowrap">
-            <div class="delivery-payment__item item-5 world-wide-web">
-                Гарантпост обрабатывает отправление в Сортировочном центре
-            </div>
-            <div class="delivery-payment__item item-6 airplane">
-                Гарантпост направляет отправление ближайшим рейсом
-            </div>
-            <div class="delivery-payment__item item-7 delivery">
-                Курьер доставляет отправление получателю
             </div>
         </div>
 

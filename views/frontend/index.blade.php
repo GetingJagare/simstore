@@ -31,9 +31,10 @@
                         </div>
                         <div class="d-inline-flex order-1 order-sm-2 align-items-center home-slider__text-col">
                             <div class="slider-item__text">
-                                <b>Честно и прозрачно</b><br>
-                                <span>Главное преимущество аренды номера в Sim-Store: НЕТ ДОПОЛНИТЕЛЬНЫХ ПЛАТЕЖЕЙ,
-                                    Вы платите только абонентскую плату по выбранному тарифу.</span>
+                                <b>Условия подключения</b><br>
+                                <span>Что бы пользоваться любым представленным номером:</span><br /><br />
+                                1. Подключите подходящий тариф <br />
+                                2. Внесите единоразовый платеж 1500 - 3000 руб. в зависимости от номера.
                             </div>
                         </div>
                     </div>
@@ -45,7 +46,10 @@
             <div class="container">
                 <div class="d-flex flex-nowrap justify-content-between">
                     <div class="advantages-block__info">
-                        <div class="big-h1">Какие бывают дополнительные платежи:</div>
+                        <div class="big-h1">
+                            Честно и прозрачно!<br />
+                            В sim-store нет скрытых платежей:
+                        </div>
 
                         <div>
                             <table class="advantages-table">
