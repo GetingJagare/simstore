@@ -87,9 +87,14 @@ class NumbersController extends Controller
 
         // Фильтр по цене
         $price = $request->price;
-        $numbers = $numbers->filter(function ($item) use ($price) {
-            return $item->price >= $price[0] && $item->price <= $price[1];
-        });
+        if (!empty($price)) {
+            $numbers = $numbers->filter(function ($item) use ($price) {
+                if (count($price) == 1) {
+                    return $item->price == $price[0];
+                }
+                return $item->price >= $price[0] && $item->price <= $price[1];
+            });
+        }
 
         // Если в строке поиска паттерн, то фильтруем номера по регулярному выражению
         if(array_key_exists($request->search, $patterns)) {

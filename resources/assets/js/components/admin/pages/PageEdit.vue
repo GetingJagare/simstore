@@ -57,7 +57,33 @@
                         <textarea id="small_desc" cols="30" rows="5">{{ page.small_desc }}</textarea>
                     </b-form-group>
 
-                    <b-form-group label="Шаблон:" class="mt-5">
+                    <b-form-group label="Добавить фильтры">
+                        <b-form-checkbox v-model="showFilters" @change="isShowFiltersChecked"></b-form-checkbox>
+                    </b-form-group>
+
+                    <b-form-group label="Выбрать тип фильтра" v-if="showFilters">
+                        <b-form-select :options="{'numbers': 'Номера', 'tariffs': 'Тарифы'}"
+                                       v-model="chosenFilter"></b-form-select>
+                    </b-form-group>
+
+                    <b-form-group>
+                        <b-form-group v-if="chosenFilter === 'numbers'">
+                            <b-form-input type="number" placeholder="От" v-model="page.filters.value[0]"
+                                          class="mt-2"></b-form-input>
+                            <b-form-input type="number" placeholder="До" v-model="page.filters.value[1]"
+                                          class="mt-2"></b-form-input>
+                            <b-form-group label="Акция" class="mt-2">
+                                <b-form-checkbox v-model="page.filters.value.promo"></b-form-checkbox>
+                            </b-form-group>
+                        </b-form-group>
+                        <b-form-group v-else-if="chosenFilter === 'tariffs'">
+                            <b-form-checkbox-group
+                                    :options="{'unlimited': 'Без ограничений', 'unlimited_ru': 'Для звонков по России', 'for_internet': 'Интернет'}"
+                                    v-model="page.filters.value"></b-form-checkbox-group>
+                        </b-form-group>
+                    </b-form-group>
+
+                    <b-form-group label="Шаблон:" class="mt-2">
                         <b-form-select :options="templates" class="mt-0 mb-0" v-model="page.template"></b-form-select>
                     </b-form-group>
 
@@ -90,6 +116,8 @@
                 domain: location.host,
                 addSmallDesc: false,
                 showOnSite: false,
+                showFilters: false,
+                chosenFilter: '',
                 mess: {
                     success: ''
                 },
@@ -104,6 +132,10 @@
                     template: '',
                     show_on_site: 0,
                     small_desc: '',
+                    filters: {
+                        name: '',
+                        value: []
+                    }
                 },
                 templates: {}
             }
@@ -133,7 +165,7 @@
                     }
                 });
 
-                tinymce.get('content').setContent(this.page[field]);
+                tinymce.get(field).setContent(this.page[field]);
             },
 
             getPage(id) {
@@ -151,10 +183,21 @@
                     this.page.show_on_site = response.body.page.show_on_site;
                     this.showOnSite = !!response.body.page.show_on_site;
                     this.page.small_desc = response.body.page.small_desc ? response.body.page.small_desc : '';
+                    this.page.filters = response.body.page.filters ? JSON.parse(response.body.page.filters) : {
+                        name: '',
+                        value: []
+                    };
 
                     this.initEditor('#content', 'content');
 
                     this.templates = response.body.templates;
+
+                    if (this.page.small_desc.length) {
+                        this.addSmallDesc = true;
+                    }
+
+                    this.showFilters = this.page.filters.value.length > 0;
+                    this.chosenFilter = this.page.filters.value.length > 0 ? this.page.filters.name : '';
 
                 }, response => {
 
@@ -187,8 +230,24 @@
 
             isSmallDescChecked(checked) {
                 this.addSmallDesc = checked;
+            },
+
+            isShowFiltersChecked(checked) {
+                this.showFilters = checked;
             }
 
+        },
+
+        watch: {
+            addSmallDesc: function (value) {
+                if (!value && tinymce.editors.small_desc) {
+                    tinymce.editors.small_desc.remove();
+                }
+            },
+            chosenFilter: function (value) {
+                this.page.filters.name = value;
+                this.page.filters.value = [];
+            }
         },
 
         updated() {

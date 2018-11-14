@@ -64,7 +64,7 @@
                     </label>-->
                 </div>
 
-                <div class="d-flex flex-wrap">
+                <div class="d-flex flex-wrap" v-if="form.price.length > 1">
                     <div class="filter-block__price">
 
                         <div class="d-flex align-items-center">
@@ -631,5 +631,8 @@
 <style>
     .filter-block__template-info span {
         cursor: pointer;
+    }
+    .filter-block__buttons {
+        margin-top: 20px;
     }
 </style>

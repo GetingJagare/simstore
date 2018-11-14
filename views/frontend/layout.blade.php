@@ -167,7 +167,7 @@
 </div>
 
 <link rel="stylesheet" href="{{ asset('/css/vendor.css') }}">
-<script src="{{ asset('/js/app.js?v=2.0.4') }}" async></script>
+<script src="{{ asset('/js/app.js?v=2.0.5') }}" async></script>
 @include('counters.ya')
 </body>
 </html>

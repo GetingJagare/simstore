@@ -48,16 +48,18 @@ class GenerateSitemapCommand extends Command
                 $host = "http" . (!$isDebug ? "s" : "") . "://" . (!$isMoscow ? $region->subdomain . "." : "")
                     . config('app.domain');
                 foreach ($pages as $page) {
-                    $pageUrl = $host . (empty($page->slug) ? $page->slug : "/{$page->slug}");
-                    $modTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $page->updated_at)
-                        ->format('Y-m-d\TH:i:sP');
-                    $isHomePage = $page->id === 1;
-                    $sitemap->add(
-                        $pageUrl,
-                        $modTime,
-                        $isHomePage ? 1.0 : 0.6,
-                        $isHomePage ? 'daily' : 'monthly'
-                    );
+                    if ($page->show_on_site) {
+                        $pageUrl = $host . (empty($page->slug) ? $page->slug : "/{$page->slug}");
+                        $modTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $page->updated_at)
+                            ->format('Y-m-d\TH:i:sP');
+                        $isHomePage = $page->id === 1;
+                        $sitemap->add(
+                            $pageUrl,
+                            $modTime,
+                            $isHomePage ? 1.0 : 0.6,
+                            $isHomePage ? 'daily' : 'monthly'
+                        );
+                    }
                 }
 
                 $sitemap->store("xml", "sitemap" . (!$isMoscow ? "-{$region->subdomain}" : ""));

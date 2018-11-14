@@ -64,12 +64,12 @@ function commonRoutes() {
 
     Route::post('crm', 'AdminController@sendToCRM');
 
-    Route::get('nomera/zolotye', 'PageController@getGoldNumbersPage');
+    /*Route::get('nomera/zolotye', 'PageController@getGoldNumbersPage');
     Route::get('nomera/platinovye', 'PageController@getPlatinumNumbersPage');
     Route::get('nomera/aktsionnye', 'PageController@getPromoNumbersPage');
     Route::get('tarify/bezlimitnye', 'PageController@getUnlimitedTariffsPage');
     Route::get('tarify/dlja-zvonkov-po-rossii', 'PageController@getUnlimitedRuTariffsPage');
-    Route::get('tarify/internet', 'PageController@getInternetTariffsPage');
+    Route::get('tarify/internet', 'PageController@getInternetTariffsPage');*/
     Route::post('upload', 'UploadController@index');
 }
 

@@ -11,7 +11,7 @@ class PageController extends Controller
 {
     use SEOToolsTrait;
 
-    public function get($region, $slug = null, $params = [])
+    public function get($region, $slug = null)
     {
         $currentRegion = session('region', null);
 
@@ -27,6 +27,22 @@ class PageController extends Controller
         // SEO
         $this->seo()->setTitle(($page->seo_title ? str_replace('{region}', $currentRegion['name_pr'], $page->seo_title) : $page->name) . $toponym);
         $this->seo()->setDescription($page->seo_description);
+
+        $filterParams = json_decode($page->filters, true);
+        $params = [];
+        switch ($filterParams['name']) {
+            case 'numbers':
+                $params['price_range'] = [];
+                foreach ($filterParams['value'] as $i => $value) {
+                    $params['price_range'][$i] = (int)$value;
+                }
+                break;
+            case 'tariffs':
+                foreach ($filterParams['value'] as $tariffType) {
+                    $params[$tariffType] = true;
+                }
+                break;
+        }
 
         return view($page->template ? $page->template : 'frontend.static', ['page' => $page, 'region' => $currentRegion, 'params' => $params]);
     }
@@ -91,7 +107,7 @@ class PageController extends Controller
         return $region;
     }
 
-    public function getGoldNumbersPage($region = 'moscow') {
+   /* public function getGoldNumbersPage($region = 'moscow') {
         return $this->get($region, 'nomera/zolotye', ['price_range' => [10000, 100000]]);
     }
 
@@ -113,7 +129,7 @@ class PageController extends Controller
 
     public function getInternetTariffsPage($region = 'moscow') {
         return $this->get($region, 'tarify/internet', ['for_internet' => true]);
-    }
+    }*/
 
     public function getRegionTariffsPage($region_slug_dat, $regionSlug = 'moscow') {
         /** @var Region $region */
