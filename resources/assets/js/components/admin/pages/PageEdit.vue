@@ -195,8 +195,6 @@
                         promo: false,
                     };
 
-                    console.log(this.savedFilters);
-
                     this.showFilters = this.savedFilters.value.length > 0 || this.savedFilters.promo;
                     this.isShowFiltersChecked(this.showFilters);
 
@@ -248,7 +246,12 @@
                 } else {
                     this.chosenFilter = this.savedFilters.value.length > 0 || this.savedFilters.promo ? this.savedFilters.name : '';
                 }
-            }
+            },
+
+            resetFilters() {
+                this.page.filters = {name: '', value: [], promo: false};
+                this.savedFilters = {name: '', value: [], promo: false};
+            },
 
         },
 
@@ -260,11 +263,11 @@
             },
             chosenFilter: function (value) {
                 if (!value || !value.length) {
-                    this.page.filters = {name: '', value: [], promo: false};
-                    this.savedFilters = {};
+                    this.resetFilters();
                 } else {
-                    if (Object.keys(this.savedFilters).length) {
-                        this.page.filters = this.savedFilters;
+                    this.page.filters = this.savedFilters;
+                    if (this.page.filters.name !== value) {
+                        this.resetFilters();
                     }
                     this.page.filters.name = value;
                 }
