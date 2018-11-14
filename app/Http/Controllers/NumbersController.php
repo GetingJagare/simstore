@@ -175,7 +175,7 @@ class NumbersController extends Controller
 
         $data = Cache::remember('numbers_on_sale_' . $currentRegion['id'], $now->addHours(3), function () use ($currentRegion, $now) {
 
-            $numbers = Number::where(['saled' => 0, 'region_id' => $currentRegion['id']])->get();
+            $numbers = Number::where(['saled' => 0, 'region_id' => $currentRegion['id'], 'on_sale' => 1])->get();
 
             // Телефонные коды региона
             //$codes = getRegionPhoneCodes($currentRegion['id']);
