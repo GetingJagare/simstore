@@ -131,6 +131,7 @@ class AdminController extends Controller
         $page->content = request('content');
         $page->template = $request->template;
         $page->show_on_site = $request->show_on_site;
+        $page->small_desc = request('small_desc');
         $page->save();
 
         return response()->json(['success' => true, 'message' => 'Страница успешно обновлена']);

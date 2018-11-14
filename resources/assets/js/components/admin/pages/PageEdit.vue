@@ -49,6 +49,14 @@
                         <textarea id="content" cols="30" rows="10">{{ page.content }}</textarea>
                     </b-form-group>
 
+                    <b-form-group label="Добавить небольшое описание">
+                        <b-form-checkbox v-model="addSmallDesc" @change="isSmallDescChecked"></b-form-checkbox>
+                    </b-form-group>
+
+                    <b-form-group label="Описание:" v-if="addSmallDesc">
+                        <textarea id="small_desc" cols="30" rows="5">{{ page.small_desc }}</textarea>
+                    </b-form-group>
+
                     <b-form-group label="Шаблон:" class="mt-5">
                         <b-form-select :options="templates" class="mt-0 mb-0" v-model="page.template"></b-form-select>
                     </b-form-group>
@@ -80,6 +88,7 @@
 
             return {
                 domain: location.host,
+                addSmallDesc: false,
                 showOnSite: false,
                 mess: {
                     success: ''
@@ -94,12 +103,38 @@
                     content: '',
                     template: '',
                     show_on_site: 0,
+                    small_desc: '',
                 },
                 templates: {}
             }
         },
 
         methods: {
+            initEditor(selector, field) {
+                tinymce.init({
+                    selector: selector,
+                    plugins: ['image autoresize code paste media advlist'],
+                    language: 'ru',
+                    paste_as_text: true,
+                    paste_data_images: true,
+                    image_advtab: true,
+                    image_title: true,
+                    automatic_uploads: true,
+                    images_upload_url: '/images',
+                    file_picker_types: 'image',
+                    init_instance_callback: (editor) => {
+                        editor.on('KeyUp', (e) => {
+                            this.page[field] = editor.getContent();
+                        });
+
+                        editor.on('Change', (e) => {
+                            this.page[field] = editor.getContent();
+                        });
+                    }
+                });
+
+                tinymce.get('content').setContent(this.page[field]);
+            },
 
             getPage(id) {
 
@@ -115,30 +150,9 @@
                     this.page.template = response.body.page.template ? response.body.page.template : 'frontend.static';
                     this.page.show_on_site = response.body.page.show_on_site;
                     this.showOnSite = !!response.body.page.show_on_site;
+                    this.page.small_desc = response.body.page.small_desc ? response.body.page.small_desc : '';
 
-                    tinymce.init({
-                        selector: '#content',
-                        plugins: ['image autoresize code paste media advlist'],
-                        language: 'ru',
-                        paste_as_text: true,
-                        paste_data_images: true,
-                        image_advtab: true,
-                        image_title: true,
-                        automatic_uploads: true,
-                        images_upload_url: '/images',
-                        file_picker_types: 'image',
-                        init_instance_callback: (editor) => {
-                            editor.on('KeyUp', (e) => {
-                                this.page.content = editor.getContent();
-                            });
-
-                            editor.on('Change', (e) => {
-                                this.page.content = editor.getContent();
-                            });
-                        }
-                    });
-
-                    tinymce.get('content').setContent(this.page.content);
+                    this.initEditor('#content', 'content');
 
                     this.templates = response.body.templates;
 
@@ -166,11 +180,21 @@
 
             },
 
-            isShowOnSiteChecked (checked) {
+            isShowOnSiteChecked(checked) {
                 this.page.show_on_site = checked ? 1 : 0;
-                this.showOnSite = this.checked;
+                this.showOnSite = checked;
+            },
+
+            isSmallDescChecked(checked) {
+                this.addSmallDesc = checked;
             }
 
+        },
+
+        updated() {
+            if (this.addSmallDesc) {
+                this.initEditor('#small_desc', 'small_desc');
+            }
         },
 
         beforeRouteLeave(to, from, next) {

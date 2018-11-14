@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar-block" v-if="numbers.length > 0">
         <div class="sidebar-block__header">
-            <div class="big-h1">Успей купить!</div>
+            <div class="big-h1">Успей подключить!</div>
             <b>номер дня со <span>скидкой</span></b>
         </div>
         <div class="sidebar-block__content offers-small">
