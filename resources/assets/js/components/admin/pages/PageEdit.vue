@@ -68,6 +68,9 @@
     import 'tinymce/plugins/autoresize';
     import 'tinymce/plugins/code';
     import 'tinymce/plugins/paste';
+    import 'tinymce/plugins/media';
+    import 'tinymce/plugins/link';
+    import 'tinymce/plugins/advlist';
 
     export default {
         mounted() {
@@ -115,9 +118,15 @@
 
                     tinymce.init({
                         selector: '#content',
-                        plugins: ['image', 'autoresize', 'code', 'paste'],
+                        plugins: ['image autoresize code paste media advlist'],
                         language: 'ru',
                         paste_as_text: true,
+                        paste_data_images: true,
+                        image_advtab: true,
+                        image_title: true,
+                        automatic_uploads: true,
+                        images_upload_url: '/images',
+                        file_picker_types: 'image',
                         init_instance_callback: (editor) => {
                             editor.on('KeyUp', (e) => {
                                 this.page.content = editor.getContent();

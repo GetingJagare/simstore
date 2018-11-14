@@ -18,11 +18,11 @@
 <body>
 @include('counters.body-counters.gtm')
 <script>
-    var APP_DOMAIN = '{{ env('APP_DOMAIN') }}';
-    var CART = {
-        numbers: {!! json_encode(getNumbersIdsInCart()) !!},
-        tariffs: {{ json_encode(getTariffsIdsInCart()) }}
-    };
+    var APP_DOMAIN = '{{ env('APP_DOMAIN') }}',
+        CART = {
+            numbers: {!! json_encode(getNumbersIdsInCart()) !!},
+            tariffs: {{ json_encode(getTariffsIdsInCart()) }}
+        };
 </script>
 
 <div id="app">
@@ -166,7 +166,7 @@
 </div>
 
 <link rel="stylesheet" href="{{ asset('/css/vendor.css') }}">
-<script src="{{ asset('/js/app.js?v=2.0.3') }}" async></script>
+<script src="{{ asset('/js/app.js?v=2.0.4') }}" async></script>
 @include('counters.ya')
 </body>
 </html>

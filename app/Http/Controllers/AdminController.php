@@ -75,6 +75,9 @@ class AdminController extends Controller
     public function getRegions()
     {
         $regions = Region::all();
+        foreach ($regions as &$region) {
+            $region->name_dat_slug = str_slug($region->name_dat);
+        }
         return response()->json(['success' => true, 'regions' => $regions]);
     }
 
