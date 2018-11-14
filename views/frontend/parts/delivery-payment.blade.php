@@ -65,4 +65,6 @@
 
         </div>
     </div>
+
+    @include('frontend.parts.small-desc', ['desc' => $desc])
 </section>

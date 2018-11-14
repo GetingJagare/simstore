@@ -9,7 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/app.css?v=2.0.5') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css?v=2.0.6') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 
@@ -70,6 +70,8 @@
                             <span class="open-dropdown"></span>
                             <ul class="dropdown d-none">
                                 <li><a href="/nomera/zolotye">Золотые</a></li>
+                                <li><a href="/nomera/serebrjanye">Серебряные</a></li>
+                                <li><a href="/nomera/bronzovye">Бронзовые</a></li>
                                 {{--<li><a href="/nomera/platinovye">Платиновые</a></li>--}}
                                 <li><a href="/nomera/aktsionnye">Акционные</a></li>
                                 <li><a href="/nomera/arenda-nomera">Аренда</a></li>

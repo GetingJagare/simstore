@@ -13,7 +13,7 @@
 
                     <div class="sidebar-block">
                         <div class="sidebar-block__header">
-                            <div class="big-h1">Успей купить!</div>
+                            <div class="big-h1">Успей подключить!</div>
                             <b>тариф дня со <span>скидкой</span></b>
                         </div>
                         <promo-tariffs :cart="cart"></promo-tariffs>
@@ -125,7 +125,7 @@
             </div>
         </section>
 
-        @include('frontend.parts.delivery-payment')
+        @include('frontend.parts.delivery-payment', ['desc' => $page->small_desc])
 
         @include('frontend.parts.question')
     </main>

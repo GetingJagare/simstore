@@ -42,7 +42,7 @@
             </div>
         </section>
 
-        @include('frontend.parts.delivery-payment')
+        @include('frontend.parts.delivery-payment', ['desc' => $page->desc])
 
         <div class="info-blocks">
             <div class="container">
