@@ -1,5 +1,5 @@
 footer {
-  background: #343441;
+  background: $footer-bg;
   color: #fff;
 
 
@@ -22,6 +22,9 @@ footer {
       font-weight: 300;
     }
 
+    .footer-logo__image {
+      width: 220px;
+    }
   }
 
   .footer-right {

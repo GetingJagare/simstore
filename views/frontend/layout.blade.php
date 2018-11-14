@@ -9,7 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/app.css?v=2.0.4') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css?v=2.0.5') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 
@@ -137,8 +137,7 @@
             <div class="footer-wrap row">
                 <div class="col-sm-4 col-md-4 d-flex align-items-center justify-content-center justify-content-sm-start text-center text-sm-left">
                     <div class="footer-logo">
-                        <b>SIM-STORE</b><br>
-                        <span>Описание что мы предлагаем</span>
+                        <img src="/images/logo_footer.png" alt="" class="footer-logo__image"/>
                     </div>
                 </div>
                 <div class="col-sm-4 col-md-4 d-flex align-items-center">
@@ -153,7 +152,7 @@
                 <div class="col-sm-4 col-md-4 d-flex align-items-center justify-content-center justify-content-sm-end">
                     <div class="text-center text-sm-right footer-right">
                         <b>8 800 100 87 18</b><br>
-                        Отдел продаж: с 9:00 до 19:00<br>
+                        Отдел продаж: с 10:00 до 21:00<br>
                         support@sim-store.ru<br>
                         <a href="/politika-konfidentsialnosti">Политика конфиденциальности</a>
                     </div>
