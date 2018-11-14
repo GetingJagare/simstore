@@ -18,5 +18,6 @@ class VerifyCsrfToken extends Middleware
         '/admin',
         '/profile',
         '/pass',
+        '/upload',
     ];
 }

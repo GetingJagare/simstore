@@ -70,6 +70,7 @@ function commonRoutes() {
     Route::get('tarify/bezlimitnye', 'PageController@getUnlimitedTariffsPage');
     Route::get('tarify/dlja-zvonkov-po-rossii', 'PageController@getUnlimitedRuTariffsPage');
     Route::get('tarify/internet', 'PageController@getInternetTariffsPage');
+    Route::post('upload', 'UploadController@index');
 }
 
 Route::domain("{region}.$httpHostWithoutSubDomain")->group(function () {

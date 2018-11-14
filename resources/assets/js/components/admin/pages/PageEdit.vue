@@ -120,7 +120,7 @@
                     image_advtab: true,
                     image_title: true,
                     automatic_uploads: true,
-                    images_upload_url: '/images',
+                    images_upload_url: '/upload',
                     file_picker_types: 'image',
                     init_instance_callback: (editor) => {
                         editor.on('KeyUp', (e) => {
