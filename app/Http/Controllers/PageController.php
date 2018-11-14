@@ -30,18 +30,23 @@ class PageController extends Controller
 
         $filterParams = json_decode($page->filters, true);
         $params = [];
-        switch ($filterParams['name']) {
-            case 'numbers':
-                $params['price_range'] = [];
-                foreach ($filterParams['value'] as $i => $value) {
-                    $params['price_range'][$i] = (int)$value;
-                }
-                break;
-            case 'tariffs':
-                foreach ($filterParams['value'] as $tariffType) {
-                    $params[$tariffType] = true;
-                }
-                break;
+
+        if (!isset($filterParams['promo']) || !$filterParams['promo']) {
+	        switch ($filterParams['name']) {
+		        case 'numbers':
+			        $params['price_range'] = [];
+			        foreach ($filterParams['value'] as $i => $value) {
+				        $params['price_range'][$i] = (int)$value;
+			        }
+			        break;
+		        case 'tariffs':
+			        foreach ($filterParams['value'] as $tariffType) {
+				        $params[$tariffType] = true;
+			        }
+			        break;
+	        }
+        } else {
+        	$params['promo'] = $filterParams['promo'];
         }
 
         return view($page->template ? $page->template : 'frontend.static', ['page' => $page, 'region' => $currentRegion, 'params' => $params]);

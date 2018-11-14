@@ -126,12 +126,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admin/orders', 'AdminController@gerOrders');
     Route::get('admin/orders/get', 'AdminController@gerOrder');
+
+	Route::get('admin/cache/clear', 'CacheController@index');
 });
 
 commonRoutes();
 Route::get('tarify/dlja-zvonkov-po-{region_slug_pr}', function ($region_slug_dat) {
     return app()->make('\App\Http\Controllers\PageController')->getRegionTariffsPage($region_slug_dat);
-});
+})->where('region_slug_pr', '(?!rossii)');
 Route::get('{slug?}', function ($slug = null) {
     return app()->make('\App\Http\Controllers\PageController')->redirectToRegionSubdomain($slug, 'moscow');
 })->where('slug', '(.*)?');

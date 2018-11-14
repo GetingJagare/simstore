@@ -73,13 +73,11 @@
                             <b-form-input type="number" placeholder="До" v-model="page.filters.value[1]"
                                           class="mt-2"></b-form-input>
                             <b-form-group label="Акция" class="mt-2">
-                                <b-form-checkbox v-model="page.filters.value.promo"></b-form-checkbox>
+                                <b-form-checkbox v-model="page.filters.promo"></b-form-checkbox>
                             </b-form-group>
                         </b-form-group>
                         <b-form-group v-else-if="chosenFilter === 'tariffs'">
-                            <b-form-checkbox-group
-                                    :options="{'unlimited': 'Без ограничений', 'unlimited_ru': 'Для звонков по России', 'for_internet': 'Интернет'}"
-                                    v-model="page.filters.value"></b-form-checkbox-group>
+                            <b-form-checkbox-group :options="tariffTypesOptions" v-model="page.filters.value"></b-form-checkbox-group>
                         </b-form-group>
                     </b-form-group>
 
@@ -117,6 +115,7 @@
                 addSmallDesc: false,
                 showOnSite: false,
                 showFilters: false,
+                savedFilters: {},
                 chosenFilter: '',
                 mess: {
                     success: ''
@@ -134,10 +133,16 @@
                     small_desc: '',
                     filters: {
                         name: '',
-                        value: []
+                        value: [],
+                        promo: false,
                     }
                 },
-                templates: {}
+                templates: {},
+                tariffTypesOptions: [
+                    {value: 'unlimited', text: 'Без ограничений'},
+                    {value: 'unlimited_ru', text: 'Для звонков по России'},
+                    {value: 'for_internet', text: 'Интернет'}
+                ],
             }
         },
 
@@ -183,10 +188,17 @@
                     this.page.show_on_site = response.body.page.show_on_site;
                     this.showOnSite = !!response.body.page.show_on_site;
                     this.page.small_desc = response.body.page.small_desc ? response.body.page.small_desc : '';
-                    this.page.filters = response.body.page.filters ? JSON.parse(response.body.page.filters) : {
+
+                    this.savedFilters = response.body.page.filters ? JSON.parse(response.body.page.filters) : {
                         name: '',
-                        value: []
+                        value: [],
+                        promo: false,
                     };
+
+                    console.log(this.savedFilters);
+
+                    this.showFilters = this.savedFilters.value.length > 0 || this.savedFilters.promo;
+                    this.isShowFiltersChecked(this.showFilters);
 
                     this.initEditor('#content', 'content');
 
@@ -195,9 +207,6 @@
                     if (this.page.small_desc.length) {
                         this.addSmallDesc = true;
                     }
-
-                    this.showFilters = this.page.filters.value.length > 0;
-                    this.chosenFilter = this.page.filters.value.length > 0 ? this.page.filters.name : '';
 
                 }, response => {
 
@@ -234,6 +243,11 @@
 
             isShowFiltersChecked(checked) {
                 this.showFilters = checked;
+                if (!checked) {
+                    this.chosenFilter = '';
+                } else {
+                    this.chosenFilter = this.savedFilters.value.length > 0 || this.savedFilters.promo ? this.savedFilters.name : '';
+                }
             }
 
         },
@@ -245,8 +259,15 @@
                 }
             },
             chosenFilter: function (value) {
-                this.page.filters.name = value;
-                this.page.filters.value = [];
+                if (!value || !value.length) {
+                    this.page.filters = {name: '', value: [], promo: false};
+                    this.savedFilters = {};
+                } else {
+                    if (Object.keys(this.savedFilters).length) {
+                        this.page.filters = this.savedFilters;
+                    }
+                    this.page.filters.name = value;
+                }
             }
         },
 

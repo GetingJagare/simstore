@@ -84,10 +84,15 @@ const router = new VueRouter({
             path: '/numbers/import',
             name: 'numbers_import',
             component: require('./components/admin/NumbersImport.vue')
+        },
+        {
+            path: '/cache',
+            name: 'cache_page',
+            component: require('./components/admin/CacheClear.vue')
         }
     ],
 });
 
 const app = new Vue({
     router
-}).$mount('#app')
+}).$mount('#app');
