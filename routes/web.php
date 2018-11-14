@@ -77,7 +77,7 @@ Route::domain("{region}.$httpHostWithoutSubDomain")->group(function () {
     commonRoutes();
     Route::get('tarify/dlja-zvonkov-po-{region_slug_pr}', function ($region, $region_slug_dat) {
         return app()->make('\App\Http\Controllers\PageController')->getRegionTariffsPage($region_slug_dat, $region);
-    });
+    })->where('region_slug_pr', '((?!rossii).)*');
     Route::get('{slug?}', 'PageController@get')->where('slug', '(.*)?')->name('page');
 });
 
@@ -127,7 +127,8 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/orders', 'AdminController@gerOrders');
     Route::get('admin/orders/get', 'AdminController@gerOrder');
 
-	Route::get('admin/cache/clear', 'CacheController@index');
+	Route::post('admin/cache/clear', 'CacheController@index');
+	Route::get('admin/cache/get-items', 'CacheController@getItems');
 });
 
 commonRoutes();
