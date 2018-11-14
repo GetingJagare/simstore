@@ -121,7 +121,7 @@
                     <span>Бесплатная доставка по всей России</span>
                 </div>
                 <div class="advantages-item ai-3">
-                    <span>Минуты и гигабайты не сгорают</span>
+                    <span>Скидки до 50% на номера</span>
                 </div>
                 <div class="advantages-item ai-4">
                     <span>Более 15 000 номеров на выбор</span>
