@@ -133,7 +133,7 @@ Route::middleware('auth')->group(function () {
 commonRoutes();
 Route::get('tarify/dlja-zvonkov-po-{region_slug_pr}', function ($region_slug_dat) {
     return app()->make('\App\Http\Controllers\PageController')->getRegionTariffsPage($region_slug_dat);
-})->where('region_slug_pr', '(?!rossii)');
+})->where('region_slug_pr', '((?!rossii).)*');
 Route::get('{slug?}', function ($slug = null) {
     return app()->make('\App\Http\Controllers\PageController')->redirectToRegionSubdomain($slug, 'moscow');
 })->where('slug', '(.*)?');
