@@ -37,8 +37,12 @@
             },
 
             setRegion(selectedOption, id) {
-                console.log(selectedOption);
-                location.href = '//' + (selectedOption.subdomain !== 'moscow' ? selectedOption.subdomain + '.' : '') + APP_DOMAIN + location.pathname;
+                var pathname = location.pathname;
+                if (/dlja-zvonkov-po/.test(pathname)) {
+                    pathname = pathname.replace(/dlja-zvonkov-po-\w+/, 'dlja-zvonkov-po-' + selectedOption.name_dat_slug);
+                }
+
+                location.href = '//' + (selectedOption.subdomain !== 'moscow' ? selectedOption.subdomain + '.' : '') + APP_DOMAIN + pathname;
             }
 
         }
