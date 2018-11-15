@@ -429,36 +429,51 @@ class AdminController extends Controller
 	    $xlsReader = \PHPExcel_IOFactory::createReader($fileType);
 
 	    $xls = $xlsReader->load($file);
-	    $xls->setActiveSheetIndex(0);
-	    $activeSheet = $xls->getActiveSheet();
 
-	    $i = 2;
-	    while (1) {
-		    $numberValue = trim($activeSheet->getCellByColumnAndRow(0, $i)->getValue());
-		    if (empty($numberValue)) {
-		    	break;
-		    }
+	    /** @var \PHPExcel_Worksheet[] $sheets */
+	    $sheets = $xls->getAllSheets();
 
-		    if (preg_match('/^[+]?7|8\d{3}\s*\d{3}\s*\d{2}\s*\d{2}$/', $numberValue)) {
-		    	$numberValue = substr(str_replace(' ', '', $numberValue), 1);
-		    }
+	    $numberValues = Number::all()->pluck('value')->toArray();
 
-            $numberEntity = Number::where('value', $numberValue)->first() ?: new Number();
-            $numberEntity->value = $numberValue;
-            $numberEntity->price_rental = (float)(trim($activeSheet->getCellByColumnAndRow(1, $i)->getValue()) ?: 0);
-            $numberEntity->price = (float)trim($activeSheet->getCellByColumnAndRow(2, $i)->getValue()) ?: 0;
+	    foreach ($sheets as $activeSheet) {
+            $i = 2;
+            while (1) {
+                $numberValue = trim($activeSheet->getCellByColumnAndRow(0, $i)->getValue());
+                if (empty($numberValue)) {
+                    break;
+                }
 
-            $cityName = mb_convert_encoding(trim($activeSheet->getCellByColumnAndRow(3, $i)->getValue()), 'utf-8');
-            print_r($cityName);
-            $region = Region::where('city', $cityName ?: 'Москва')->first() ?: Region::where('subdomain', 'moscow')->first();
+                if (preg_match('/^\s*[+]?7|8(\d{3}\s*\d{3}\s*\d{2}\s*\d{2})\s*$/', $numberValue, $matches)) {
+                    $numberValue = substr(str_replace(' ', '', $matches[1]), 1);
+                }
 
-            if ($region) {
-                $numberEntity->region_id = $region->id;
-                $numberEntity->save();
+                $numberEntity = Number::where('value', $numberValue)->first() ?: new Number();
+                $numberEntity->value = $numberValue;
+                $numberEntity->price_rental = (float)(trim($activeSheet->getCellByColumnAndRow(1, $i)->getValue()) ?: 0);
+                $numberEntity->price = (float)trim($activeSheet->getCellByColumnAndRow(2, $i)->getValue()) ?: 0;
+
+                $cityName = mb_convert_encoding(trim($activeSheet->getCellByColumnAndRow(3, $i)->getValue()), 'utf-8');
+                $region = Region::where('city', $cityName ?: 'Москва')->first() ?: Region::where('subdomain', 'moscow')->first();
+
+                if ($region) {
+                    $numberEntity->region_id = $region->id;
+                    $numberEntity->save();
+                }
+
+                if (($pos = array_search($numberValue, $numberValues)) !== false) {
+                    array_splice($numberValues, $pos, 1);
+                    $numberValues = array_values($numberValues);
+                }
+
+                $i ++;
             }
+        }
 
-	    	$i ++;
-	    }
+	    if (!empty($numberValues)) {
+	        foreach ($numberValues as $numValue) {
+                Number::where('value', $numValue)->first()->delete();
+            }
+        }
 
     }
 

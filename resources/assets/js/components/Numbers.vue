@@ -120,7 +120,7 @@
                         <td></td>
                         <td class="text-center"><b>Цена</b></td>
                         <td></td>
-                        <td class="text-center"><b>Аренда</b></td>
+                        <!--<td class="text-center"><b>Аренда</b></td>-->
                     </tr>
                     </thead>
 
@@ -142,14 +142,14 @@
                         <td class="offers-item__old-price text-center">
                             <span v-if="number.price_new != number.final_price">{{ number.price_new }} ₽</span>
                         </td>
-                        <td class="offers-item__price text-center" v-if="number.price_rental > 0">
+                        <!--<td class="offers-item__price text-center" v-if="number.price_rental > 0">
                             {{ number.price_rental }} ₽/мес <span class="offers-item__price__rental"
                                                                   v-tooltip="'Вы можете арендовать номер вместо его покупки. Стоимость аренды включена в тариф.'">?</span>
                         </td>
                         <td class="offers-item__price text-center" v-else>
                             Договорная <span class="offers-item__price__rental"
                                              v-tooltip="'Вы можете арендовать номер вместо его покупки. Стоимость аренды включена в тариф.'">?</span>
-                        </td>
+                        </td>-->
                         <td class="offers-item__buy text-right">
                             <a href="#" class="offers-item__one-click button" v-on:click.prevent="oneClick(number)">Купить
                                 в 1 клик</a>
