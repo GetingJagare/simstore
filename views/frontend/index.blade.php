@@ -5,7 +5,7 @@
             <h1 class="big-h1 big-h1_numbers">{{ $page->alter_name ?: $page->name }}</h1>
             <div class="main-wrap d-flex flex-wrap flex-lg-nowrap justify-content-between">
                 <div class="main-content">
-                    <numbers :cart="cart" :price_max="{{ maxNumbersPrice() }}" {!! isset($params['promo']) ? ':promo="true"' : '' !!} {!! isset($params['price_range']) ? ':price_range="' . json_encode($params['price_range']) .'"' : '' !!}></numbers>
+                    <numbers :cart="cart" :price_max="{{ maxNumbersPrice() }}" {!! isset($params['promo']) ? ':promo="true"' : '' !!} {!! ':price_range="' . json_encode(isset($params['price_range']) ? $params['price_range'] : [0, maxNumbersPrice()]) . '"' !!}></numbers>
                 </div>
                 <div class="main-sidebar d-sm-flex d-md-flex d-lg-block justify-content-between">
 
