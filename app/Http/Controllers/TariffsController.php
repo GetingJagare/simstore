@@ -17,31 +17,31 @@ class TariffsController extends Controller
 
         $tariffs = Tariff::query();
 
-        if($request->promo) {
+        if ($request->promo) {
             $tariffs = $tariffs->where('promo', 1);
         }
 
-        if($request->no_limit) {
+        if ($request->no_limit) {
             $tariffs = $tariffs->orWhere('no_limit', 1);
         }
 
-        if($request->no_limit_ru) {
+        if ($request->no_limit_ru) {
             $tariffs = $tariffs->orWhere('no_limit_ru', 1);
         }
 
-        if($request->for_internet) {
+        if ($request->for_internet) {
             $tariffs = $tariffs->orWhere('for_internet', 1);
         }
 
-        if($request->minutes) {
+        if ($request->minutes) {
             $tariffs = $tariffs->whereBetween('minutes', $request->minutes);
         }
 
-        if($request->price) {
+        if ($request->price) {
             $tariffs = $tariffs->whereBetween('price', $request->price);
         }
 
-        if($request->traffic) {
+        if ($request->traffic) {
             $tariffs = $tariffs->whereBetween('traffic', $request->traffic);
         }
 
@@ -69,7 +69,11 @@ class TariffsController extends Controller
 
         });
 
-        return response()->json(['success' => true, 'tariff' => $tariff->random(1)->first(), 'end' => $data['date_end']]);
+        return response()->json([
+            'success' => true,
+            'tariff' => $tariff->count() ? $tariff->random(1)->first() : null,
+            'end' => $data['date_end']
+        ]);
 
     }
 

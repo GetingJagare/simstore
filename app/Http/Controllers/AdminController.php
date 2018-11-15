@@ -252,7 +252,8 @@ class AdminController extends Controller
             $priceColumn = 'price';
         }
 
-        if($request->price_from || $request->price_to) {
+        if((empty($request->option) || !in_array($request->option, ['saled', 'discount', 'sale']))
+            && ($request->price_from || $request->price_to)) {
             if($request->price_from != 'null' && $request->price_to != 'null') {
                 $numbers = $numbers->whereBetween($priceColumn, [$request->price_from, $request->price_to]);
             } elseif($request->price_from != 'null') {

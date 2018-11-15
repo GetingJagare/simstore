@@ -64,7 +64,7 @@
                     </label>-->
                 </div>
 
-                <div class="d-flex flex-wrap" v-if="form.price.length > 1">
+                <div class="d-flex flex-wrap">
                     <div class="filter-block__price">
 
                         <div class="d-flex align-items-center">
@@ -286,7 +286,7 @@
 
         mounted() {
             this.form.perpage = this.perpage_options[0];
-            this.form.sort = this.sort_options[0];
+            this.form.sort = this.sort_options[this.sourcePriceRange.length > 1 ? 0 : 1];
             this.search();
 
             $(this.$el).find('.filter-block__checkboxes .checkbox input').on('change', this.dataLayerFunction);
@@ -348,7 +348,9 @@
 
                 processStyle: {
                     "backgroundColor": "#f7d23e"
-                }
+                },
+
+                sourcePriceRange: []
 
             }
 
@@ -361,9 +363,8 @@
         },
 
         created() {
-            if (this.price_range) {
-                this.form.price = this.price_range;
-            }
+            this.sourcePriceRange = this.price_range;
+            this.form.price = this.price_range.length > 1 ? this.price_range : [0, this.price_range[0]];
 
             if (this.promo) {
                 this.form.promo = true;
@@ -632,6 +633,7 @@
     .filter-block__template-info span {
         cursor: pointer;
     }
+
     .filter-block__buttons {
         margin-top: 20px;
     }

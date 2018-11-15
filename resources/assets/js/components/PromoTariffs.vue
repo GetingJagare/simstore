@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar-block__content offers-small tariffs">
+    <div class="sidebar-block__content offers-small tariffs" v-if="tariff">
         <div class="sidebar-countdown text-center">
             <b>Предложение доступно:</b>
             <countdown v-if="end" :end="end"></countdown>
@@ -30,6 +30,9 @@
             </table>
         </div>
 
+    </div>
+    <div v-else v-bind:style="{'margin-top': '20px'}">
+        На данный актуальных предложений нет
     </div>
 </template>
 

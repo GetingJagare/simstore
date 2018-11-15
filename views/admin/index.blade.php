@@ -47,6 +47,6 @@
 </div>
 
 
-<script src="{{ asset('/js/admin.js?v=2.0.5') }}"></script>
+<script src="{{ asset('/js/admin.js?v=2.0.6') }}"></script>
 </body>
 </html>
