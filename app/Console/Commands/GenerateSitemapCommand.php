@@ -48,7 +48,7 @@ class GenerateSitemapCommand extends Command
                 $host = "http" . (!$isDebug ? "s" : "") . "://" . (!$isMoscow ? $region->subdomain . "." : "")
                     . config('app.domain');
                 foreach ($pages as $page) {
-                    if ($page->show_on_site) {
+                    if (!$page->exclude_from_sitemap) {
                         $pageUrl = $host . (empty($page->slug) ? $page->slug : "/{$page->slug}");
                         $modTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $page->updated_at)
                             ->format('Y-m-d\TH:i:sP');

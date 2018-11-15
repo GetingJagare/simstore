@@ -25,6 +25,10 @@
                         <b-form-checkbox @change="isShowOnSiteChecked" v-model="showOnSite"></b-form-checkbox>
                     </b-form-group>
 
+                    <b-form-group label="Исключить из sitemap">
+                        <b-form-checkbox v-model="excludeFromSitemap" @change="excludeFromSitemapChange"></b-form-checkbox>
+                    </b-form-group>
+
                     <b-form-group label="Адрес:">
                         <b-input-group>
                             <b-input-group-text slot="prepend">{{ domain }}/</b-input-group-text>
@@ -115,6 +119,7 @@
                 addSmallDesc: false,
                 showOnSite: false,
                 showFilters: false,
+                excludeFromSitemap: false,
                 savedFilters: {},
                 chosenFilter: '',
                 mess: {
@@ -131,6 +136,7 @@
                     template: '',
                     show_on_site: 0,
                     small_desc: '',
+                    exclude_from_sitemap: 0,
                     filters: {
                         name: '',
                         value: [],
@@ -188,6 +194,8 @@
                     this.page.show_on_site = response.body.page.show_on_site;
                     this.showOnSite = !!response.body.page.show_on_site;
                     this.page.small_desc = response.body.page.small_desc ? response.body.page.small_desc : '';
+                    this.page.exclude_from_sitemap = response.body.page.exclude_from_sitemap;
+                    this.excludeFromSitemap = !!response.body.page.exclude_from_sitemap;
 
                     this.savedFilters = response.body.page.filters ? JSON.parse(response.body.page.filters) : {
                         name: '',
@@ -246,6 +254,11 @@
                 } else {
                     this.chosenFilter = this.savedFilters.value.length > 0 || this.savedFilters.promo ? this.savedFilters.name : '';
                 }
+            },
+
+            excludeFromSitemapChange(checked) {
+                this.page.exclude_from_sitemap = checked ? 1 : 0;
+                this.excludeFromSitemap = checked;
             },
 
             resetFilters() {

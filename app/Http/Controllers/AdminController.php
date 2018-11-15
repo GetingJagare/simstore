@@ -133,6 +133,7 @@ class AdminController extends Controller
         $page->show_on_site = $request->show_on_site;
         $page->small_desc = request('small_desc');
         $page->filters = json_encode($request->filters);
+        $page->exclude_from_sitemap = $request->exclude_from_sitemap;
         $page->save();
 
         return response()->json(['success' => true, 'message' => 'Страница успешно обновлена']);
