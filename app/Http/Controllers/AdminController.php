@@ -459,4 +459,20 @@ class AdminController extends Controller
 	    }
 
     }
+
+    public function deleteTariffs(Request $request)
+    {
+        $tariffs = $request->tariffs;
+
+        try {
+            foreach ($tariffs as $tariff) {
+                Tariff::find($tariff['id'])->delete();
+            }
+
+            return response()->json(['success' => 1, 'tariffs' => $tariffs]);
+        }
+        catch (\Exception $e) {
+            return response()->json(['success' => 0, 'message' => $e->getMessage()]);
+        }
+    }
 }

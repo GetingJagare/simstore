@@ -111,6 +111,7 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/tariffs/get', 'AdminController@getTariff');
     Route::post('admin/tariffs/add', 'AdminController@addTariff');
     Route::post('admin/tariffs/edit', 'AdminController@editTariff');
+    Route::post('admin/tariffs/delete', 'AdminController@deleteTariffs');
 
     Route::get('admin/settings', 'AdminController@getSettings');
     Route::post('admin/settings/save', 'AdminController@saveSettings');

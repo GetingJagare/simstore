@@ -2,12 +2,18 @@
     <div>
         <div class="row">
             <div class="col-md-6"><h3>Тарифы</h3></div>
-            <div class="col-md-6 text-right"><b-btn v-b-toggle.collapse1 variant="primary">Добавить</b-btn></div>
+            <div class="col-md-6 text-right">
+                <b-btn variant="danger" :disabled="!selectedTariffs.length" @click="deleteTariffs">Удалить</b-btn>
+                <b-btn v-b-toggle.collapse1 variant="primary">Добавить</b-btn>
+            </div>
         </div>
 
         <table class="mt-4 table b-table table-hover border">
             <thead>
             <tr>
+                <th>
+                    <input type="checkbox" @change="selectAll" v-model="allSelected"/>
+                </th>
                 <th>Название</th>
                 <th>Минут</th>
                 <th>СМС</th>
@@ -17,7 +23,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="tariff in tariffs">
+            <tr v-for="(tariff, index) in tariffs">
+                <td>
+                    <input type="checkbox" :value="{id: tariff.id, index: index}" v-model="selectedTariffs"/>
+                </td>
                 <td>{{ tariff.name }}</td>
                 <td>{{ tariff.minutes }}</td>
                 <td>{{ tariff.sms }}</td>
@@ -101,6 +110,10 @@
         data() {
 
             return {
+
+                allSelected: false,
+
+                selectedTariffs: [],
 
                 mess: {
                     success: ''
@@ -187,6 +200,38 @@
                 evt.preventDefault();
                 this.resetForm();
             },
+
+            deleteTariffs() {
+                this.$http.post('/admin/tariffs/delete', {tariffs: this.selectedTariffs})
+                    .then(response => {
+                        if (response.body.success) {
+
+                            var rows = this.$el.querySelector('.table').querySelector('tbody').querySelectorAll('tr');
+                            response.body.tariffs.forEach(tariff => {
+                                rows[parseInt(tariff.index)].remove();
+                            });
+                        }
+                    });
+            },
+
+            selectAll(e) {
+                if (e.srcElement.checked) {
+                    var _selected_tariffs = [];
+                    this.tariffs.forEach((tariff, index) => {
+                        _selected_tariffs.push({id: tariff.id, index: index});
+                    });
+                    this.selectedTariffs = _selected_tariffs;
+                } else {
+                    this.selectedTariffs = [];
+                }
+            }
+
+        },
+
+        watch: {
+            selectedTariffs: function (value) {
+                this.allSelected = value.length === this.tariffs.length;
+            }
 
         }
     }
