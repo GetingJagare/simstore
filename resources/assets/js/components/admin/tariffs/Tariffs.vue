@@ -89,6 +89,15 @@
                             <b-form-checkbox value="1" unchecked-value="0" v-model="tariff.sale">Тариф дня</b-form-checkbox>
                         </b-form-group>
 
+                        <b-form-group label="Добавить цены номеров" class="mt-5">
+                            <b-form-checkbox value="1" unchecked-value="0" v-model="addNumbersPrices"></b-form-checkbox>
+
+                            <b-form-group class="mt-1" v-if="addNumbersPrices == 1">
+                                <b-form-input v-model="tariff.number_prices[0]" placeholder="От" class="mb-2"></b-form-input>
+                                <b-form-input v-model="tariff.number_prices[1]" placeholder="До"></b-form-input>
+                            </b-form-group>
+                        </b-form-group>
+
                         <b-button type="submit" variant="primary">Добавить</b-button>
                         <b-button type="reset">Очистить</b-button>
                     </b-form>
@@ -115,6 +124,8 @@
 
                 selectedTariffs: [],
 
+                addNumbersPrices: 0,
+
                 mess: {
                     success: ''
                 },
@@ -134,6 +145,7 @@
                     no_limit_ru: '0',
                     for_internet: '0',
                     sale: '0',
+                    number_prices: []
                 },
 
                 tariffs: []
