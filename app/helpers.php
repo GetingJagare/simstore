@@ -1,5 +1,14 @@
 <?php
 
+function formatStringToNumber($num)
+{
+    $numSplitted = preg_split('/[\.|,]/', $num);
+    if (count($numSplitted) > 1) {
+        return (float)($numSplitted[0] . "." . $numSplitted[1]);
+    }
+    return (int)$num;
+}
+
 function getNumbersIdsInCart() {
 
     $collection = collect(session('numbers_cart', []));
@@ -16,14 +25,21 @@ function getTariffsIdsInCart() {
 
 function addDiscountPriceToNumbers($numbers) {
 
-    $discount = getSetting('catalog_numbers_discount');
+    //$discount = getSetting('catalog_numbers_discount');
+
+    $discountType = \App\Setting::where('setting_key', 'numbers_discount_type')->first();
 
     foreach ($numbers as $number) {
 
         $number->discount_price = 0;
 
-        if($number->discount) {
-            $number->discount_price = abs(($number->price_new * $discount / 100) - $number->price_new);
+        if($number->discount > 0) {
+            if ($discountType->setting_value === 'percent') {
+                $number->discount_price = round($number->price * (1 - $number->discount / 100));
+            }
+            if ($discountType->setting_value === 'rubles') {
+                $number->discount_price = round($number->price - $number->discount);
+            }
         }
     }
 
@@ -95,7 +111,7 @@ function formatTariffs($tariffs) {
 function formatNumbers($numbers, $sale = false) {
 
     // Наценка
-    $markup = [];
+   /* $markup = [];
     $settings = \App\Setting::where('setting_key', 'LIKE', '%markup%')->get();
     foreach ($settings as $setting) {
 
@@ -104,14 +120,14 @@ function formatNumbers($numbers, $sale = false) {
         } else {
             $markup[$setting->setting_key] = $setting->setting_value;
         }
-    }
+    }*/
 
     // Формат номера
     $formats = array(
         '10' => '+7 (###) ###-##-##'
     );
 
-    $salePercent = getSetting('catalog_numbers_sale');
+    //$salePercent = getSetting('catalog_numbers_sale');
 
     /*$promo_numbers = \App\Setting::where('setting_key', 'promo_numbers')->first();
     $promo_numbers = explode(',', $promo_numbers->setting_value);*/
@@ -127,13 +143,13 @@ function formatNumbers($numbers, $sale = false) {
 
     $numbers = addDiscountPriceToNumbers($numbers);
 
-    return $numbers->each(function ($number, $key) use ($formats, $markup, $sale, $salePercent) {
+    return $numbers->each(function ($number, $key) use ($formats, $sale) {
 
         $number->is_promo = false;
         $number->value = phone_format($number->value, $formats, '#');
 
         // Если наценка есть
-        if($markup['markup'] > 0) {
+        /*if($markup['markup'] > 0) {
 
             // Если наценка в рублях
             if($markup['markup_type'] == 'rubles') {
@@ -144,7 +160,7 @@ function formatNumbers($numbers, $sale = false) {
                 $number->price_new *= 1 . '.' . $markup['markup'];
                 $number->price_new = floor($number->price_new);
             }
-        }
+        }*/
 
         $number->final_price = $number->price_new;
 
@@ -153,10 +169,10 @@ function formatNumbers($numbers, $sale = false) {
             $number->is_promo = true;
         }
 
-        if($number->on_sale) {
+       /* if($number->on_sale) {
             $number->final_price = abs(($number->price_new * $salePercent / 100) - $number->price_new);
             //$number->is_promo = true;
-        }
+        }*/
 
         /*
         if(in_array($number->id, $promo_numbers)) {

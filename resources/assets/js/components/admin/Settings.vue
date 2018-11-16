@@ -31,6 +31,12 @@
                     </b-form-group>
                 </b-card>
 
+                <b-card class="mt-3" title="Скидка на номера">
+                    <b-form-group label="Тип скидки:">
+                        <b-form-checkbox v-model="settings.numbers_discount_type.setting_value" value="rubles" unchecked-value="0">Рубли</b-form-checkbox>
+                        <b-form-checkbox v-model="settings.numbers_discount_type.setting_value" value="percent" unchecked-value="0">Процент</b-form-checkbox>
+                    </b-form-group>
+                </b-card>
 
                 <b-card class="mt-3">
                     <b-form-group label="Наценка:">

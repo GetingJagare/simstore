@@ -424,6 +424,8 @@ class AdminController extends Controller
 
     public function importNumbers(Request $request)
     {
+        set_time_limit(0);
+
     	$file = $request->file('numbers');
 	    $fileType = \PHPExcel_IOFactory::identify($file);
 	    $xlsReader = \PHPExcel_IOFactory::createReader($fileType);
@@ -449,8 +451,13 @@ class AdminController extends Controller
 
                 $numberEntity = Number::where('value', $numberValue)->first() ?: new Number();
                 $numberEntity->value = $numberValue;
-                $numberEntity->price_rental = (float)(trim($activeSheet->getCellByColumnAndRow(1, $i)->getValue()) ?: 0);
-                $numberEntity->price = (float)trim($activeSheet->getCellByColumnAndRow(2, $i)->getValue()) ?: 0;
+
+                $discount = trim($activeSheet->getCellByColumnAndRow(1, $i)->getValue()) ?: "0";
+                $price = (float)trim($activeSheet->getCellByColumnAndRow(2, $i)->getValue()) ?: "0";
+
+                $numberEntity->price = formatStringToNumber($price);
+                $numberEntity->discount = formatStringToNumber($discount);
+                $numberEntity->price_new = formatStringToNumber($price);
 
                 $cityName = mb_convert_encoding(trim($activeSheet->getCellByColumnAndRow(3, $i)->getValue()), 'utf-8');
                 $region = Region::where('city', $cityName ?: 'Москва')->first() ?: Region::where('subdomain', 'moscow')->first();

@@ -123,7 +123,7 @@
                     <span>Бесплатная доставка по всей России</span>
                 </div>
                 <div class="advantages-item ai-3">
-                    <span>Скидки до 80% на номера</span>
+                    <span>Скидки до 95% на номера</span>
                 </div>
                 <div class="advantages-item ai-4">
                     <span>Более 15 000 номеров на выбор</span>
