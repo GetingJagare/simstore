@@ -168,6 +168,14 @@ class AdminController extends Controller
         $tariff->no_limit_ru = $request->no_limit_ru;
         $tariff->for_internet = $request->for_internet;
         $tariff->sale = $request->sale;
+
+        $number_prices = [];
+        foreach ($request->number_prices as $price) {
+            if (!empty($price)) {
+                $number_prices[] = $price;
+            }
+        }
+        $tariff->number_prices = json_encode($number_prices);
         $tariff->save();
 
         return response()->json(['success' => true, 'message' => 'Тариф успешно обновлен']);
