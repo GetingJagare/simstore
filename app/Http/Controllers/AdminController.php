@@ -275,13 +275,20 @@ class AdminController extends Controller
         // Пагинация
         $numbers = $numbers->paginate(25);
 
+        $discountType = Setting::where('setting_key', 'numbers_discount_type')->first();
+
         // Добавляем скидку
         foreach ($numbers->items() as $number) {
 
             $number->discount_price = 0;
 
             if($number->discount) {
-                $number->discount_price = abs(($number->price_new * $discount / 100) - $number->price_new);
+                if ($discountType->setting_value === 'percent') {
+                    $number->discount_price = round($number->price * (1 - $number->discount / 100));
+                }
+                if ($discountType->setting_value === 'rubles') {
+                    $number->discount_price = round($number->price - $number->discount);
+                }
             }
         }
 
