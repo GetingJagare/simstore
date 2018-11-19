@@ -13,36 +13,6 @@
 
 Route::get('test-point', 'AdminController@testPoint');
 
-/*
-Route::get('test', function () {
-
-    $promos = [];
-    $numbers = \App\Number::where(['block_po' => 0, 'saled' => 0])->where('price', '>', '0')->get()->random(5);
-
-    foreach ($numbers as $number) {
-        array_push($promos, $number->id);
-    }
-
-    $setting = \App\Setting::where('setting_key', 'promo_numbers')->first();
-    $setting->setting_value = implode(',', $promos);
-    $setting->save();
-
-    dd($setting);
-
-});
-
-Route::get('test2', function () {
-
-    $tariff = \App\Tariff::get()->random(1)->first();
-
-    $setting = \App\Setting::where('setting_key', 'promo_tariffs')->first();
-    $setting->setting_value = $tariff->id;
-    $setting->save();
-
-    dd($setting);
-
-});*/
-
 $httpHost = app('request')->getHttpHost();
 $httpHostWithoutSubDomain = preg_replace('/^([^\.]+\.)([^\.]+\..*)$/', '$2', $httpHost);
 
@@ -63,13 +33,6 @@ function commonRoutes() {
     Route::post('numbers', 'NumbersController@search');
 
     Route::post('crm', 'AdminController@sendToCRM');
-
-    /*Route::get('nomera/zolotye', 'PageController@getGoldNumbersPage');
-    Route::get('nomera/platinovye', 'PageController@getPlatinumNumbersPage');
-    Route::get('nomera/aktsionnye', 'PageController@getPromoNumbersPage');
-    Route::get('tarify/bezlimitnye', 'PageController@getUnlimitedTariffsPage');
-    Route::get('tarify/dlja-zvonkov-po-rossii', 'PageController@getUnlimitedRuTariffsPage');
-    Route::get('tarify/internet', 'PageController@getInternetTariffsPage');*/
     Route::post('upload', 'UploadController@index');
 }
 
@@ -80,14 +43,6 @@ Route::domain("{region}.$httpHostWithoutSubDomain")->group(function () {
     })->where('region_slug_pr', '((?!rossii).)*');
     Route::get('{slug?}', 'PageController@get')->where('slug', '(.*)?')->name('page');
 });
-
-/*
-Route::domain('{region}.sim-store.syplex.ru')->group(function () {
-    Route::get('{slug?}', function ($region, $slug = null) {
-        return app()->make('App\Http\Controllers\PageController')->get($slug);
-    })->name('page');
-});*/
-
 
 Route::get('admin/login', 'AdminController@getLogin')->name('login');
 Route::post('admin/login', 'AdminController@authUser');
@@ -137,7 +92,7 @@ Route::get('tarify/dlja-zvonkov-po-{region_slug_pr}', function ($region_slug_dat
     return app()->make('\App\Http\Controllers\PageController')->getRegionTariffsPage($region_slug_dat);
 })->where('region_slug_pr', '((?!rossii).)*');
 Route::get('{slug?}', function ($slug = null) {
-    return app()->make('\App\Http\Controllers\PageController')->redirectToRegionSubdomain($slug, 'moscow');
+    return app()->make('\App\Http\Controllers\PageController')->get('moscow', $slug);
 })->where('slug', '(.*)?');
 
 
