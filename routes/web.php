@@ -29,6 +29,7 @@ function commonRoutes() {
     Route::post('cart/add-tariff', 'CartController@addTariffToCart');
     Route::get('regions', 'AdminController@getRegions');
     Route::post('tariffs', 'TariffsController@search');
+    Route::get('tariffs/other', 'TariffsController@otherTariffs');
     Route::get('nomera', 'NumbersController@index');
     Route::post('numbers', 'NumbersController@search');
 

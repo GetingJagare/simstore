@@ -77,4 +77,20 @@ class TariffsController extends Controller
 
     }
 
+    public function otherTariffs(Request $request)
+    {
+        $number = Number::find($request->numberId);
+        $tariffs = Tariff::query()->where('id', '<>', $request->tariffId)->get();
+        $otherTariffs = [];
+
+        foreach ($tariffs as $tariff) {
+            $numberPrices = json_decode($tariff->number_prices, true);
+            if ($number->price > (float)$numberPrices[0] && $number->price <= (float)$numberPrices[1]) {
+                $otherTariffs[] = $tariff;
+            }
+        }
+
+        return response()->json(['tariffs' => $otherTariffs]);
+    }
+
 }

@@ -17,7 +17,7 @@ class CacheController extends Controller {
 	private $cacheItems = [
 		'tariffs' => [
 			'name' => 'Тарифы',
-			'items' => ['tariffs_on_sale']
+			'items' => ['tariffs_on_sale', 'all_tariffs']
 		],
 		'numbers' => [
 			'name' => 'Номера',

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Number;
 use App\Order;
 use App\Tariff;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CartController extends Controller
 {
@@ -19,6 +21,9 @@ class CartController extends Controller
     public function getCart()
     {
         $numbersCart = collect(session('numbers_cart', []));
+        $numberTariffs = session('number_tariffs', []);
+
+        /** @var Collection|null $numbers */
         $numbers = !empty($numbersCart) ? Number::find($numbersCart->keys()) : null;
 
         $numbers = formatNumbers($numbers);
@@ -27,27 +32,49 @@ class CartController extends Controller
         $tariffs = !empty($tariffsCart) ? Tariff::find($tariffsCart->keys()) : null;
 
         $tariffs = formatTariffs($tariffs);
-
-        if(isset($numbers) && !$numbers->min('price') > 0) {
-            //dd($numbers);
-        }
-
         $price = $numbers->sum('final_price') + $tariffs->sum('final_price');
 
-        return response()->json(['success' => true, 'numbers' => $numbers, 'tariffs' => $tariffs, 'price' => $price, 'count' => cartCount()]);
+        foreach ($numbers as $number) {
+            $number->tariff = $numberTariffs[$number->id] ?? null;
+            if ($number->tariff) {
+                $price += (float)$number->tariff->price;
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'numbers' => $numbers,
+            //'tariffs' => $tariffs,
+            'price' => $price,
+            'count' => cartCount()
+        ]);
     }
 
     public function addNumberToCart(Request $request)
     {
         $numbersCart = session('numbers_cart', []);
+        $numberTariffs = session('number_tariffs', []);
+
         $number = Number::find($request->id);
+        $allTariffs = Cache::remember("all_tariffs", 1440, function () {
+            return Tariff::query()->orderBy('price')->get();
+        });
 
         $numbersCart[$number->id] = [
             'id' => $number->id,
             'number' => $number->value
         ];
 
+        foreach ($allTariffs as $tariff) {
+            $numberPrice = json_decode($tariff->number_prices, true);
+            if ($number->price > (float)$numberPrice[0] && $number->price <= (float)$numberPrice[1]) {
+                $numberTariffs[$number->id] = $tariff;
+                break;
+            }
+        }
+
         session(['numbers_cart' => $numbersCart]);
+        session(['number_tariffs' => $numberTariffs]);
 
         return response()->json(['success' => true, 'message' => 'Номер успешно добавлен в корзину.', 'count' => cartCount(), 'numbers' => getNumbersIdsInCart()]);
     }
@@ -73,6 +100,14 @@ class CartController extends Controller
         $items = session($type, []);
 
         unset($items[$request->id]);
+
+        if ($type === 'number') {
+            $numberTariffs = session('number_tariffs', []);
+            if (isset($numberTariffs[$request->id])) {
+                unset($numberTariffs[$request->id]);
+                session(['number_tariffs' => $numberTariffs]);
+            }
+        }
 
         session([$type => $items]);
 

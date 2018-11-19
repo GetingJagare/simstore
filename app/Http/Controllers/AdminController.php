@@ -171,9 +171,7 @@ class AdminController extends Controller
 
         $number_prices = [];
         foreach ($request->number_prices as $price) {
-            if (!empty($price)) {
-                $number_prices[] = $price;
-            }
+            $number_prices[] = $price ?: 0;
         }
         $tariff->number_prices = json_encode($number_prices);
         $tariff->save();
@@ -200,9 +198,7 @@ class AdminController extends Controller
 
         $number_prices = [];
         foreach ($request->number_prices as $price) {
-            if (!empty($price)) {
-                $number_prices[] = $price;
-            }
+            $number_prices[] = $price ?: 0;
         }
         $tariff->number_prices = json_encode($number_prices);
 
