@@ -77,9 +77,9 @@ function maxNumbersPrice() {
 function cartCount() {
 
     $numbersCart = session('numbers_cart', []);
-    $tariffsCart = session('tariffs_cart', []);
+    //$tariffsCart = session('tariffs_cart', []);
 
-    return count($numbersCart + $tariffsCart);
+    return count($numbersCart);
 
 }
 
@@ -219,6 +219,7 @@ function sendToCRM($fields) {
 
     $fields['entryPoint'] = 'MeetingsFromSite_simstore';
     $fields['key'] = 'C2Dq9Wx70DhxnjWJ3Aq8uNpF7sx9SvNvCdVd';
+    $fields['dev'] = config('app.debug') ? 'true' : null;
 
     $url = 'https://cm.j-call.ru/index.php?' . http_build_query($fields);
 

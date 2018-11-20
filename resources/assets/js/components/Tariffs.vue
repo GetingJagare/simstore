@@ -129,9 +129,10 @@
                                             из любой точки России
                                         </div>
                                         <div class="tariffs-item__buttons d-flex flex-nowrap">
-                                            <a href="#" class="button no-bg tariffs-item__buttons-more" v-on:click.prevent="detail(tariff)">Узнать подробнее</a>
-                                            <a href="#" v-if="cart.tariffs.includes(tariff.id)" class="tariffs-item__buttons-cart active" v-on:click.prevent="showNumberAlreadyInCartModal">В корзину</a>
-                                            <a href="#" class="tariffs-item__buttons-cart" v-on:click.prevent="addToCart(tariff)" v-else>В корзину</a>
+                                            <!--<a href="#" class="button no-bg tariffs-item__buttons-more" v-on:click.prevent="detail(tariff)">Узнать подробнее</a>-->
+                                            <a href="#" class="button no-bg tariffs-item__buttons-more" v-on:click.prevent="openModal('Узнать подробнее', 'lead_upper_popup_form', tariff.name)">Узнать подробнее</a>
+                                            <!--<a href="#" v-if="cart.tariffs.includes(tariff.id)" class="tariffs-item__buttons-cart active" v-on:click.prevent="showNumberAlreadyInCartModal">В корзину</a>-->
+                                            <a href="#" class="tariffs-item__buttons-cart" v-on:click.prevent="openModal('Узнать подробнее', 'lead_upper_popup_form', tariff.name)">В корзину</a>
                                         </div>
                                     </div>
                                 </div>
@@ -243,12 +244,16 @@
 
         },
 
-            openModal(subject, leadName) {
+            openModal(subject, leadName, tariffName) {
                 var params = {
                     subject: subject
                 };
                 if (leadName) {
                     params = Object.assign({}, params, {leadName: leadName});
+                }
+
+                if (tariffName) {
+                    params = Object.assign({}, params, {tariffs: tariffName});
                 }
 
                 return this.$modal.show(CallbackModal, params, {

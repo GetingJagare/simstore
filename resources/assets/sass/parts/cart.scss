@@ -100,6 +100,17 @@
           padding-right: 0;
         }
       }
+
+      &-number-params, &-tariff-params {
+        margin-top: 16px;
+      }
+
+      &-col.flex-grow-1 &-number-params,
+      &-col.flex-grow-1 &-tariff-params {
+        @include media-breakpoint-down(lg) {
+          display: none;
+        }
+      }
     }
 
     & &__another-tariff {

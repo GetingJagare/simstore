@@ -55,7 +55,7 @@ class AdminController extends Controller
 
     public function addRegion(Request $request)
     {
-        if($request->id) {
+        if ($request->id) {
             $region = Region::find($request->id);
         } else {
             $region = new Region();
@@ -240,39 +240,39 @@ class AdminController extends Controller
         $numbers = Number::query();
 
         // По номеру
-        if($request->search) {
+        if ($request->search) {
             $numbers = $numbers->where('value', 'like', "%{$request->search}%");
         }
 
         // Скидка
-        if($request->option == 'discount') {
+        if ($request->option == 'discount') {
             $numbers = $numbers->where('discount', '=', 1);
         }
 
         // На распродаже
-        if($request->option == 'sale') {
+        if ($request->option == 'sale') {
             $numbers = $numbers->where('on_sale', '=', 1);
         }
 
         // Проданные
-        if($request->option == 'saled') {
+        if ($request->option == 'saled') {
             $numbers = $numbers->where('saled', '=', 1);
         }
 
         // Цена
         $priceColumn = 'price_new';
 
-        if($request->option == 'gold-partner' || $request->option == 'platinum-partner') {
+        if ($request->option == 'gold-partner' || $request->option == 'platinum-partner') {
             $priceColumn = 'price';
         }
 
-        if((empty($request->option) || !in_array($request->option, ['saled', 'discount', 'sale']))
+        if ((empty($request->option) || !in_array($request->option, ['saled', 'discount', 'sale']))
             && ($request->price_from || $request->price_to)) {
-            if($request->price_from != 'null' && $request->price_to != 'null') {
+            if ($request->price_from != 'null' && $request->price_to != 'null') {
                 $numbers = $numbers->whereBetween($priceColumn, [$request->price_from, $request->price_to]);
-            } elseif($request->price_from != 'null') {
+            } elseif ($request->price_from != 'null') {
                 $numbers = $numbers->where($priceColumn, '>=', $request->price_from);
-            } elseif($request->price_to != 'null') {
+            } elseif ($request->price_to != 'null') {
                 $numbers = $numbers->where($priceColumn, '<=', $request->price_to);
             }
         }
@@ -287,7 +287,7 @@ class AdminController extends Controller
 
             $number->discount_price = 0;
 
-            if($number->discount) {
+            if ($number->discount) {
                 if ($discountType->setting_value === 'percent') {
                     $number->discount_price = round($number->price * (1 - $number->discount / 100));
                 }
@@ -329,10 +329,21 @@ class AdminController extends Controller
     public function gerOrder(Request $request)
     {
         $order = Order::find($request->id);
-        $order->numbers = Number::find(explode(',', $order->numbers));
-        $order->tariffs = Tariff::find(explode(',', $order->tariffs));
+        $order->numbers = addDiscountPriceToNumbers(Number::find(explode(',', $order->numbers)));
 
-        return response()->json(['success' => true, 'order' => $order]);
+        $tariffIds = explode(',', $order->tariffs);
+        $tariffDoubles = [];
+        foreach ($tariffIds as $tariffId) {
+            if (!isset($tariffDoubles[$tariffId])) {
+                $tariffDoubles[$tariffId] = 1;
+            } else {
+                $tariffDoubles[$tariffId]++;
+            }
+        }
+
+        $order->tariffs = Tariff::find($tariffIds);
+
+        return response()->json(['success' => true, 'order' => $order, 'tariffDoubles' => $tariffDoubles]);
     }
 
     public function massEditNumbersPrice(Request $request)
@@ -350,7 +361,8 @@ class AdminController extends Controller
 
     }
 
-    public function setDiscountToNumbers(Request $request) {
+    public function setDiscountToNumbers(Request $request)
+    {
 
         $ids = $this->getNumberIds($request->numbers);
 
@@ -358,9 +370,9 @@ class AdminController extends Controller
 
         foreach ($numbers as $number) {
 
-            if($request->action == 'add-discount') {
+            if ($request->action == 'add-discount') {
                 $number->discount = 1;
-            } elseif($request->action == 'remove-discount') {
+            } elseif ($request->action == 'remove-discount') {
                 $number->discount = 0;
             }
 
@@ -373,7 +385,8 @@ class AdminController extends Controller
 
     }
 
-    public function getNumberIds($arr) {
+    public function getNumberIds($arr)
+    {
 
         $ids = [];
 
@@ -384,16 +397,17 @@ class AdminController extends Controller
         return $ids;
     }
 
-    public function addToSale(Request $request) {
+    public function addToSale(Request $request)
+    {
 
         $ids = $this->getNumberIds($request->numbers);
         $numbers = Number::find($ids);
 
         foreach ($numbers as $number) {
 
-            if($request->action == 'sale-add') {
+            if ($request->action == 'sale-add') {
                 $number->on_sale = 1;
-            } elseif($request->action == 'sale-remove') {
+            } elseif ($request->action == 'sale-remove') {
                 $number->on_sale = 0;
             }
 
@@ -406,16 +420,17 @@ class AdminController extends Controller
 
     }
 
-    public function setSaledNumbers(Request $request) {
+    public function setSaledNumbers(Request $request)
+    {
 
         $ids = $this->getNumberIds($request->numbers);
         $numbers = Number::find($ids);
 
         foreach ($numbers as $number) {
 
-            if($request->action == 'saled-add') {
+            if ($request->action == 'saled-add') {
                 $number->saled = 1;
-            } elseif($request->action == 'saled-remove') {
+            } elseif ($request->action == 'saled-remove') {
                 $number->saled = 0;
             }
 
@@ -427,13 +442,15 @@ class AdminController extends Controller
         return response()->json(['success' => true, 'numbers' => $numbers->keyBy('id')]);
     }
 
-    public function sendToCRM(Request $request) {
+    public function sendToCRM(Request $request)
+    {
 
         return sendToCRM($request->fields);
 
     }
 
-    public function testPoint() {
+    public function testPoint()
+    {
 
         $numbers = Number::query();
         $numbers = $numbers->where('value', 'LIKE', '%19__');
@@ -446,18 +463,18 @@ class AdminController extends Controller
     {
         set_time_limit(0);
 
-    	$file = $request->file('numbers');
-	    $fileType = \PHPExcel_IOFactory::identify($file);
-	    $xlsReader = \PHPExcel_IOFactory::createReader($fileType);
+        $file = $request->file('numbers');
+        $fileType = \PHPExcel_IOFactory::identify($file);
+        $xlsReader = \PHPExcel_IOFactory::createReader($fileType);
 
-	    $xls = $xlsReader->load($file);
+        $xls = $xlsReader->load($file);
 
-	    /** @var \PHPExcel_Worksheet[] $sheets */
-	    $sheets = $xls->getAllSheets();
+        /** @var \PHPExcel_Worksheet[] $sheets */
+        $sheets = $xls->getAllSheets();
 
-	    $numberValues = Number::all()->pluck('value')->toArray();
+        $numberValues = Number::all()->pluck('value')->toArray();
 
-	    foreach ($sheets as $activeSheet) {
+        foreach ($sheets as $activeSheet) {
             $i = 2;
             while (1) {
                 $numberValue = trim($activeSheet->getCellByColumnAndRow(0, $i)->getValue());
@@ -492,12 +509,12 @@ class AdminController extends Controller
                     $numberValues = array_values($numberValues);
                 }
 
-                $i ++;
+                $i++;
             }
         }
 
-	    if (!empty($numberValues)) {
-	        foreach ($numberValues as $numValue) {
+        if (!empty($numberValues)) {
+            foreach ($numberValues as $numValue) {
                 Number::where('value', $numValue)->first()->delete();
             }
         }
@@ -514,8 +531,7 @@ class AdminController extends Controller
             }
 
             return response()->json(['success' => 1, 'tariffs' => $tariffs]);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['success' => 0, 'message' => $e->getMessage()]);
         }
     }

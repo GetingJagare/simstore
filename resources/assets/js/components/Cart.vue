@@ -12,19 +12,7 @@
                                 <div class="cart-items__item-number">
                                     <span class="beeline"></span> {{ number.value }}
                                 </div>
-                                <div class="cart-items__item-tariff w-100" v-if="number.tariff">
-                                    <div class="cart__label w-100">Тариф:</div>
-                                    <div class="cart-items__item-tariff-name">
-                                        {{ number.tariff.name }}&nbsp;
-                                        <a href="#" class="button cart-items__another-tariff"
-                                           @click.prevent="chooseAnotherTariff(number.id, number.tariff.id, number.tariff.price)">Выбрать
-                                            другой тариф</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="cart-items__item-col flex-grow-1 d-flex flex-wrap">
-                                <div class="cart-items__item-number-params w-100 d-flex justify-content-between align-items-center">
+                                <div class="cart-items__item-number-params w-100 d-flex justify-content-between align-items-center d-xl-none">
                                     <div class="cart-items__item-price text-center" v-if="number.price_new > 0">
                                         {{ number.final_price }} ₽
                                     </div>
@@ -39,7 +27,40 @@
                                            v-on:click.prevent="remove('number', number.id)">Удалить</a>
                                     </div>
                                 </div>
-                                <div class="cart-items__item-tariff-params w-100 d-flex align-items-center"
+                                <div class="cart-items__item-tariff w-100" v-if="number.tariff">
+                                    <div class="cart__label w-100">Тариф:</div>
+                                    <div class="cart-items__item-tariff-name">
+                                        {{ number.tariff.name }}&nbsp;
+                                        <a href="#" class="button cart-items__another-tariff"
+                                           @click.prevent="chooseAnotherTariff(number.id, number.tariff.id, number.tariff.price)">Выбрать
+                                            другой тариф</a>
+                                    </div>
+                                    <div class="cart-items__item-tariff-params w-100 d-flex align-items-center d-xl-none"
+                                         v-if="number.tariff">
+                                        <div class="cart-items__item-tariff-price" v-if="number.price_new > 0">
+                                            {{ number.tariff.price }} ₽
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cart-items__item-col flex-grow-1 d-flex flex-wrap">
+                                <div class="w-100 d-xl-flex cart-items__item-number-params justify-content-between align-items-center">
+                                    <div class="cart-items__item-price text-center" v-if="number.price_new > 0">
+                                        {{ number.final_price }} ₽
+                                    </div>
+                                    <div class="cart-items__item-price text-center" v-else>
+                                        Договорная
+                                    </div>
+                                    <div class="cart-items__item-old-price text-center">
+                                        <span v-if="number.price_new != number.final_price">{{ number.price_new }} ₽</span>
+                                    </div>
+                                    <div class="cart-items__item-buy text-right">
+                                        <a href="#" class="cart-items__remove"
+                                           v-on:click.prevent="remove('number', number.id)">Удалить</a>
+                                    </div>
+                                </div>
+                                <div class="w-100 d-xl-flex cart-items__item-tariff-params align-items-center"
                                      v-if="number.tariff">
                                     <div class="cart-items__item-tariff-price text-center" v-if="number.price_new > 0">
                                         {{ number.tariff.price }} ₽
@@ -130,7 +151,6 @@
                 </form>
 
             </div>
-            <another-tariff-modal></another-tariff-modal>
         </div>
     </div>
 </template>
@@ -173,7 +193,7 @@
                 this.$http.post('/cart').then(response => {
 
                     this.numbers = response.body.numbers;
-                    this.tariffs = response.body.tariffs;
+                    //this.tariffs = response.body.tariffs;
                     this.price = response.body.price;
 
                 }, response => {
@@ -238,7 +258,7 @@
                 this.$http.post('/cart/order', this.form).then(response => {
 
                     this.numbers = response.body.numbers;
-                    this.tariffs = response.body.tariffs;
+                    //this.tariffs = response.body.tariffs;
                     this.price = response.body.price;
 
                     this.$modal.show(InfoPopup, {
@@ -258,6 +278,8 @@
 
                     this.policy = false;
 
+                    document.querySelector('.nav-basket').querySelector('.basket-count').innerText = response.body.count;
+
                     addToDataLayer({'event': 'lead_make_order_form'});
 
                 }, response => {
@@ -270,10 +292,25 @@
 
             chooseAnotherTariff(numberId, tariffId, currentTariffPrice) {
                 this.$modal.show(AnotherTariffModal, {
-                    currentTariffPrice: currentTariffPrice,
-                    numberId: numberId,
-                    tariffId: tariffId
+                    price: currentTariffPrice,
+                    nid: numberId,
+                    tid: tariffId
+                }, {
+                    height: 'auto',
+                    adaptive: true,
+                    width: 700
                 });
+            },
+
+            recalcPrice: function () {
+                let newPrice = 0;
+                this.numbers.forEach(number => {
+                    newPrice += number.final_price;
+                    if (number.tariff) {
+                        newPrice += number.tariff.price;
+                    }
+                });
+                this.price = newPrice;
             }
 
         }

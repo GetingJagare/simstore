@@ -28,11 +28,12 @@ class CartController extends Controller
 
         $numbers = formatNumbers($numbers);
 
-        $tariffsCart = collect(session('tariffs_cart', []));
+        /*$tariffsCart = collect(session('tariffs_cart', []));
         $tariffs = !empty($tariffsCart) ? Tariff::find($tariffsCart->keys()) : null;
 
-        $tariffs = formatTariffs($tariffs);
-        $price = $numbers->sum('final_price') + $tariffs->sum('final_price');
+        $tariffs = formatTariffs($tariffs);*/
+
+        $price = $numbers->sum('final_price');
 
         foreach ($numbers as $number) {
             $number->tariff = $numberTariffs[$number->id] ?? null;
@@ -122,7 +123,7 @@ class CartController extends Controller
         $order->address = $request->address;
 
         $numbersToString = [];
-        $tariffsToString = [];
+        $tariffsToString = $tariffIds = [];
 
         $numbersCart = collect(session('numbers_cart', []));
         $numbers = !empty($numbersCart) ? Number::find($numbersCart->keys()) : null;
@@ -134,21 +135,25 @@ class CartController extends Controller
             $number->saled = 1;
             $number->save();
 
-            bookNumberInStore($number->value);
+            if (!config('app.debug')) {
+                bookNumberInStore($number->value);
+            }
         }
 
         $numbers = formatNumbers($numbers);
 
-        $tariffsCart = collect(session('tariffs_cart', []));
-        $tariffs = !empty($tariffsCart) ? Tariff::find($tariffsCart->keys()) : null;
+        $tariffs = collect(session('number_tariffs', []));
         $tariffs = formatTariffs($tariffs);
 
+        $tariffsPrice = 0;
         foreach ($tariffs as $tariff) {
             $tariffsToString[] = $tariff->name;
+            $tariffIds[] = $tariff->id;
+            $tariffsPrice += $tariff->price;
         }
 
-        $order->tariffs = implode(',', $tariffsCart->keys()->toArray());
-        $order->summ = $numbers->sum('final_price') + $tariffs->sum('final_price');
+        $order->tariffs = implode(',', $tariffIds);
+        $order->summ = $numbers->sum('final_price') + $tariffsPrice;
         $order->save();
 
         $crm = sendToCRM([
@@ -168,7 +173,8 @@ class CartController extends Controller
     public function clearCart()
     {
         session(['numbers_cart' => []]);
-        session(['tariffs_cart' => []]);
+        //session(['tariffs_cart' => []]);
+        session(['number_tariffs' => []]);
     }
 
     public function orderOneClick(Request $request)
@@ -179,6 +185,15 @@ class CartController extends Controller
 
         return response()->json(['success' => true]);
 
+    }
+
+    public function changeTariff(Request $request)
+    {
+        $numberTariffs = session('number_tariffs', []);
+        $numberTariffs[(int)$request->numberId] = Tariff::find($request->tariffId);
+        session(['number_tariffs' => $numberTariffs]);
+
+        return response()->json(['success' => 1]);
     }
 
 }

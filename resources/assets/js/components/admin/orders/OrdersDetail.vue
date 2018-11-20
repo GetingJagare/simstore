@@ -37,7 +37,10 @@
             <tbody>
             <tr v-for="number in order.numbers">
                 <td>{{ number.value }}</td>
-                <td>{{ number.price }}</td>
+                <td>
+                    {{ number.discount_price > 0 ? number.discount_price : number.price }} ₽&nbsp;
+                    <s v-if="number.discount_price > 0">{{ number.price}} ₽</s>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -54,7 +57,9 @@
             <tbody>
             <tr v-for="tariff in order.tariffs">
                 <td>{{ tariff.name }}</td>
-                <td>{{ tariff.price }}</td>
+                <td>{{ tariff.price }} ₽
+                    <span v-if="tariffDoubles[tariff.id] > 1">&nbsp;x&nbsp;{{ tariffDoubles[tariff.id] }}</span>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -72,7 +77,8 @@
         data() {
 
             return {
-                order: []
+                order: [],
+                tariffDoubles: [],
             }
 
         },
@@ -83,6 +89,7 @@
 
                 this.$http.get('/admin/orders/get?id=' + this.$route.params.id).then(response => {
 
+                    this.tariffDoubles = response.body.tariffDoubles;
                     this.order = response.body.order;
 
                 }, response => {

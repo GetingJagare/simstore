@@ -25,7 +25,7 @@
 <script>
     import InfoPopup from './InfoPopup.vue';
     export default {
-        props: ['subject', 'leadName'],
+        props: ['subject', 'leadName', 'numbers', 'tariffs'],
 
         data() {
 
@@ -33,6 +33,8 @@
                 form: {
                     subject: this.subject,
                     leadName: this.leadName,
+                    numbers: this.numbers,
+                    tariffs: this.tariffs,
                     name: '',
                     phone: ''
                 }
