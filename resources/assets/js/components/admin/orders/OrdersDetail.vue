@@ -57,7 +57,8 @@
             <tbody>
             <tr v-for="tariff in order.tariffs">
                 <td>{{ tariff.name }}</td>
-                <td>{{ tariff.price }} ₽
+                <td>{{ tariff.price !== tariff.final_price ? tariff.final_price : tariff.price }} ₽
+                    <s v-if="tariff.price !== tariff.final_price">{{ tariff.price }} ₽</s>
                     <span v-if="tariffDoubles[tariff.id] > 1">&nbsp;x&nbsp;{{ tariffDoubles[tariff.id] }}</span>
                 </td>
             </tr>

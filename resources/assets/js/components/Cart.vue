@@ -12,15 +12,15 @@
                                 <div class="cart-items__item-number">
                                     <span class="beeline"></span> {{ number.value }}
                                 </div>
-                                <div class="cart-items__item-number-params w-100 d-flex justify-content-between align-items-center d-xl-none">
-                                    <div class="cart-items__item-price text-center" v-if="number.price_new > 0">
+                                <div class="cart-items__item-number-params w-100 d-flex align-items-center d-xl-none">
+                                    <div class="cart-items__item-price" v-if="number.final_price > 0">
                                         {{ number.final_price }} ₽
                                     </div>
-                                    <div class="cart-items__item-price text-center" v-else>
+                                    <div class="cart-items__item-price" v-else>
                                         Договорная
                                     </div>
-                                    <div class="cart-items__item-old-price text-center">
-                                        <span v-if="number.price_new != number.final_price">{{ number.price_new }} ₽</span>
+                                    <div class="cart-items__item-old-price">
+                                        <span v-if="number.price != number.final_price">{{ number.price }} ₽</span>
                                     </div>
                                     <div class="cart-items__item-buy text-right">
                                         <a href="#" class="cart-items__remove"
@@ -37,23 +37,29 @@
                                     </div>
                                     <div class="cart-items__item-tariff-params w-100 d-flex align-items-center d-xl-none"
                                          v-if="number.tariff">
-                                        <div class="cart-items__item-tariff-price" v-if="number.price_new > 0">
-                                            {{ number.tariff.price }} ₽
+                                        <div class="cart-items__item-price" v-if="number.final_price > 0">
+                                            {{ number.tariff.final_price !== number.tariff.price ? number.tariff.final_price
+                                            : number.tariff.price }} ₽
+                                            &nbsp;
+                                        </div>
+                                        <div class="cart-items__item-old-price"
+                                             v-if="number.tariff.final_price !== number.tariff.price">
+                                            <span>{{ number.tariff.price }} ₽</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="cart-items__item-col flex-grow-1 d-flex flex-wrap">
-                                <div class="w-100 d-xl-flex cart-items__item-number-params justify-content-between align-items-center">
-                                    <div class="cart-items__item-price text-center" v-if="number.price_new > 0">
+                                <div class="w-100 d-xl-flex cart-items__item-number-params align-items-center">
+                                    <div class="cart-items__item-price" v-if="number.final_price > 0">
                                         {{ number.final_price }} ₽
                                     </div>
-                                    <div class="cart-items__item-price text-center" v-else>
+                                    <div class="cart-items__item-price" v-else>
                                         Договорная
                                     </div>
-                                    <div class="cart-items__item-old-price text-center">
-                                        <span v-if="number.price_new != number.final_price">{{ number.price_new }} ₽</span>
+                                    <div class="cart-items__item-old-price">
+                                        <span v-if="number.price != number.final_price">{{ number.price }} ₽</span>
                                     </div>
                                     <div class="cart-items__item-buy text-right">
                                         <a href="#" class="cart-items__remove"
@@ -62,8 +68,14 @@
                                 </div>
                                 <div class="w-100 d-xl-flex cart-items__item-tariff-params align-items-center"
                                      v-if="number.tariff">
-                                    <div class="cart-items__item-tariff-price text-center" v-if="number.price_new > 0">
-                                        {{ number.tariff.price }} ₽
+                                    <div class="cart-items__item-price">
+                                        {{ number.tariff.final_price !== number.tariff.price ? number.tariff.final_price
+                                        : number.tariff.price }} ₽
+                                        &nbsp;
+                                    </div>
+                                    <div class="cart-items__item-old-price"
+                                         v-if="number.tariff.final_price !== number.tariff.price">
+                                        <span>{{ number.tariff.price }} ₽</span>
                                     </div>
                                 </div>
                             </div>
@@ -307,7 +319,7 @@
                 this.numbers.forEach(number => {
                     newPrice += number.final_price;
                     if (number.tariff) {
-                        newPrice += number.tariff.price;
+                        newPrice += number.tariff.final_price;
                     }
                 });
                 this.price = newPrice;

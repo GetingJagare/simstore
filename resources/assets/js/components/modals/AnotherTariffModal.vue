@@ -11,7 +11,12 @@
                     <div v-if="tariff.minutes.length">{{ tariff.minutes + ' мин.' }}</div>
                     <div v-if="tariff.sms.length">{{ tariff.sms + ' SMS' }}</div>
                     <div v-if="tariff.traffic.length">{{ tariff.traffic + ' Гб' }}</div>
-                    <div class="modal__tariff-price"><b>{{ tariff.price }}&nbsp;₽</b></div>
+                    <div class="modal__tariff-price">
+                        <b>{{ tariff.final_price !== tariff.price ? tariff.final_price : tariff.price }}&nbsp;₽</b>
+                        <span class="modal__tariff-old-price" v-if="tariff.final_price !== tariff.price">
+                            {{ tariff.price }} ₽
+                        </span>
+                    </div>
                 </div>
                 <a href="#" class="button modal__tariff-choose-btn" @click.prevent="chooseAnotherTariff(tariff)">Выбрать</a>
             </div>
@@ -98,5 +103,20 @@
 
     .modal__tariff-price {
         margin-top: 30px;
+    }
+
+    .modal__tariff-old-price {
+        position: relative;
+    }
+
+    .modal__tariff-old-price:before {
+        content: '';
+        display: inline-block;
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        background: #f7d23e;
+        left: 0;
+        top: 8px;
     }
 </style>

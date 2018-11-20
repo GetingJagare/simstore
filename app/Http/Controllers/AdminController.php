@@ -341,7 +341,7 @@ class AdminController extends Controller
             }
         }
 
-        $order->tariffs = Tariff::find($tariffIds);
+        $order->tariffs = formatTariffs(Tariff::find($tariffIds));
 
         return response()->json(['success' => true, 'order' => $order, 'tariffDoubles' => $tariffDoubles]);
     }

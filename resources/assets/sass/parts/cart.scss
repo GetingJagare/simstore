@@ -111,6 +111,10 @@
           display: none;
         }
       }
+
+      &-price, &-old-price {
+        width: 30%;
+      }
     }
 
     & &__another-tariff {

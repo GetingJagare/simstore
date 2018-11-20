@@ -81,6 +81,7 @@ class TariffsController extends Controller
     {
         $number = Number::find($request->numberId);
         $tariffs = Tariff::query()->where('id', '<>', $request->tariffId)->get();
+        $tariffs = formatTariffs($tariffs);
         $otherTariffs = [];
 
         foreach ($tariffs as $tariff) {

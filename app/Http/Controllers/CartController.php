@@ -21,24 +21,23 @@ class CartController extends Controller
     public function getCart()
     {
         $numbersCart = collect(session('numbers_cart', []));
-        $numberTariffs = session('number_tariffs', []);
+        $numberTariffs = collect(session('number_tariffs', []));
 
         /** @var Collection|null $numbers */
         $numbers = !empty($numbersCart) ? Number::find($numbersCart->keys()) : null;
 
         $numbers = formatNumbers($numbers);
+        $numberTariffs = formatTariffs($numberTariffs);
 
         /*$tariffsCart = collect(session('tariffs_cart', []));
-        $tariffs = !empty($tariffsCart) ? Tariff::find($tariffsCart->keys()) : null;
-
-        $tariffs = formatTariffs($tariffs);*/
+        $tariffs = !empty($tariffsCart) ? Tariff::find($tariffsCart->keys()) : null;*/
 
         $price = $numbers->sum('final_price');
 
         foreach ($numbers as $number) {
             $number->tariff = $numberTariffs[$number->id] ?? null;
             if ($number->tariff) {
-                $price += (float)$number->tariff->price;
+                $price += (float)$number->tariff->final_price;
             }
         }
 
@@ -102,12 +101,12 @@ class CartController extends Controller
 
         unset($items[$request->id]);
 
-        if ($type === 'number') {
-            $numberTariffs = session('number_tariffs', []);
+        $numberTariffs = session('number_tariffs', []);
+        if ($request->type == 'number') {
             if (isset($numberTariffs[$request->id])) {
                 unset($numberTariffs[$request->id]);
-                session(['number_tariffs' => $numberTariffs]);
             }
+            session(['number_tariffs' => $numberTariffs]);
         }
 
         session([$type => $items]);
@@ -149,7 +148,7 @@ class CartController extends Controller
         foreach ($tariffs as $tariff) {
             $tariffsToString[] = $tariff->name;
             $tariffIds[] = $tariff->id;
-            $tariffsPrice += $tariff->price;
+            $tariffsPrice += $tariff->final_price;
         }
 
         $order->tariffs = implode(',', $tariffIds);
