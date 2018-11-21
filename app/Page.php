@@ -27,7 +27,7 @@ class Page extends Model
 
         // SEO
         $page->seo()->setTitle(($page->seo_title ? str_replace('{region}', $region['name_pr'], $page->seo_title) : $page->name) . $toponym);
-        $page->seo()->setDescription($page->seo_description);
+        $page->seo()->setDescription(str_replace('{region}', $region['name_pr'], $page->seo_description));
 
         $filterParams = json_decode($page->filters, true);
         $params = [];
