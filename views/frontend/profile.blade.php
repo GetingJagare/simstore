@@ -1,8 +1,8 @@
 <?php
 
 $WrongNumber = '';
-if(isset($_POST['X_username']) && isset($_POST['X_password'])){
-    $Request = json_decode(file_get_contents('http://lk.gsmcorp.tarifer.ru/get_access_token.json?mobile=false&phone='.urlencode($_POST['X_username']).'&password='.urlencode($_POST['X_password'])), true);
+if(isset($_REQUEST['X_username']) && isset($_REQUEST['X_password'])){
+    $Request = json_decode(file_get_contents('http://lk.gsmcorp.tarifer.ru/get_access_token.json?mobile=false&phone='.urlencode($_REQUEST['X_username']).'&password='.urlencode($_REQUEST['X_password'])), true);
     if($Request['success']){
         header('Location: http://lk.gsmcorp.tarifer.ru/login_with_token?token='.$Request['access_token']);
     }else{
@@ -23,7 +23,7 @@ if(isset($_POST['X_username']) && isset($_POST['X_password'])){
                         <p>Центр обслуживания клиентов.<br>Тут вы можете найти онлайн - счета и другую полезную информацию.</p>
                     </div>
 
-                    <form class="profile-login__form" method="post" accept-charset="windows-1251">
+                    <form class="profile-login__form" method="get" accept-charset="windows-1251">
                         {!! $WrongNumber !!}
                         <div>
                             <input name="X_username" class="diler_input_login" id="appleId" type="text"  placeholder="Логин">

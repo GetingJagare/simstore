@@ -26,16 +26,6 @@ class PageController extends Controller
         return Page::get($currentRegion, $slug);
     }
 
-    public function getProfile($region)
-    {
-        return $this->get($region, 'profile');
-    }
-
-    public function getPass($region)
-    {
-        return $this->get($region, 'pass');
-    }
-
     public function setRegion($region = null)
     {
         return Region::set($region);

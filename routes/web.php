@@ -23,8 +23,6 @@ function commonRoutes() {
     Route::post('cart/order/one-click', 'CartController@orderOneClick');
     Route::post('cart/order', 'CartController@order');
     Route::post('cart/remove', 'CartController@removeFromCart');
-    Route::post('profile', 'PageController@getProfile');
-    Route::post('pass', 'PageController@getPass');
     Route::post('cart/add-number', 'CartController@addNumberToCart');
     Route::post('cart/add-tariff', 'CartController@addTariffToCart');
     Route::post('cart/change-tariff', 'CartController@changeTariff');
