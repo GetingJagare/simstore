@@ -31,7 +31,7 @@
     export default {
         name: "AnotherTariffModal",
         components: {VueLoading},
-        props: ['numbers', 'nid', 'tid'],
+        props: ['numbers', 'nid', 'tid', 'oneclick', 'popup'],
 
         data() {
             return {
@@ -47,7 +47,7 @@
 
         methods: {
             getOtherTariffs() {
-                this.$http.get('tariffs/other?numberId=' + this.nid + '&tariffId=' + this.tid)
+                this.$http.get('/tariffs/other?numberId=' + this.nid + '&tariffId=' + this.tid)
                     .then(response => {
                         this.loading = false;
                         this.tariffs = response.body.tariffs;
@@ -57,18 +57,24 @@
             chooseAnotherTariff(tariff) {
                 this.changingTariff = true;
 
-                this.$http.post('cart/change-tariff', {numberId: this.nid, tariffId: tariff.id})
+                this.$http.post('/cart/change-tariff', {numberId: this.nid, tariffId: tariff.id})
                     .then(response => {
                         if (response.body.success) {
                             this.changingTariff = false;
-                            let $cart = this.$root.$children[1];
-                            $cart.numbers.forEach(number => {
-                                if (number.id === this.nid) {
-                                    number.tariff = tariff;
-                                }
-                            });
 
-                            $cart.recalcPrice();
+                            if (!this.oneclick) {
+                                let $cart = this.$root.$children[1];
+                                $cart.numbers.forEach(number => {
+                                    if (number.id === this.nid) {
+                                        number.tariff = tariff;
+                                    }
+                                });
+
+                                $cart.recalcPrice();
+                            } else {
+                                this.popup.tariff = tariff;
+                            }
+
                             this.$emit('close');
                         }
                     });

@@ -71,7 +71,7 @@ window.getCookie = function (key) {
 };
 
 window.setCookie = function (key, value, expires) {
-    document.cookie = key + '=' + value + ';path=/;domain=.sim-store.ru;expires=' + expires;
+    document.cookie = key + '=' + value + ';path=/;domain=.' + window.location.host + ';expires=' + expires;
 };
 
 window.deleteCookie = function (key) {

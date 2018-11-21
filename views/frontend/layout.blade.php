@@ -9,7 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/app.css?v=2.0.7') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css?id=' . getUniqueId('css')) }}">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 
@@ -166,8 +166,8 @@
     <modals-container/>
 </div>
 
-<link rel="stylesheet" href="{{ asset('/css/vendor.css') }}">
-<script src="{{ asset('/js/app.js?v=2.1.0') }}" async></script>
+<link rel="stylesheet" href="{{ asset('/css/vendor.css?id=' . getUniqueId('css_vendor')) }}">
+<script src="{{ asset('/js/app.js?id=' . getUniqueId('js')) }}" async></script>
 @include('counters.ya')
 </body>
 </html>
