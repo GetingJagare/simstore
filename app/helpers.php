@@ -9,21 +9,24 @@ function formatStringToNumber($num)
     return (int)$num;
 }
 
-function getNumbersIdsInCart() {
+function getNumbersIdsInCart()
+{
 
     $collection = collect(session('numbers_cart', []));
     return $collection->count() > 0 ? $collection->keys() : [];
 
 }
 
-function getTariffsIdsInCart() {
+function getTariffsIdsInCart()
+{
 
     $collection = collect(session('tariffs_cart', []));
     return $collection->count() > 0 ? $collection->keys() : [];
 
 }
 
-function addDiscountPriceToNumbers($numbers) {
+function addDiscountPriceToNumbers($numbers)
+{
 
     //$discount = getSetting('catalog_numbers_discount');
 
@@ -33,7 +36,7 @@ function addDiscountPriceToNumbers($numbers) {
 
         $number->discount_price = 0;
 
-        if($number->discount > 0) {
+        if ($number->discount > 0) {
             if ($discountType->setting_value === 'percent') {
                 $number->discount_price = round($number->price * (1 - $number->discount / 100));
             }
@@ -47,7 +50,8 @@ function addDiscountPriceToNumbers($numbers) {
 }
 
 
-function getSetting($key) {
+function getSetting($key)
+{
 
     $setting = \App\Setting::where('setting_key', $key)->first();
     return $setting->setting_value;
@@ -55,7 +59,8 @@ function getSetting($key) {
 }
 
 
-function setSetting($key, $value) {
+function setSetting($key, $value)
+{
 
     $setting = \App\Setting::where('setting_key', $key)->first();
     $setting->setting_value = $value;
@@ -64,7 +69,8 @@ function setSetting($key, $value) {
 
 }
 
-function maxNumbersPrice() {
+function maxNumbersPrice()
+{
 
     return \Illuminate\Support\Facades\Cache::remember('numbers_max_price', 100, function () {
 
@@ -74,7 +80,8 @@ function maxNumbersPrice() {
     });
 }
 
-function cartCount() {
+function cartCount()
+{
 
     $numbersCart = session('numbers_cart', []);
     //$tariffsCart = session('tariffs_cart', []);
@@ -83,8 +90,12 @@ function cartCount() {
 
 }
 
-function formatTariffs($tariffs) {
-
+/**
+ * @param \Illuminate\Support\Collection $tariffs
+ * @return mixed
+ */
+function formatTariffs($tariffs)
+{
     $promoType = getSetting('tariffs_discount_type');
     $promoValue = getSetting('tariffs_discount');
     //$promoTariff = getSetting('promo_tariffs');
@@ -93,11 +104,11 @@ function formatTariffs($tariffs) {
 
         $tariff->final_price = $tariff->price;
 
-        if($tariff->sale) {
+        if ($tariff->sale) {
 
-            if($promoType == 'percent') {
+            if ($promoType == 'percent') {
                 $tariff->final_price = abs(($tariff->final_price * $promoValue / 100) - $tariff->price);
-            } else if($promoType == 'rubles') {
+            } else if ($promoType == 'rubles') {
                 $tariff->final_price = ($tariff->price - $promoValue);
             }
 
@@ -108,19 +119,20 @@ function formatTariffs($tariffs) {
 
 }
 
-function formatNumbers($numbers, $sale = false) {
+function formatNumbers($numbers, $sale = false)
+{
 
     // Наценка
-   /* $markup = [];
-    $settings = \App\Setting::where('setting_key', 'LIKE', '%markup%')->get();
-    foreach ($settings as $setting) {
+    /* $markup = [];
+     $settings = \App\Setting::where('setting_key', 'LIKE', '%markup%')->get();
+     foreach ($settings as $setting) {
 
-        if($setting->setting_key == 'markup') {
-            $markup[$setting->setting_key] = floor($setting->setting_value);
-        } else {
-            $markup[$setting->setting_key] = $setting->setting_value;
-        }
-    }*/
+         if($setting->setting_key == 'markup') {
+             $markup[$setting->setting_key] = floor($setting->setting_value);
+         } else {
+             $markup[$setting->setting_key] = $setting->setting_value;
+         }
+     }*/
 
     // Формат номера
     $formats = array(
@@ -164,15 +176,15 @@ function formatNumbers($numbers, $sale = false) {
 
         $number->final_price = $number->price_new;
 
-        if($number->discount_price) {
+        if ($number->discount_price) {
             $number->final_price = $number->discount_price;
             $number->is_promo = true;
         }
 
-       /* if($number->on_sale) {
-            $number->final_price = abs(($number->price_new * $salePercent / 100) - $number->price_new);
-            //$number->is_promo = true;
-        }*/
+        /* if($number->on_sale) {
+             $number->final_price = abs(($number->price_new * $salePercent / 100) - $number->price_new);
+             //$number->is_promo = true;
+         }*/
 
         /*
         if(in_array($number->id, $promo_numbers)) {
@@ -215,7 +227,8 @@ function phone_format($phone, $format, $mask = '#')
     return ($phone) ? trim(preg_replace($pattern, $format, $phone, 1)) : false;
 }
 
-function sendToCRM($fields) {
+function sendToCRM($fields)
+{
 
     $fields['entryPoint'] = 'MeetingsFromSite_simstore';
     $fields['key'] = 'C2Dq9Wx70DhxnjWJ3Aq8uNpF7sx9SvNvCdVd';
@@ -224,21 +237,20 @@ function sendToCRM($fields) {
     $url = 'https://cm.j-call.ru/index.php?' . http_build_query($fields);
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL,$url);
+    curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($curl);
     $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
 
 
-
-    if(env('APP_DEBUG')) {
+    if (env('APP_DEBUG')) {
         //dd($response);
     }
 
     \Illuminate\Support\Facades\Log::info("Отправлен запрос в CRM: {$url}. Код ответа: {$status}");
 
-    if($status != 200) {
+    if ($status != 200) {
         return response()->json(['success' => false], $status);
     }
 
@@ -246,7 +258,8 @@ function sendToCRM($fields) {
 
 }
 
-function getRegionPhoneCodes($id) {
+function getRegionPhoneCodes($id)
+{
 
     return \Illuminate\Support\Facades\Cache::remember("region_{$id}_c", 10080, function () use ($id) {
         $region = \App\Region::find($id);
@@ -261,7 +274,8 @@ function getRegionPhoneCodes($id) {
 
 }
 
-function getSimilarNumbers($numbers, $price_sort = 'asc') {
+function getSimilarNumbers($numbers, $price_sort = 'asc')
+{
 
     $result = [];
 
@@ -271,7 +285,7 @@ function getSimilarNumbers($numbers, $price_sort = 'asc') {
 
         foreach ($numbers as $number2) {
 
-            if(similar_text($number->value, $number2->value) > 7) {
+            if (similar_text($number->value, $number2->value) > 7) {
                 $group[] = $number2;
                 $groupCost = $groupCost + $number2->price_new;
             }
@@ -287,7 +301,7 @@ function getSimilarNumbers($numbers, $price_sort = 'asc') {
 
     $collection = collect($result);
 
-    if($price_sort == 'desc') {
+    if ($price_sort == 'desc') {
 
         $collection = $collection->sortByDesc(function ($numbers) {
             return $numbers['cost'];
@@ -324,4 +338,29 @@ function bookNumberInStore($number, $saled = true)
     curl_setopt($curl, CURLOPT_HEADER, 1);
     curl_exec($curl);
     curl_close($curl);
+}
+
+/**
+ * @param string $type
+ *
+ * @return string
+ */
+function getUniqueId($type)
+{
+    return \Illuminate\Support\Facades\Cache::remember("unique_id_$type", 86400, function () {
+        $symbolCodes = [range(97, 122), range(48, 57)];
+
+        $string = '';
+        for ($i = 1; $i <= 64; $i++) {
+            $randomListIndex = rand(0, count($symbolCodes) - 1);
+            $randomListLength = count($symbolCodes[$randomListIndex]);
+            $randomCode = rand($symbolCodes[$randomListIndex][0], $symbolCodes[$randomListIndex][$randomListLength - 1]);
+
+            $char = chr($randomCode);
+            $upper = rand(0, 1);
+            $string .= $upper < 0.5 ? mb_strtolower($char) : mb_strtoupper($char);
+        }
+
+        return $string;
+    });
 }

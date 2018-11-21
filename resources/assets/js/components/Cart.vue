@@ -306,11 +306,13 @@
                 this.$modal.show(AnotherTariffModal, {
                     price: currentTariffPrice,
                     nid: numberId,
-                    tid: tariffId
+                    tid: tariffId,
+                    oneclick: false,
                 }, {
                     height: 'auto',
                     adaptive: true,
-                    width: 700
+                    width: 700,
+                    scrollable: true
                 });
             },
 

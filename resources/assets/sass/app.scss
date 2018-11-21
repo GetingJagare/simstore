@@ -259,8 +259,14 @@ form.profile-login__form input {
 
   main .main-content .offers-items .offers-item__operator {margin-left: -40px;}
 
-  main .main-content .offers-items .offers-item__number {
-    width: 100%;
+  main {
+    .main-content {
+      .offers-items {
+        .offers-item__number, .offers-item__tariff {
+          width: 100%;
+        }
+      }
+    }
   }
 
   main .main-content .offers-items tbody td.offers-item__price {

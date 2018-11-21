@@ -84,8 +84,8 @@
 
                 <div class="filter-block__buttons">
                     <button class="filter-block__buttons-search" type="submit">Найти</button>
-                    <button class="filter-block__buttons-order no-bg" v-on:click.prevent="openNumberOrderPopup">Номер
-                        под заказ
+                    <button class="filter-block__buttons-order no-bg" v-on:click.prevent="reset">
+                        Очистить
                     </button>
                 </div>
             </div>
@@ -287,6 +287,11 @@
         mounted() {
             this.form.perpage = this.perpage_options[0];
             this.form.sort = this.sort_options[this.sourcePriceRange.length > 1 ? 0 : 1];
+
+            if (!getCookie('default_number_filters')) {
+                setCookie('default_number_filters', JSON.stringify(this.form), getInfiniteUTCDateString());
+            }
+
             this.search();
 
             $(this.$el).find('.filter-block__checkboxes .checkbox input').on('change', this.dataLayerFunction);
@@ -373,6 +378,12 @@
         },
 
         methods: {
+
+            reset() {
+                this.form = JSON.parse(getCookie('default_number_filters'));
+
+                this.search();
+            },
 
             showNumberAlreadyInCartModal() {
 
@@ -495,7 +506,7 @@
                     this.$modal.show(InfoPopup, {
                         title: 'Добавлено в корзину',
                         text: 'Выбранный номер добавлен в корзину. Вы можете перейти к оформлению заказа или продолжить покупки.',
-                        link: {name: 'Перейти в корзину', href: '/korzina'}
+                        link: [{name: 'Перейти в корзину', href: '/korzina'}, {name: 'Продолжить выбор', href: '#', method: 'close'}]
                     }, {
                         height: 'auto',
                         adaptive: true,

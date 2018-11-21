@@ -156,7 +156,7 @@
             initEditor(selector, field) {
                 tinymce.init({
                     selector: selector,
-                    plugins: ['image autoresize code paste media advlist'],
+                    plugins: ['image autoresize code paste media advlist link'],
                     language: 'ru',
                     paste_as_text: true,
                     paste_data_images: true,
@@ -164,7 +164,7 @@
                     image_title: true,
                     automatic_uploads: true,
                     images_upload_url: '/upload',
-                    file_picker_types: 'image',
+                    file_picker_types: 'file image media',
                     init_instance_callback: (editor) => {
                         editor.on('KeyUp', (e) => {
                             this.page[field] = editor.getContent();

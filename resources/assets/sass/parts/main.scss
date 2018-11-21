@@ -201,6 +201,15 @@ main {
     font-size: 16px;
     margin: 25px 0 0 0;
 
+    .offers-item__another-tariff {
+      padding: 0 8px;
+      font-size: 12px;
+      margin-top: 10px;
+      display: inline-block;
+      line-height: 20px;
+      height: 24px;
+    }
+
     .offers-item__operator {
 
       width: 40px;
@@ -221,7 +230,7 @@ main {
 
     }
 
-    .offers-item__number {
+    .offers-item__number, .offers-item__tariff {
       font-family: 'GothamPro', 'Roboto', 'Arial';
       font-weight: bold;
     }
@@ -342,7 +351,7 @@ main {
         margin: 0 0 0 10px;
       }
 
-      .offers-item__number {
+      .offers-item__number, .offers-item__tariff {
         margin: 0 0 6px 0;
       }
 
@@ -512,8 +521,14 @@ main {
     font-size: 14px;
   }
 
-  main .offers-small .offers-items .offers-item__number {
-    font-size: 17px;
+  main {
+    .offers-small {
+      .offers-items {
+        .offers-item__number, .offers-item__tariff {
+          font-size: 17px;
+        }
+      }
+    }
   }
 }
 
@@ -568,8 +583,14 @@ main {
     font-size: 12px;
   }
 
-  main .offers-small .offers-items .offers-item__number {
-    font-size: 16px;
+  main {
+    .offers-small {
+      .offers-items {
+        .offers-item__number, .offers-item__tariff {
+          font-size: 16px;
+        }
+      }
+    }
   }
 
   main .offers-items .offers-item__operator {
@@ -734,9 +755,13 @@ main {
     left: 0;
   }
 
-  main .offers-items .offers-item__number {
-    width: 100%;
-    padding-bottom: 5px;
+  main {
+    .offers-items {
+      .offers-item__number, .offers-item__tariff {
+        width: 100%;
+        padding-bottom: 5px;
+      }
+    }
   }
 
   main .offers-items td.offers-item__price, td.offers-item__old-price {
@@ -830,8 +855,12 @@ main {
     top: 15px;
   }
 
-  main .offers-items .offers-item__number {
-    font-size: 16px;
+  main {
+    .offers-items {
+      .offers-item__number, .offers-item__tariff {
+        font-size: 16px;
+      }
+    }
   }
 
 }
