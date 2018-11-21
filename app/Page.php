@@ -26,8 +26,8 @@ class Page extends Model
         $toponym = (is_null($slug) ? '' : ' | ' . (!empty($region['city']) ? $region['city'] . ' и ' : '') . $region['name']);
 
         // SEO
-        $page->seo()->setTitle(($page->seo_title ? str_replace('{region}', $region['name_pr'], $page->seo_title) : $page->name) . $toponym);
-        $page->seo()->setDescription(str_replace('{region}', $region['name_pr'], $page->seo_description));
+        $page->seo()->setTitle(($page->seo_title ? str_replace(['{region}', '{region2}'], [$region['name_pr'], $region['name_dat']], $page->seo_title) : $page->name) . $toponym);
+        $page->seo()->setDescription(str_replace(['{region}', '{region2}'], [$region['name_pr'], $region['name_dat']], $page->seo_description));
 
         $filterParams = json_decode($page->filters, true);
         $params = [];

@@ -26,7 +26,8 @@
                     </b-form-group>
 
                     <b-form-group label="Исключить из sitemap">
-                        <b-form-checkbox v-model="excludeFromSitemap" @change="excludeFromSitemapChange"></b-form-checkbox>
+                        <b-form-checkbox v-model="excludeFromSitemap"
+                                         @change="excludeFromSitemapChange"></b-form-checkbox>
                     </b-form-group>
 
                     <b-form-group label="Адрес:">
@@ -37,13 +38,13 @@
                     </b-form-group>
 
                     <b-form-group label="SEO-заголовок:"
-                                  description="Вместо {region} автоматически подставляется название региона.">
+                                  description="Вместо {region} автоматически подставляется название региона.<br />Вместо {region2} автоматически подставляется название региона в дательном падеже.">
                         <b-form-input type="text" v-model="page.seo_title" placeholder="Информация"
                                       autocomplete="off"></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="SEO-описание:"
-                                  description="Вместо {region} автоматически подставляется название региона.">
+                                  description="Вместо {region} автоматически подставляется название региона.<br />Вместо {region2} автоматически подставляется название региона в дательном падеже">
                         <b-form-textarea autocomplete="off" v-model="page.seo_description" placeholder="Информация"
                                          :rows="3" :max-rows="6">
                         </b-form-textarea>
@@ -81,7 +82,8 @@
                             </b-form-group>
                         </b-form-group>
                         <b-form-group v-else-if="chosenFilter === 'tariffs'">
-                            <b-form-checkbox-group :options="tariffTypesOptions" v-model="page.filters.value"></b-form-checkbox-group>
+                            <b-form-checkbox-group :options="tariffTypesOptions"
+                                                   v-model="page.filters.value"></b-form-checkbox-group>
                         </b-form-group>
                     </b-form-group>
 
