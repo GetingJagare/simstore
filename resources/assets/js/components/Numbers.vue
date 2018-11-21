@@ -106,7 +106,7 @@
 
                 <div class="w-xs-100 offer-help">
                     <a href="#" class="button no-bg"
-                       v-on:click.prevent="openModal('Помогите с выбором', 'lead_upper_popup_form')">
+                       v-on:click.prevent="openModal('Помогите с выбором', 'lead_upper_popup_form', 'Заказан звонок с сайта')">
                         <span class="d-inline d-lg-none d-xl-inline">Помогите с выбором</span>
                         <span class="d-none d-lg-inline d-xl-none">Помощь</span>
                     </a>
@@ -441,7 +441,7 @@
 
             },
 
-            openModal(subject, leadName) {
+            openModal(subject, leadName, comment) {
 
                 var params = {
                     subject: subject
@@ -450,6 +450,10 @@
                 if (leadName) {
                     params = Object.assign({}, params, {leadName: leadName});
                 }
+                if (comment) {
+                    params = Object.assign({}, params, {tariffs: comment});
+                }
+
                 return this.$modal.show(CallbackModal, params, {
                     height: 'auto',
                     adaptive: true,

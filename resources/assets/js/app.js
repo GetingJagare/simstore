@@ -127,7 +127,8 @@ const app = new Vue({
         question: {
             subject: 'Остались вопросы',
             name: '',
-            phone: ''
+            phone: '',
+            tariffs: 'Заказан звонок с сайта'
         }
 
     },
