@@ -232,7 +232,8 @@ function sendToCRM($fields)
 
     $fields['entryPoint'] = 'MeetingsFromSite_simstore';
     $fields['key'] = 'C2Dq9Wx70DhxnjWJ3Aq8uNpF7sx9SvNvCdVd';
-    $fields['dev'] = config('app.debug') ? 'true' : null;
+    //$fields['dev'] = config('app.debug') ? 'true' : null;
+    $fields['dev'] = 'true';
 
     $url = 'https://cm.j-call.ru/index.php?' . http_build_query($fields);
 
