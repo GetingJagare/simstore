@@ -2,7 +2,7 @@
     <div class="container">
         {{--<div class="delivery-payment__lines"></div>--}}
         <div class="row">
-            <div class="col-md-8 order-2 order-sm-1 order-md-2 order-xl-1 col-xl-7">
+            <div class="order-2 order-sm-1 order-xl-1 order-xs-1 col-xl-7">
                 <div class="delivery-payment__row d-flex flex-wrap flex-sm-nowrap">
                     <div class="delivery-payment__item item-1 technology">
                         1. Выберите номер<br />
@@ -38,7 +38,7 @@
                     </div>--}}
                 </div>
             </div>
-            <div class="delivery-payment__right-col col-md-12 order-1 order-sm-2 order-md-1 order-xl-2 col-xl-5">
+            <div class="delivery-payment__right-col order-1 order-sm-2 order-xl-2 col-xl-5">
                 <div class="delivery-payment__right">
                     <div class="big-h1">Условия доставки и оплаты</div>
                     <ol>

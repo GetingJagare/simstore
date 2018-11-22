@@ -160,13 +160,13 @@
     width: 280px;
   }
 
-  .delivery-payment .row-2 {
+  /*.delivery-payment .row-2 {
     margin: 28px 0 0 0;
   }
 
   .delivery-payment .row-3 {
     margin: 77px 0 0 0;
-  }
+  }*/
 
 }
 
@@ -180,7 +180,7 @@
     left: 50px;
   }
 
-  .delivery-payment__item.item-1 {
+  /*.delivery-payment__item.item-1 {
     position: absolute;
     top: -25px;
     left: 20px;
@@ -220,7 +220,7 @@
     position: absolute;
     top: 515px;
     left: 325px;
-  }
+  }*/
 
   .delivery-payment .delivery-payment__right {
     padding: 0;
@@ -236,24 +236,29 @@
 
   }
 
-  .delivery-payment__right-col {
+  /*.delivery-payment__right-col {
     width: 355px;
     position: absolute;
     right: 40px;
     top: -30px;
-  }
+  }*/
 
 
 
-  .delivery-payment {
+  /*.delivery-payment {
     height: 760px;
-  }
+  }*/
 
 
-  .home-page .delivery-payment {
+  /*.home-page .delivery-payment {
     height: 870px;
-  }
+  }*/
+}
 
+@include media-breakpoint-between(xs, lg) {
+  .delivery-payment .delivery-payment__item {
+    width: 50%;
+  }
 }
 
 @include media-breakpoint-only(xs) {
@@ -277,6 +282,12 @@
   .delivery-payment .delivery-payment__item {
     width: 100%;
     margin-bottom: 35px;
+    background: none;
+    &.airplane {
+      &:after {
+        content: normal;
+      }
+    }
   }
 
   .delivery-payment .delivery-payment__item:after {
@@ -295,14 +306,11 @@
   }
 
   .home-page .delivery-payment {
-    padding: 50px 0 110px 0;
+    padding: 50px 0 0;
   }
 
   .delivery-payment {
     padding-bottom: 0;
   }
-
-
-
 }
 
