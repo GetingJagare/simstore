@@ -26,7 +26,7 @@
             <div class="slider-wrap owl-slider-home owl-carousel">
                 <div class="slider-item container">
                     <div class="d-flex flex-wrap flex-sm-nowrap">
-                        <div class="d-inline-flex order-2 order-sm-1 align-content-end">
+                        <div class="d-inline-flex order-2 order-sm-1 align-content-end home-slider__image-col">
                             <img src="/images/slider-item1.png" class="slider-item__image" alt="Бесплатная доставка при покупке в интернет-магазине SIM-STORE">
                         </div>
                         <div class="d-inline-flex order-1 order-sm-2 align-items-center home-slider__text-col">
@@ -118,7 +118,7 @@
                         </div>
 
                     </div>
-                    <div class="d-none d-lg-block">
+                    <div class="d-none d-lg-block advantages-block__image-wrapper">
                         <img src="/images/advantages.png" class="advantages-block__image" alt="Плюсы индивидуального обслуживания">
                     </div>
                 </div>

@@ -13,6 +13,10 @@
     width: 40%;
   }
 
+  .home-slider__image-col {
+    width: 60%;
+  }
+
   .slider-item__image {
     position: relative;
     left: -50px;
@@ -55,6 +59,7 @@
     line-height: 0.8;
     margin: 0 0 20px 0;
     display: inline-block;
+    font-size: 30px;
   }
 
   .slider.home-slider {
@@ -67,6 +72,10 @@
   .slider .slider-item__image {
     height: 100%;
     left: 0;
+  }
+
+  .home-slider .home-slider__text-col {
+    width: 100%;
   }
 
   .slider .slider-item__text {

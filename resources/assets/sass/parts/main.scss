@@ -431,7 +431,7 @@ main {
 }
 
 .advantages-table {
-  width: 720px;
+  width: 100%;
   font-family: 'GothamPro';
   margin: 40px 0 0 0;
 }
@@ -561,7 +561,8 @@ main {
     }*/
 
     .main-sidebar {
-      width: 305px;
+      width: 285px;
+      margin-left: 20px;
     }
 
    .filter-block__checkboxes {
@@ -581,6 +582,7 @@ main {
 
   main .offers-small .offers-items .offers-item__old-price, main .offers-small .offers-items .offers-item__price {
     font-size: 12px;
+    padding: 0 10px;
   }
 
   main {
@@ -642,6 +644,10 @@ main {
 
     &:first-of-type {
       margin-right: 30px;
+    }
+
+    &:last-of-type {
+      width: calc(50% - 30px);
     }
 
   }
@@ -871,4 +877,14 @@ main {
     font-size: 25px!important;
   }
 
+}
+
+@include media-breakpoint-down(lg) {
+  .main-sidebar {
+    .sidebar-block {
+      .big-h1 {
+        font-size: 30px;
+      }
+    }
+  }
 }
