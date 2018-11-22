@@ -8,5 +8,7 @@ Disallow: *openstat=
 Disallow: /politika
 Disallow: */index.php
 Disallow: *roistat
+Disallow: /kabinet-abonenta
+Disallow: /vosstanovlenie-dostupa-registratsiya
 
 Sitemap: https://sim-store.ru/sitemap.xml
