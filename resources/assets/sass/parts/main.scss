@@ -676,11 +676,6 @@ main {
 
   }
 
-  main .main-content {
-    width: 100%;
-  }
-
-
   main .filter-block__template input {
     margin: 0 0 10px 0;
     width: 100%;
@@ -886,5 +881,11 @@ main {
         font-size: 30px;
       }
     }
+  }
+}
+
+@include media-breakpoint-between(xs, sm) {
+  main .main-content {
+    width: 100%;
   }
 }

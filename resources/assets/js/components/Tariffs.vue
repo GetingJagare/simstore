@@ -22,7 +22,7 @@
                                 <span class="checkbox__text">Для интернета</span>
                             </label>
                         </div>
-                        <div class="d-flex flex-wrap flex-sm-nowrap">
+                        <div class="d-flex flex-wrap flex-md-nowrap">
                             <div class="filter-block__price filter-minutes">
 
                                 <div class="d-flex flex-nowrap align-items-center">
