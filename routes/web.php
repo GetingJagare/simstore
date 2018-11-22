@@ -36,6 +36,9 @@ function commonRoutes() {
 
     Route::post('crm', 'AdminController@sendToCRM');
     Route::post('upload', 'UploadController@index');
+
+    Route::post('login', 'Auth\LoginController@index');
+    Route::post('lostpass', 'Auth\LoginController@lostpass');
 }
 
 Route::domain("{region}.$httpHostWithoutSubDomain")->group(function () {

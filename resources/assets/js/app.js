@@ -106,6 +106,8 @@ Vue.component('promo-tariffs', require('./components/PromoTariffs.vue'));
 Vue.component('countdown', require('./components/Countdown.vue'));
 Vue.component('callback-popup', require('./components/CallbackPopup.vue'));
 Vue.component('callback-modal', require('./components/modals/CallbackModal'));
+Vue.component('login-form', require('./components/LoginForm'));
+Vue.component('lostpass-form', require('./components/LostPassForm'));
 //Vue.component('order', require('./components/Order.vue'));
 
 import CallbackModal from './components/modals/CallbackModal.vue';
