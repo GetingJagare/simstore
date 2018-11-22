@@ -132,8 +132,10 @@ class CartController extends Controller
         $tariffs = formatTariffs(collect($tariffsInSession));
 
         foreach ($tariffsInSession as $numberId => $tariff) {
-            $numbersToString[$numberId] .= ', Тариф:' . $tariff->name;
-            $tariffIds[] = $tariff->id;
+            if (isset($numbersToString[$numberId])) {
+                $numbersToString[$numberId] .= ', Тариф:' . $tariff->name;
+                $tariffIds[] = $tariff->id;
+            }
         }
 
         $order->tariffs = implode(',', $tariffIds);
