@@ -25,6 +25,10 @@ class Page extends Model
 
         $toponym = (is_null($slug) ? '' : ' | ' . (!empty($region['city']) ? $region['city'] . ' и ' : '') . $region['name']);
 
+        foreach ($region['verif_codes'] as $meta) {
+            $page->seo()->metatags()->addMeta($meta['meta_name'], $meta['meta_content']);
+        }
+
         // SEO
         $page->seo()->setTitle(($page->seo_title ? str_replace(['{region}', '{region2}'], [$region['name_pr'], $region['name_dat']], $page->seo_title) : $page->name) . $toponym);
         $page->seo()->setDescription(str_replace(['{region}', '{region2}'], [$region['name_pr'], $region['name_dat']], $page->seo_description));
@@ -49,6 +53,8 @@ class Page extends Model
         } else {
             $params['promo'] = $filterParams['promo'];
         }
+
+        $page->content = str_replace('{address}', $region['address'], $page->content);
 
         return view($page->template ? $page->template : 'frontend.static', ['page' => $page, 'region' => $region, 'params' => $params]);
     }

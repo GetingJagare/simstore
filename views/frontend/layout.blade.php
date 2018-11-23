@@ -156,7 +156,8 @@
                         <b>8 800 100 87 18</b><br>
                         Отдел продаж: с 10:00 до 21:00<br>
                         support@sim-store.ru<br>
-                        <a href="/politika-konfidentsialnosti">Политика конфиденциальности</a>
+                        <a href="/politika-konfidentsialnosti">Политика конфиденциальности</a><br />
+                        <a href="/kontakty">Контакты</a>
                     </div>
                 </div>
             </div>

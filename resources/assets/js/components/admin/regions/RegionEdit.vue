@@ -33,6 +33,19 @@
                     <b-form-input type="text" v-model="form.name_dat" required placeholder="Москве" autocomplete="off"></b-form-input>
                 </b-form-group>
 
+                <b-form-group label="Юр.адрес" class="mt-3">
+                    <b-form-input v-model="form.address" autocomplete="off"></b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Коды верификации" class="mt-3">
+                    <div v-for="(code, index) in form.verif_codes" class="mt-2 d-flex">
+                        <b-form-input v-model="code.meta_name" class="mr-3 d-inline-block" placeholder="Название meta"></b-form-input>
+                        <b-form-input v-model="code.meta_content" class="mr-3 d-inline-block" placeholder="Содержимое meta"></b-form-input>
+                        <b-button variant="danger" @click="deleteVerifCode(index)">Удалить</b-button>
+                    </div>
+                    <b-button variant="warning" class="mt-3" @click="addVerifCode">Добавить код верификации</b-button>
+                </b-form-group>
+
                 <b-button type="submit" variant="primary">Обновить</b-button>
             </b-form>
         </b-card>
@@ -64,7 +77,9 @@
                     name_pr: '',
                     name_dat: '',
                     subdomain: '',
-                    codes: []
+                    verif_codes: [],
+                    codes: [],
+                    address: '',
                 },
 
                 mess: {
@@ -114,6 +129,21 @@
                     // error callback
                 });
 
+            },
+
+            addVerifCode() {
+                let codesCount = 0;
+                if (!this.form.verif_codes) {
+                    this.form.verif_codes = [];
+                } else {
+                    codesCount = this.form.verif_codes ? this.form.verif_codes.length : 0;
+                }
+
+                this.$set(this.form.verif_codes, codesCount, {meta_name: '', meta_content: ''});
+            },
+
+            deleteVerifCode(index) {
+                this.form.verif_codes.splice(index, 1);
             }
 
         }

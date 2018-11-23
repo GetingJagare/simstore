@@ -17,11 +17,7 @@ class PageController extends Controller
      */
     public function get($region, $slug = null)
     {
-        $currentRegion = session('region', null);
-
-        if(!$currentRegion || $region != $currentRegion['subdomain']) {
-            $currentRegion = $this->setRegion($region);
-        }
+        $currentRegion = $this->setRegion($region);
 
         return Page::get($currentRegion, $slug);
     }
@@ -37,7 +33,7 @@ class PageController extends Controller
         if (str_slug($region->name_dat) !== $region_slug_dat) {
             abort(404);
         }
-        $region->writeToSession();
-        return $this->get($region->subdomain, 'dlya-zvonkov-po');
+        $currentRegion = $region->writeToSession();
+        return $this->get($currentRegion['subdomain'], 'dlya-zvonkov-po');
     }
 }

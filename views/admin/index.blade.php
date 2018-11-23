@@ -47,6 +47,6 @@
 </div>
 
 
-<script src="{{ asset('/js/admin.js?v=2.1.3') }}"></script>
+<script src="{{ asset('/js/admin.js?v=' . getUniqueId('js')) }}"></script>
 </body>
 </html>

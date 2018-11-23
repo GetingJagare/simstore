@@ -11,6 +11,7 @@ use App\Tariff;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class AdminController extends Controller
 {
@@ -67,7 +68,11 @@ class AdminController extends Controller
         $region->city = $request->city;
         $region->subdomain = $request->subdomain;
         $region->codes = json_encode($request->codes);
+        $region->verif_codes = json_encode($request->verif_codes);
+        $region->address = $request->address;
         $region->save();
+
+        Cache::forget("region_{$region->subdomain}");
 
         return response()->json(['success' => true, 'message' => 'Регион успешно добавлен']);
     }
@@ -85,6 +90,7 @@ class AdminController extends Controller
     {
         $region = Region::find($request->id);
         $region->codes = empty($region->codes) ? [] : json_decode($region->codes);
+        $region->verif_codes = empty($region->verif_codes) ? [] : json_decode($region->verif_codes);
         return response()->json(['success' => true, 'region' => $region]);
     }
 

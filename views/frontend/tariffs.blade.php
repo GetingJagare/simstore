@@ -33,39 +33,34 @@
 
                         <div class="row">
                             <div class="advantages-block__item col-md-6">
-                                <div><img src="/images/advantage-icon.png" alt="Короткий заголовок плюса"></div>
+                                <div class="advantages-block__item-icon personal"></div>
                                 <b>Персональное обслуживание</b>{{--<br>
                                 <span>Подробное описание данное плюса очень подробное</span>--}}
                             </div>
                             <div class="advantages-block__item col-md-6">
-                                <div><img src="/images/advantage-icon.png" alt="Короткий заголовок плюса"></div>
+                                <div class="advantages-block__item-icon sale"></div>
                                 <b>Продажа красивых телефонных номеров!!</b>{{--<br>
                                 <span>Подробное описание данное плюса очень подробное</span>--}}
                             </div>
                             <div class="advantages-block__item col-md-6">
-                                <div><img src="/images/advantage-icon.png" alt="Короткий заголовок плюса"></div>
+                                <div class="advantages-block__item-icon connect"></div>
                                 <b>Подключения к корпоративным тарифам.</b>{{--<br>
                                 <span>Подробное описание данное плюса очень подробное</span>--}}
                             </div>
                             <div class="advantages-block__item col-md-6">
-                                <div><img src="/images/advantage-icon.png" alt="Короткий заголовок плюса"></div>
+                                <div class="advantages-block__item-icon unlimited"></div>
                                 <b>Безлимитная связь.</b>{{--<br>
                                 <span>Подробное описание данное плюса очень подробное</span>--}}
                             </div>
                         </div>
                         <div class="row">
                             <div class="advantages-block__item col-md-6">
-                                <div><img src="/images/advantage-icon.png" alt="Короткий заголовок плюса"></div>
+                                <div class="advantages-block__item-icon choose"></div>
                                 <b>Подбор номера.</b>{{--<br>
                                 <span>Подробное описание данное плюса очень подробное</span>--}}
                             </div>
                             <div class="advantages-block__item col-md-6">
-                                <div><img src="/images/advantage-icon.png" alt="Короткий заголовок плюса"></div>
-                                <b>Персональное обслуживание каждого клиента.</b>{{--<br>
-                                <span>Подробное описание данное плюса очень подробное</span>--}}
-                            </div>
-                            <div class="advantages-block__item col-md-6">
-                                <div><img src="/images/advantage-icon.png" alt="Короткий заголовок плюса"></div>
+                                <div class="advantages-block__item-icon delivery"></div>
                                 <b>Доставка курьером.</b>{{--<br>
                                 <span>Подробное описание данное плюса очень подробное</span>--}}
                             </div>

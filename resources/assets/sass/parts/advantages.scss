@@ -102,6 +102,35 @@
       left: -20px;
     }
 
+    &-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 20px;
+      background: url(/images/db-sprites_3.png) no-repeat 0 0;
+      &.personal {
+        background-position: -0 -0;
+      }
+
+      &.sale {
+        background-position: -128px -64px;
+      }
+
+      &.connect {
+        background-position: -64px -0;
+      }
+
+      &.unlimited {
+        background-position: -64px -64px;
+      }
+
+      &.choose {
+        background-position: -128px -0;
+      }
+
+      &.delivery {
+        background-position: -0 -64px;
+      }
+    }
   }
 
   .advantages-block__button {
