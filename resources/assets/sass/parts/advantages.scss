@@ -103,32 +103,39 @@
     }
 
     &-icon {
-      width: 64px;
-      height: 64px;
+      width: 60px;
+      height: 60px;
       margin-bottom: 20px;
       background: url(/images/db-sprites_3.png) no-repeat 0 0;
       &.personal {
+        width: 62px;
+        height: 62px;
         background-position: -0 -0;
       }
 
       &.sale {
-        background-position: -128px -64px;
+        background-position: -122px -62px;
       }
 
       &.connect {
-        background-position: -64px -0;
+        width: 62px;
+        height: 62px;
+        background-position: -62px -0;
       }
 
       &.unlimited {
-        background-position: -64px -64px;
+        background-position: -63px -62px;
       }
 
       &.choose {
-        background-position: -128px -0;
+        width: 62px;
+        height: 62px;
+        background-position: -124px -0;
       }
 
       &.delivery {
-        background-position: -0 -64px;
+        width: 63px;
+        background-position: -0 -62px;
       }
     }
   }
