@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    @include('counters.gtm')
+    @if (!config('app.debug'))
+        @include('counters.gtm')
+    @endif
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
@@ -16,7 +18,9 @@
     {!! SEO::generate() !!}
 </head>
 <body>
-@include('counters.body-counters.gtm')
+@if (!config('app.debug'))
+    @include('counters.body-counters.gtm')
+@endif
 <script>
     var APP_DOMAIN = '{{ env('APP_DOMAIN') }}',
         CART = {
@@ -156,7 +160,7 @@
                         <b>8 800 100 87 18</b><br>
                         Отдел продаж: с 10:00 до 21:00<br>
                         support@sim-store.ru<br>
-                        <a href="/politika-konfidentsialnosti">Политика конфиденциальности</a><br />
+                        <a href="/politika-konfidentsialnosti">Политика конфиденциальности</a><br/>
                         <a href="/kontakty">Контакты</a>
                     </div>
                 </div>
@@ -169,6 +173,8 @@
 
 <link rel="stylesheet" href="{{ asset('/css/vendor.css?id=' . getUniqueId('css_vendor')) }}">
 <script src="{{ asset('/js/app.js?id=' . getUniqueId('js')) }}" async></script>
-@include('counters.ya')
+@if (!config('app.debug'))
+    @include('counters.ya')
+@endif
 </body>
 </html>

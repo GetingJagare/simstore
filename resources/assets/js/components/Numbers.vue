@@ -288,8 +288,9 @@
             this.form.perpage = this.perpage_options[0];
             this.form.sort = this.sort_options[this.sourcePriceRange.length > 1 ? 0 : 1];
 
-            if (!getCookie('default_number_filters')) {
-                setCookie('default_number_filters', JSON.stringify(this.form), getInfiniteUTCDateString());
+            const rangeJoined = this.price_range.join('_');
+            if (!getCookie('default_number_filters_' + rangeJoined)) {
+                setCookie('default_number_filters_' + rangeJoined, encodeURIComponent(JSON.stringify(this.form)), getInfiniteUTCDateString());
             }
 
             this.search();
@@ -380,7 +381,7 @@
         methods: {
 
             reset() {
-                this.form = JSON.parse(getCookie('default_number_filters'));
+                this.form = JSON.parse(decodeURIComponent(getCookie('default_number_filters_' + this.price_range.join('_'))));
 
                 this.search();
             },
