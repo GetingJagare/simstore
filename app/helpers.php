@@ -255,7 +255,7 @@ function sendToCRM($fields)
         return response()->json(['success' => false], $status);
     }
 
-    return response()->json(['success' => true], $status);
+    return response()->json(['success' => true, 'url' => $url], $status);
 
 }
 
