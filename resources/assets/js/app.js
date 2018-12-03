@@ -80,6 +80,31 @@ window.deleteCookie = function (key) {
     document.cookie = key + '=;path=/;domain=.sim-store.ru;expires=' + previousDate;
 };
 
+window.getUTMTags = function () {
+    var data = {}, utmTags;
+
+    if (utmTags = getCookie('utm_tags')) {
+        utmTags = JSON.parse(decodeURIComponent(utmTags));
+        if (utmTags) {
+            for (var param in utmTags) {
+                data[param] = utmTags[param];
+            }
+        }
+    }
+
+    if (/utm_[^=]+=[^&]+/.test(window.location.href)) {
+        const queryString = window.location.href.match(/\?(.+)$/)[1];
+        queryString.split('&').forEach(function (paramValue) {
+            const splittedParam = paramValue.split('=');
+            if (/^utm_.+$/.test(splittedParam[0])) {
+                data[splittedParam[0]] = decodeURIComponent(splittedParam[1]);
+            }
+        });
+    }
+
+    return data;
+};
+
 window.Vue = require('vue');
 window.VueEvent = require('vue-event-manager');
 
@@ -214,7 +239,9 @@ const app = new Vue({
                 return false;
             }
 
-            this.$http.post('/crm', {fields: this.question}).then(response => {
+            var params = Object.assign({}, this.question, getUTMTags());
+
+            this.$http.post('/crm', {fields: params}).then(response => {
 
                 this.$modal.show(InfoPopup, {
                     title: 'Спасибо за заявку!',

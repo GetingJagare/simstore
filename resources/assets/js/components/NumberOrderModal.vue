@@ -62,7 +62,9 @@
                     return false;
                 }
 
-                this.$http.post('/crm', {fields: this.number_order}).then(response => {
+                var params = Object.assign({}, this.number_order, getUTMTags());
+
+                this.$http.post('/crm', {fields: params}).then(response => {
 
                     this.$modal.show(InfoPopup, {
                         title: 'Спасибо за заявку!',
