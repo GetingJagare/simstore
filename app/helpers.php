@@ -230,6 +230,8 @@ function phone_format($phone, $format, $mask = '#')
 function sendToCRM($fields)
 {
 
+	var_dump($fields);
+
     $fields['entryPoint'] = 'MeetingsFromSite_simstore';
     $fields['key'] = 'C2Dq9Wx70DhxnjWJ3Aq8uNpF7sx9SvNvCdVd';
     //$fields['dev'] = config('app.debug') ? 'true' : null;
