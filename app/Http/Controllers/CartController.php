@@ -101,6 +101,10 @@ class CartController extends Controller
         return $this->getCart();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function order(Request $request)
     {
         $order = new Order();
@@ -142,14 +146,22 @@ class CartController extends Controller
         $order->summ = $numbers->sum('final_price') + $tariffs->sum('final_price');
         $order->save();
 
-        $crm = sendToCRM([
+        $data = [
             'name' => $order->name,
             'phone' => $order->phone,
             'address' => $order->address,
             'numbers' => implode('; ', array_values($numbersToString)),
             'tariffs' => implode(', ', $tariffsToString),
             'summ' => $order->summ
-        ]);
+        ];
+
+        if (!empty($request->utm_tags)) {
+            foreach ($request->utm_tags as $key => $value) {
+                $data[$key] = $value;
+            }
+        }
+
+        $crm = sendToCRM($data);
 
         $this->clearCart();
 
@@ -163,6 +175,10 @@ class CartController extends Controller
         session(['number_tariffs' => []]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function orderOneClick(Request $request)
     {
         $this->clearCart();

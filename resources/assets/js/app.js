@@ -80,6 +80,14 @@ window.deleteCookie = function (key) {
     document.cookie = key + '=;path=/;domain=.sim-store.ru;expires=' + previousDate;
 };
 
+window.setUTMTags = function () {
+    var data = getUTMTags();
+
+    if (Object.keys(data).length) {
+        setCookie('utm_tags', encodeURIComponent(JSON.stringify(data)), getInfiniteUTCDateString());
+    }
+};
+
 window.getUTMTags = function () {
     var data = {}, utmTags;
 
@@ -164,6 +172,10 @@ const app = new Vue({
     created: function () {
 
         this.cart = CART;
+    },
+
+    mounted() {
+        setUTMTags();
     },
 
     methods: {

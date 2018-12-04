@@ -267,7 +267,9 @@
 
                 }
 
-                this.$http.post('/cart/order', this.form).then(response => {
+                var params = Object.assign({}, this.form, {utm_tags: getUTMTags()});
+
+                this.$http.post('/cart/order', params).then(response => {
 
                     this.numbers = response.body.numbers;
                     //this.tariffs = response.body.tariffs;

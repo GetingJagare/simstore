@@ -145,13 +145,15 @@
 
                 }
 
-                this.$http.post('/cart/order/one-click', {
+                var params = Object.assign({}, {
                     id: this.number.id,
                     tariffId: this.tariff.id,
                     name: this.order.name,
                     phone: this.order.phone,
                     address: this.order.address
-                }).then(response => {
+                }, {utm_tags: getUTMTags()});
+
+                this.$http.post('/cart/order/one-click', params).then(response => {
 
                     this.$modal.show(InfoPopup, {
                         title: 'Спасибо за заявку!',
