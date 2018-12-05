@@ -26,3 +26,4 @@ Homestead.json
 *.log
 backups
 sitemap*xml
+*.sql.gz

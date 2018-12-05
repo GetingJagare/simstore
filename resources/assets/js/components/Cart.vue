@@ -38,7 +38,8 @@
                                     <div class="cart-items__item-tariff-params w-100 d-flex align-items-center d-xl-none"
                                          v-if="number.tariff">
                                         <div class="cart-items__item-price" v-if="number.final_price > 0">
-                                            {{ number.tariff.final_price !== number.tariff.price ? number.tariff.final_price
+                                            {{ number.tariff.final_price !== number.tariff.price ?
+                                            number.tariff.final_price
                                             : number.tariff.price }} ₽
                                             &nbsp;
                                         </div>
@@ -150,8 +151,11 @@
                         <div class="order-form__checkbox">
                             <label class="checkbox d-flex">
                                 <input type="checkbox" v-model="policy"/>
-                                <span class="checkbox__text">Нажимая кнопку, Вы принимаете <a
-                                        href="/politika-konfidentsialnosti">условия</a></span>
+                                <span class="checkbox__text">Нажимая кнопку, Вы принимаете
+                                    <a v-bind:href="offerDoc" target="_blank">
+                                        условия
+                                    </a>
+                                </span>
                             </label>
                         </div>
                         <div>
@@ -182,6 +186,8 @@
 
             this.getItems();
         },
+
+        props: ['offerDoc'],
 
         data() {
             return {

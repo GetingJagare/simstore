@@ -1,6 +1,7 @@
 try {
     window.$ = window.jQuery = require('jquery');
 
+    require('fancybox')($);
     require('owl.carousel');
 
     //require('bootstrap');
