@@ -49,6 +49,12 @@
                     </b-form-group>
                 </b-card>
 
+                <b-card class="mt-3">
+                    <b-form-group label="Количество счастливых номеров:">
+                        <b-form-input type="number" v-model="settings.lucky_count.setting_value" required autocomplete="off"></b-form-input>
+                    </b-form-group>
+                </b-card>
+
                 <!--<b-card class="mt-3">
                     <b-form-group label="Скидка на акционные номера:">
                         <b-form-input type="number" v-model="settings.numbers_discount.setting_value" required autocomplete="off"></b-form-input>

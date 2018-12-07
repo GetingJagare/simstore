@@ -1,0 +1,10 @@
+.filter-block {
+  & &__buttons {
+    &-lucky {
+      float: right;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -365,3 +365,24 @@ function getUniqueId($type)
         return $string;
     });
 }
+
+function getLuckyNumbers()
+{
+    $nowTime = \Carbon\Carbon::now();
+
+    return \Illuminate\Support\Facades\Cache::remember("lucky_numbers", $nowTime->addMinutes(15), function () {
+        $luckyNumbersCount = (int)getSetting('lucky_count');
+
+        $currentRegion = session('region');
+
+        /** @var \Illuminate\Database\Eloquent\Collection $numbers */
+        $numbers = \App\Number::where(['saled' => 0, 'region_id' => $currentRegion['id'], 'on_sale' => 0])->get();
+        $numbers = formatNumbers($numbers);
+
+        if ($numbers->count() > $luckyNumbersCount) {
+            $numbers = $numbers->random($luckyNumbersCount);
+        }
+
+        return $numbers->shuffle();
+    });
+}

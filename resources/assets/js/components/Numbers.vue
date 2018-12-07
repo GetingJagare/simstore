@@ -87,6 +87,9 @@
                     <button class="filter-block__buttons-order no-bg" v-on:click.prevent="reset">
                         Очистить
                     </button>
+                    <button class="filter-block__buttons-lucky" v-on:click.prevent="getLuckyNumbers">
+                        Мне повезет!
+                    </button>
                 </div>
             </div>
         </form>
@@ -327,6 +330,7 @@
                 numbers_count: 0,
 
                 form: {
+                    lucky: false,
                     price: [0, this.price_max],
                     perpage: {},
                     sort: {},
@@ -529,6 +533,11 @@
 
                 });
 
+            },
+
+            getLuckyNumbers() {
+                this.form.lucky = true;
+                this.search();
             },
 
             nextNumbers() {
