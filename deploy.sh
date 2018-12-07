@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-npm install
-npm update
 composer install
 
 git fetch
