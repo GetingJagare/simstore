@@ -21,7 +21,7 @@ class CacheController extends Controller {
 		],
 		'numbers' => [
 			'name' => 'Номера',
-			'items' => ['numbers_on_sale_{region_id}', 'numbers_max_price', 'region_{region_id}_c']
+			'items' => ['numbers_on_sale_{region_id}', 'numbers_max_price', 'region_{region_id}_c', 'lucky_numbers']
 		]
 	];
 
