@@ -5,6 +5,12 @@
       &:hover {
         text-decoration: underline;
       }
+
+      @include media-breakpoint-only(xs) {
+        float: none;
+        margin-top: 10px;
+        width: 100%;
+      }
     }
   }
 }
