@@ -170,9 +170,9 @@ class NumbersController extends Controller
             }
 
             $numbers = $numbers->values();
-            $numbers = $numbers->forPage($request->page, $request->perpage['value'])->all();
-
             $numbersCount = count($numbers);
+
+            $numbers = $numbers->forPage($request->page, $request->perpage['value'])->all();
         } else {
             /** @var Collection $numbers */
             $numbers = getLuckyNumbers();
