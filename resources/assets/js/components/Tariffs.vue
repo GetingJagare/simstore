@@ -268,7 +268,7 @@
                     subject: subject
                 };
                 if (leadName) {
-                    params = Object.assign({}, params, {leadName: leadName});
+                    addToDataLayer({event: leadName});
                 }
 
                 if (tariffName) {

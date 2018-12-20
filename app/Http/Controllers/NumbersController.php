@@ -137,6 +137,9 @@ class NumbersController extends Controller
                                 case 'end':
                                     return substr($number->value, -$length) === $search;
                                     break;
+                                case 'middle':
+                                    return stristr(substr($number->value, 1, -1), $search) !== false;
+                                    break;
                             }
                         }
                     }

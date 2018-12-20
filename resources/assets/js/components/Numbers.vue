@@ -453,7 +453,7 @@
                 };
 
                 if (leadName) {
-                    params = Object.assign({}, params, {leadName: leadName});
+                    addToDataLayer({event: leadName});
                 }
                 if (comment) {
                     params = Object.assign({}, params, {tariffs: comment});
