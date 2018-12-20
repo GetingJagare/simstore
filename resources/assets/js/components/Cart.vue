@@ -128,7 +128,7 @@
             <div class="cart-order__box">
 
                 <div class="order-h1 big-h1">Ваши контакты</div>
-                <form @submit.prevent="order">
+                <form @submit.prevent="order" @keyup.enter="$event.preventDefault();" @keydown.enter="$event.preventDefault();">
                     <div class="order-form">
                         <div class="d-flex flex-wrap flex-xl-nowrap">
                             <div class="order-form__input first">
@@ -142,16 +142,18 @@
                             </div>
                         </div>
                         <div class="order-form__input last">
-                            <div class="order-form__label">Адресс доставки</div>
-                            <input type="text" v-model="form.address"
-                                   placeholder="г. Москва, ул. Тверская, д. 30, кв. 5">
+                            <div class="order-form__label">Адрес доставки</div>
+                            <gmap-autocomplete :componentRestrictions="{country: 'ru'}"
+                                               v-bind:options="{bounds: bounds, strictBounds: true}"
+                                               placeholder="г. Москва, ул. Тверская, д. 30, кв. 5"
+                                               type="text" @place_changed="updatePlace" ref="address"></gmap-autocomplete>
                         </div>
                     </div>
                     <div class="d-flex flex-wrap flex-md-nowrap order-form__bottom">
                         <div class="order-form__checkbox">
                             <label class="checkbox d-flex">
-                                <input type="checkbox" v-model="policy"/>
-                                <span class="checkbox__text">Нажимая кнопку, Вы принимаете
+                                <!--<input type="checkbox" v-model="policy"/>-->
+                                <span>Отправляя заказ, Вы принимаете
                                     <a v-bind:href="offerDoc" target="_blank">
                                         условия
                                     </a>
@@ -174,7 +176,16 @@
 <script>
     import InfoPopup from './modals/InfoPopup.vue';
     import AnotherTariffModal from './modals/AnotherTariffModal';
-    import VueTheMask from 'vue-the-mask'
+    import VueTheMask from 'vue-the-mask';
+
+    import * as VueGoogleMaps from 'vue2-google-maps';
+
+    Vue.use(VueGoogleMaps, {
+        load: {
+            key: 'AIzaSyA4ec8KnKv4HjLFHKcq-TD_iffaZaSufYo',
+            libraries: 'places'
+        }
+    });
 
     Vue.use(VueTheMask);
 
@@ -182,20 +193,29 @@
         components: {AnotherTariffModal},
         mounted() {
 
-            //console.log(window.app.__vue__.$refs.ordering);
+            window.$vm = this;
+
+            const lat_diff = this.getLatitudeGrad(100),
+                lat_north = Math.abs(this.lat) + lat_diff,
+                lat_south = Math.abs(this.lat) - lat_diff,
+                lng_east = Math.abs(this.lng) + this.getLongitudeGrad(lat_north, 100 * ((90 - lat_north) / 90)),
+                lng_west = Math.abs(this.lng) - this.getLongitudeGrad(lat_south, 100 * ((90 - lat_south) / 90));
+
+            this.bounds = {north: lat_north, south: lat_south, east: lng_east, west: lng_west};
 
             this.getItems();
         },
 
-        props: ['offerDoc'],
+        props: ['offerDoc', 'lat', 'lng'],
 
         data() {
             return {
+                bounds: {},
                 numbers: [],
                 tariffs: [],
                 price: 0,
                 disabled: true,
-                policy: false,
+                //policy: false,
                 form: {
                     name: '',
                     phone: '',
@@ -205,6 +225,14 @@
         },
 
         methods: {
+
+            getLatitudeGrad(kilometers) {
+                return kilometers / 111.111;
+            },
+
+            getLongitudeGrad(latitude, kilometers) {
+                return (111.111 * Math.cos(latitude * Math.PI / 180)) / kilometers;
+            },
 
             getItems() {
 
@@ -258,7 +286,7 @@
                     return false;
                 }
 
-                if (!this.policy) {
+                /*if (!this.policy) {
 
                     this.$modal.show(InfoPopup, {
                         title: 'Ошибка!',
@@ -271,7 +299,7 @@
 
                     return false;
 
-                }
+                }*/
 
                 var params = Object.assign({}, this.form, {utm_tags: getUTMTags()});
 
@@ -296,7 +324,9 @@
                         address: ''
                     };
 
-                    this.policy = false;
+                    this.$refs.address.$el.value = '';
+
+                    //this.policy = false;
 
                     document.querySelector('.nav-basket').querySelector('.basket-count').innerText = response.body.count;
 
@@ -333,6 +363,10 @@
                     }
                 });
                 this.price = newPrice;
+            },
+
+            updatePlace (place) {
+                this.form.address = place.formatted_address;
             }
 
         }

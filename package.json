@@ -21,7 +21,8 @@
         "owl.carousel": "^2.3.4",
         "popper.js": "^1.14.5",
         "vue": "^2.5.7",
-        "vue-element-loading": "^1.0.5"
+        "vue-element-loading": "^1.0.5",
+        "vue2-google-maps": "^0.10.5"
     },
     "dependencies": {
         "tinymce": "^4.8.5",

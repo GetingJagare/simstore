@@ -118,20 +118,27 @@ class NumbersController extends Controller
             elseif(!empty($request->search)) {
 
                 // Удаляем лишние символы
-                $search = str_replace('-', '', $request->search);
-                $search = str_replace(' ', '', $search);
-                $search = str_replace('(', '', $search);
-                $search = str_replace(')', '', $search);
-                $search = str_replace('+7', '', $search);
-                $positionEnd = $request->position_end;
+                $search = str_replace(['-', ' ', '(', ')', '+7'], '', $request->search);
 
-                $numbers = collect($numbers)->filter(function ($number) use ($search, $positionEnd) {
+                $searchPosition = $request->position_start ? "start"
+                    : ($request->position_middle ? "middle"
+                        : ($request->position_end ? "end" : null));
 
-                    if($positionEnd) {
+                $numbers = collect($numbers)->filter(function ($number) use ($search, $searchPosition) {
+
+                    if($searchPosition) {
                         $length = strlen($search);
 
-                        return $length === 0 ||
-                            (substr($number->value, -$length) === $search);
+                        if ($length) {
+                            switch ($searchPosition) {
+                                case 'start':
+                                    return substr($number->value, 0, $length) === $search;
+                                break;
+                                case 'end':
+                                    return substr($number->value, -$length) === $search;
+                                    break;
+                            }
+                        }
                     }
 
                     // replace stristr with your choice of matching function

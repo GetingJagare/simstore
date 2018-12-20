@@ -6,19 +6,19 @@
                     <div class="filter-block filter-tariffs">
                         <div class="filter-block__checkboxes">
                             <label class="checkbox">
-                                <input type="checkbox" v-model="form.promo" />
+                                <input type="checkbox" v-model="form.promo"/>
                                 <span class="checkbox__text">Акция</span>
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="form.no_limit" />
+                                <input type="checkbox" v-model="form.no_limit"/>
                                 <span class="checkbox__text">Безлимитные</span>
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="form.no_limit_ru" />
+                                <input type="checkbox" v-model="form.no_limit_ru"/>
                                 <span class="checkbox__text">Безлимит — Россия</span>
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="form.for_internet" />
+                                <input type="checkbox" v-model="form.for_internet"/>
                                 <span class="checkbox__text">Для интернета</span>
                             </label>
                         </div>
@@ -33,7 +33,9 @@
                                 </div>
 
                                 <div class="filter-block__range">
-                                    <vue-slider v-model="form.minutes" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
+                                    <vue-slider v-model="form.minutes" :min="0" :max="5000" :process-dragable="true"
+                                                :tooltip="false" :process-style="processStyle"
+                                                @drag-end="dataLayerFunction"></vue-slider>
                                 </div>
                             </div>
                             <div class="filter-block__price">
@@ -46,7 +48,9 @@
                                 </div>
 
                                 <div class="filter-block__range">
-                                    <vue-slider v-model="form.price" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
+                                    <vue-slider v-model="form.price" :min="0" :max="5000" :process-dragable="true"
+                                                :tooltip="false" :process-style="processStyle"
+                                                @drag-end="dataLayerFunction"></vue-slider>
                                 </div>
 
                             </div>
@@ -56,14 +60,17 @@
                             <div class="filter-block__price">
 
                                 <div class="d-flex flex-nowrap align-items-center">
-                                    <span class="filter-block__price-name">Объем <span class="md-br">трафика:</span></span>
+                                    <span class="filter-block__price-name">Объем <span
+                                            class="md-br">трафика:</span></span>
                                     <input type="text" placeholder="от" v-model="form.traffic[0]">
                                     <span>–</span>
                                     <input type="text" placeholder="до" v-model="form.traffic[1]">
                                 </div>
 
                                 <div class="filter-block__range">
-                                    <vue-slider v-model="form.traffic" :min="0" :max="5000" :process-dragable="true" :tooltip="false" :process-style="processStyle" @drag-end="dataLayerFunction"></vue-slider>
+                                    <vue-slider v-model="form.traffic" :min="0" :max="5000" :process-dragable="true"
+                                                :tooltip="false" :process-style="processStyle"
+                                                @drag-end="dataLayerFunction"></vue-slider>
                                 </div>
 
                             </div>
@@ -88,13 +95,17 @@
 
                             <div class="d-flex flex-wrap flex-lg-nowrap align-items-center tariffs-sort-options">
                                 <div class="main-content__select-count">Сортировать по:</div>
-                                <multiselect @select="sort" v-model="form.sort" :options="sort_options" :allow-empty="false" track-by="name" label="name" :searchable="false" :close-on-select="true" :show-labels="false">
+                                <multiselect @select="sort" v-model="form.sort" :options="sort_options"
+                                             :allow-empty="false" track-by="name" label="name" :searchable="false"
+                                             :close-on-select="true" :show-labels="false">
                                     <template slot="singleLabel" slot-scope="{ option }">{{ option.name }}</template>
                                 </multiselect>
                             </div>
 
                             <div class="w-xs-100 offer-help">
-                                <a href="#" class="button no-bg icon-phone" v-on:click.prevent="openModal('Помогите с выбором', 'lead_upper_popup_form')">Помогите с выбором</a>
+                                <a href="#" class="button no-bg icon-phone"
+                                   v-on:click.prevent="openModal('Помогите с выбором', 'lead_upper_popup_form')">Помогите
+                                    с выбором</a>
                             </div>
                         </div>
                     </div>
@@ -105,38 +116,46 @@
                     <div class="tariffs-items__row row">
 
 
-
-                            <div class="col-lg-6 col-xl-4" v-for="tariff in tariffs">
-                                <div class="tariffs-item">
-                                    <div class="tariffs-item__label" v-if="tariff.label"><span>{{ tariff.label }}</span></div>
-                                    <div class="tariffs-item__header d-flex flex-nowrap align-items-center">
-                                        <div class="tariffs-item__operator">
-                                            <div class="tariffs-icon beeline"></div>
-                                        </div>
-                                        <div class="tariffs-item__name">{{ tariff.name }}</div>
+                        <div class="col-lg-6 col-xl-4" v-for="tariff in tariffs">
+                            <div class="tariffs-item">
+                                <div class="tariffs-item__label" v-if="tariff.label"><span>{{ tariff.label }}</span>
+                                </div>
+                                <div class="tariffs-item__header d-flex flex-nowrap align-items-center">
+                                    <div class="tariffs-item__operator">
+                                        <div class="tariffs-icon beeline"></div>
                                     </div>
-                                    <div class="tariffs-item__content">
-                                        <div class="tariffs-item__line time">{{ tariff.minutes }} мин. по России</div>
-                                        <div class="tariffs-item__line sms">{{ tariff.sms }} SMS по России</div>
-                                        <div class="tariffs-item__line net">{{ tariff.traffic }} ГБ интернета</div>
-                                        <div class="tariffs-item__line vk" v-if="tariff.socials">{{ tariff.socials }}</div>
-                                        <div class="tariffs-item__line wp" v-if="tariff.messengers">{{ tariff.messengers }}</div>
-                                        <div class="tariffs-item__line yt" v-if="tariff.youtube">{{ tariff.youtube }} YouTube</div>
+                                    <div class="tariffs-item__name">{{ tariff.name }}</div>
+                                </div>
+                                <div class="tariffs-item__content">
+                                    <div class="tariffs-item__line time">{{ tariff.minutes }} мин. по России</div>
+                                    <div class="tariffs-item__line sms">{{ tariff.sms }} SMS по России</div>
+                                    <div class="tariffs-item__line net">{{ tariff.traffic }} ГБ интернета</div>
+                                    <div class="tariffs-item__line vk" v-if="tariff.socials">{{ tariff.socials }}</div>
+                                    <div class="tariffs-item__line wp" v-if="tariff.messengers">{{ tariff.messengers
+                                        }}
                                     </div>
-                                    <div class="tariff-item_bottom">
-                                        <div class="tariffs-item__price">
-                                            <span><b>{{ tariff.final_price }} ₽</b> / месяц</span><br>
-                                            из любой точки России
-                                        </div>
-                                        <div class="tariffs-item__buttons d-flex flex-nowrap">
-                                            <!--<a href="#" class="button no-bg tariffs-item__buttons-more" v-on:click.prevent="detail(tariff)">Узнать подробнее</a>-->
-                                            <a href="#" class="button no-bg tariffs-item__buttons-more" v-on:click.prevent="openModal('Узнать подробнее', 'lead_upper_popup_form', tariff.name)">Узнать подробнее</a>
-                                            <!--<a href="#" v-if="cart.tariffs.includes(tariff.id)" class="tariffs-item__buttons-cart active" v-on:click.prevent="showNumberAlreadyInCartModal">В корзину</a>-->
-                                            <a href="#" class="tariffs-item__buttons-cart" v-on:click.prevent="openModal('Узнать подробнее', 'lead_upper_popup_form', tariff.name)">В корзину</a>
-                                        </div>
+                                    <div class="tariffs-item__line yt" v-if="tariff.youtube">{{ tariff.youtube }}
+                                        YouTube
+                                    </div>
+                                </div>
+                                <div class="tariff-item_bottom">
+                                    <div class="tariffs-item__price">
+                                        <span><b>{{ tariff.final_price }} ₽</b> / месяц</span><br>
+                                        из любой точки России
+                                    </div>
+                                    <div class="tariffs-item__buttons d-flex flex-nowrap">
+                                        <!--<a href="#" class="button no-bg tariffs-item__buttons-more" v-on:click.prevent="detail(tariff)">Узнать подробнее</a>-->
+                                        <a href="#" class="button no-bg tariffs-item__buttons-more"
+                                           v-on:click.prevent="openModal('Узнать подробнее', null, tariff.name)">Узнать
+                                            подробнее</a>
+                                        <!--<a href="#" v-if="cart.tariffs.includes(tariff.id)" class="tariffs-item__buttons-cart active" v-on:click.prevent="showNumberAlreadyInCartModal">В корзину</a>-->
+                                        <a href="#" class="tariffs-item__buttons-cart"
+                                           v-on:click.prevent="openModal('Узнать подробнее', 'basket_add', tariff.name)">В
+                                            корзину</a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
 
                     </div>
@@ -180,7 +199,7 @@
             return {
                 dataLayerFunction: function () {
                     if (!getCookie('lead__touch_beauty_number_form_done')) {
-                        addToDataLayer({'event':'lead__touch_beauty_number_form'});
+                        addToDataLayer({'event': 'lead__touch_beauty_number_form'});
                         setCookie('lead__touch_beauty_number_form_done', 1, getInfiniteUTCDateString());
                     }
                 },
@@ -214,15 +233,15 @@
 
         created() {
 
-            if(this.unlimited) {
+            if (this.unlimited) {
                 this.form.no_limit = true;
             }
 
-            if(this.unlimited_ru) {
+            if (this.unlimited_ru) {
                 this.form.no_limit_ru = true;
             }
 
-            if(this.for_internet) {
+            if (this.for_internet) {
                 this.form.for_internet = true;
             }
 
@@ -232,17 +251,17 @@
 
             showNumberAlreadyInCartModal() {
 
-            return this.$modal.show(InfoPopup, {
-                title: 'Уже в корзине',
-                text: 'Данный тариф ранее уже был добавлен в корзину',
-                link: {name: 'Перейти в корзину', href: '/korzina'}
-            }, {
-                height: 'auto',
-                adaptive: true,
-                width: 400
-            });
+                return this.$modal.show(InfoPopup, {
+                    title: 'Уже в корзине',
+                    text: 'Данный тариф ранее уже был добавлен в корзину',
+                    link: {name: 'Перейти в корзину', href: '/korzina'}
+                }, {
+                    height: 'auto',
+                    adaptive: true,
+                    width: 400
+                });
 
-        },
+            },
 
             openModal(subject, leadName, tariffName) {
                 var params = {
@@ -311,9 +330,9 @@
 
                     this.$trigger('updateCart', {tariffs: response.body.tariffs});
                     document.getElementsByClassName('basket-count')[0].innerHTML = response.body.count;
-                    document.getElementsByClassName('basket-mobile-count')[0].innerHTML =  response.body.count;
+                    document.getElementsByClassName('basket-mobile-count')[0].innerHTML = response.body.count;
 
-                    addToDataLayer({'event':'basket_add'});
+                    addToDataLayer({'event': 'basket_add'});
 
                 }, response => {
 

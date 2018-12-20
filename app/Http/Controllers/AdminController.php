@@ -69,6 +69,7 @@ class AdminController extends Controller
         $region->subdomain = $request->subdomain;
         $region->codes = json_encode($request->codes);
         $region->verif_codes = json_encode($request->verif_codes);
+        $region->geo = json_encode($request->geo ?: Region::getDefaultGeo());
         $region->address = $request->address;
         $region->save();
 
@@ -91,6 +92,7 @@ class AdminController extends Controller
         $region = Region::find($request->id);
         $region->codes = empty($region->codes) ? [] : json_decode($region->codes);
         $region->verif_codes = empty($region->verif_codes) ? [] : json_decode($region->verif_codes);
+        $region->geo = $region->geo ? json_decode($region->geo) : Region::getDefaultGeo();
         return response()->json(['success' => true, 'region' => $region]);
     }
 
