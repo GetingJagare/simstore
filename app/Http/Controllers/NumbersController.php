@@ -129,16 +129,20 @@ class NumbersController extends Controller
                     if($searchPosition) {
                         $length = strlen($search);
 
+                        $searchInStart = substr($number->value, 0, $length) === $search;
+                        $searchInEnd = substr($number->value, -$length) === $search;
+
                         if ($length) {
                             switch ($searchPosition) {
                                 case 'start':
-                                    return substr($number->value, 0, $length) === $search;
+                                    return $searchInStart;
                                 break;
                                 case 'end':
-                                    return substr($number->value, -$length) === $search;
+                                    return $searchInEnd;
                                     break;
                                 case 'middle':
-                                    return stristr(substr($number->value, 1, -1), $search) !== false;
+                                    $searchInMiddle = stristr(substr($number->value, 1, -1), $search) !== false;
+                                    return $searchInMiddle && !$searchInStart && !$searchInEnd;
                                     break;
                             }
                         }
