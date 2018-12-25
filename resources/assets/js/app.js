@@ -181,13 +181,18 @@ const app = new Vue({
 
     methods: {
         
-        openCallbackPopup: function (subject, leadName) {
+        openCallbackPopup: function (subject, leadName, tariffs) {
 
             var params = {
                 subject: subject
             };
+
             if (leadName) {
                 params = Object.assign({}, params, {leadName: leadName});
+            }
+
+            if (tariffs) {
+                params = Object.assign({}, params, {tariffs: tariffs});
             }
 
             this.$modal.show(CallbackModal, params, {

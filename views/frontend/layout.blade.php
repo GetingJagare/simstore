@@ -50,7 +50,7 @@
                 <div class="flex-nowrap d-none d-sm-flex">
                     <div class="header-phone d-inline-flex align-items-center">
                         <span class="header-phone__label">Отдел продаж:</span>
-                        <span>8 800 100 87 18</span>
+                        <span><a href="tel:+78001008718">8 800 100 87 18</a></span>
                     </div>
                     <div class="header-divider d-inline-flex align-items-center">
                         <span></span>
@@ -157,7 +157,7 @@
                 </div>
                 <div class="col-sm-4 col-md-4 d-flex align-items-center justify-content-center justify-content-sm-end">
                     <div class="text-center text-sm-right footer-right">
-                        <b>8 800 100 87 18</b><br>
+                        <b><a href="tel:+78001008718">8 800 100 87 18</a></b><br>
                         Отдел продаж: с 10:00 до 21:00<br>
                         support@sim-store.ru<br>
                         <a href="/politika-konfidentsialnosti">Политика конфиденциальности</a><br/>

@@ -85,7 +85,9 @@
                 this.form = {
                     subject: this.subject,
                     name: '',
-                    phone: ''
+                    phone: '',
+                    tariffs: '',
+                    numbers: '',
                 };
 
                 this.$emit('close');

@@ -22,8 +22,8 @@
                         </div>
                     </td>
                     <td class="offers-item__buy text-right">
-                        <a href="#" v-if="cart.tariffs.includes(tariff.id)" class="offers-item__basket active" v-on:click.prevent="showNumberAlreadyInCartModal">В корзину</a>
-                        <a href="#" class="offers-item__basket" v-on:click.prevent="addTariffToCart(tariff)" v-else>В корзину</a>
+                        <!--<a href="#" v-if="cart.tariffs.includes(tariff.id)" class="offers-item__basket active" v-on:click.prevent="showNumberAlreadyInCartModal">В корзину</a>-->
+                        <a href="#" class="offers-item__basket" v-on:click.prevent="openCallbackPopup">В корзину</a>
                     </td>
                 </tr>
                 </tbody>
@@ -38,6 +38,8 @@
 
 <script>
     import InfoPopup from './modals/InfoPopup.vue';
+    import CallbackModal from './modals/CallbackModal';
+
     export default {
 
         props: ['cart'],
@@ -116,6 +118,17 @@
                 });
 
             },
+
+            openCallbackPopup () {
+                return this.$modal.show(CallbackModal,{
+                    subject: 'Заказ тарифа',
+                    tariffs: this.tariff.name
+                }, {
+                    height: 'auto',
+                    adaptive: true,
+                    width: 400
+                });
+            }
 
         }
     }
