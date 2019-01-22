@@ -62,7 +62,7 @@
                     return false;
                 }
 
-                var params = Object.assign({}, this.number_order, getUTMTags());
+                var params = Object.assign({}, this.number_order, getUTMTags(), getGACookies());
 
                 this.$http.post('/crm', {fields: params}).then(response => {
 

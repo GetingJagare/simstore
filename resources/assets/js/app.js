@@ -114,6 +114,26 @@ window.getUTMTags = function () {
     return data;
 };
 
+window.getGACookies = function () {
+    const keys = {'_ga': 'ga'};
+    var data = {};
+    for (var cookie_key in keys) {
+        var value;
+        if (value = this.getCookie(cookie_key)) {
+            switch (cookie_key) {
+                case '_ga':
+                    var matches = value.match(/^\w+\d+\.\d+\.(\d+\.\d+)$/i);
+                    data[keys[cookie_key]] = matches ? matches[1] : null;
+                    break;
+                default:
+                    data[keys[cookie_key]] = value;
+                    break;
+            }
+        }
+    }
+    return data;
+};
+
 window.Vue = require('vue');
 window.VueEvent = require('vue-event-manager');
 

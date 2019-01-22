@@ -301,7 +301,7 @@
 
                 }*/
 
-                var params = Object.assign({}, this.form, {utm_tags: getUTMTags()});
+                var params = Object.assign({}, this.form, {utm_tags: getUTMTags()}, {ga: getGACookies()});
 
                 this.$http.post('/cart/order', params).then(response => {
 

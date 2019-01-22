@@ -161,6 +161,12 @@ class CartController extends Controller
             }
         }
 
+        if (!empty($request->ga)) {
+            foreach ($request->ga as $key => $value) {
+                $data[$key] = $value;
+            }
+        }
+
         $crm = sendToCRM($data);
 
         $this->clearCart();

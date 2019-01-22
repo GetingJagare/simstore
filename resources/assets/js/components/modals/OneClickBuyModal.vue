@@ -151,7 +151,7 @@
                     name: this.order.name,
                     phone: this.order.phone,
                     address: this.order.address
-                }, {utm_tags: getUTMTags()});
+                }, {utm_tags: getUTMTags()}, {ga: getGACookies()});
 
                 this.$http.post('/cart/order/one-click', params).then(response => {
 
