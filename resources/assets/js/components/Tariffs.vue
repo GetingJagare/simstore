@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="tariffs-item__header d-flex flex-nowrap align-items-center">
                                     <div class="tariffs-item__operator">
-                                        <div class="tariffs-icon beeline"></div>
+                                        <div class="tariffs-icon" :class="{'beeline': !tariff.provider_id || tariff.provider_id === 3, 'megafon': tariff.provider_id === 4}"></div>
                                     </div>
                                     <div class="tariffs-item__name">{{ tariff.name }}</div>
                                 </div>

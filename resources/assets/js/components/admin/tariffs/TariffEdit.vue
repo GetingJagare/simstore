@@ -47,6 +47,11 @@
                     <b-form-checkbox value="1" unchecked-value="0" v-model="tariff.sale">Тариф дня</b-form-checkbox>
                 </b-form-group>
 
+                <b-form-group label="Оператор:">
+                    <b-form-radio value="3" name="provider" @change="setProviderId" v-bind:checked="tariff.provider_id === 3">Билайн</b-form-radio>
+                    <b-form-radio value="4" name="provider" @change="setProviderId" v-bind:checked="tariff.provider_id === 4">Мегафон</b-form-radio>
+                </b-form-group>
+
                 <b-form-group label="Добавить цены номеров" class="mt-5">
                     <b-form-checkbox value="1" unchecked-value="0" v-model="addNumbersPrices"></b-form-checkbox>
 
@@ -87,6 +92,7 @@
                     no_limit: false,
                     no_limit_ru: false,
                     for_internet: false,
+                    provider_id: null,
                     sale: false,
                     number_prices: []
                 }
@@ -95,6 +101,12 @@
         },
 
         methods: {
+
+            setProviderId (checked) {
+
+                this.tariff.provider_id = checked;
+
+            },
 
             getTariff() {
 
@@ -116,8 +128,17 @@
                     this.tariff.for_internet = response.body.tariff.for_internet;
                     this.tariff.sale = response.body.tariff.sale;
                     this.tariff.number_prices = response.body.tariff.number_prices ? JSON.parse(response.body.tariff.number_prices) : [];
+                    this.tariff.provider_id = response.body.tariff.provider_id;
 
                     this.addNumbersPrices = this.tariff.number_prices.length > 0 ? 1 : 0;
+
+                    const providerRadio = this.$el.querySelector('[name="provider"][value="' + this.tariff.provider_id + '"]');
+
+                    if (providerRadio) {
+
+                        providerRadio.click();
+
+                    }
 
                 }, response => {
 

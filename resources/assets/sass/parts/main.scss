@@ -226,6 +226,12 @@ main {
           background-position: 0 -100px;
         }
 
+        &.megafon {
+          background-position: 0 0;
+          background-size: cover;
+          background-image: url(/images/megafon_icon.png);
+        }
+
       }
 
     }

@@ -131,7 +131,7 @@
 
                     <tr v-for="number in numbers">
                         <td class="offers-item__operator">
-                            <span class="beeline"></span>
+                            <span :class="{'beeline': !number.provider_id || number.provider_id === 3, 'megafon': number.provider_id === 4 }"></span>
                         </td>
                         <td class="offers-item__number">
                             {{ number.value }}

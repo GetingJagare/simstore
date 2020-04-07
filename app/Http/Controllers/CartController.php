@@ -221,9 +221,12 @@ class CartController extends Controller
 
             foreach ($allTariffs as $tariff) {
                 $numberPrice = json_decode($tariff->number_prices, true);
-                if ($number->price > (float)$numberPrice[0] && $number->price <= (float)$numberPrice[1]) {
-                    $numberTariffs[$number->id] = $tariff;
-                    break;
+
+                if (!empty($numberPrice)) {
+                    if ($number->price > (float)$numberPrice[0] && $number->price <= (float)$numberPrice[1]) {
+                        $numberTariffs[$number->id] = $tariff;
+                        break;
+                    }
                 }
             }
         } else {

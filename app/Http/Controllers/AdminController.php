@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Number;
 use App\Order;
 use App\Page;
+use App\Provider;
 use App\Region;
 use App\Setting;
 use App\Tariff;
@@ -176,6 +177,7 @@ class AdminController extends Controller
         $tariff->no_limit_ru = $request->no_limit_ru;
         $tariff->for_internet = $request->for_internet;
         $tariff->sale = $request->sale;
+        $tariff->provider_id = $request->provider_id;
 
         $number_prices = [];
         foreach ($request->number_prices as $price) {
@@ -494,6 +496,7 @@ class AdminController extends Controller
                     $numberValue = substr(str_replace(' ', '', $matches[1]), 1);
                 }
 
+                /** @var Number $numberEntity */
                 $numberEntity = Number::where('value', $numberValue)->first() ?: new Number();
                 $numberEntity->value = $numberValue;
 
@@ -506,6 +509,25 @@ class AdminController extends Controller
 
                 $cityName = mb_convert_encoding(trim($activeSheet->getCellByColumnAndRow(3, $i)->getValue()), 'utf-8');
                 $region = Region::where('city', $cityName ?: 'Москва')->first() ?: Region::where('subdomain', 'moscow')->first();
+
+                $providerName = mb_convert_encoding(trim($activeSheet->getCellByColumnAndRow(4, $i)->getValue()), 'utf-8');
+
+                if (!empty($providerName)) {
+
+                    $provider = Provider::where('name', $providerName)->first();
+
+                    if (!$provider) {
+
+                        /** @var Provider $provider */
+                        $provider = new Provider();
+                        $provider->name = $providerName;
+                        $provider->save();
+
+                    }
+
+                    $numberEntity->provider_id = $provider->id;
+
+                }
 
                 if ($region) {
                     $numberEntity->region_id = $region->id;
@@ -521,11 +543,11 @@ class AdminController extends Controller
             }
         }
 
-        if (!empty($numberValues)) {
+        /*if (!empty($numberValues)) {
             foreach ($numberValues as $numValue) {
                 Number::where('value', $numValue)->first()->delete();
             }
-        }
+        }*/
 
     }
 

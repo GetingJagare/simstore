@@ -138,6 +138,13 @@
     text-align: left;
 
     &.beeline { background-position: -0px -0px; width: 40px; height: 40px; }
+    &.megafon {
+      background-position: 0 0;
+      background-size: cover;
+      background-image: url(/images/megafon_icon-big.png);
+      width: 42px;
+      height: 42px;
+    }
     &.time { background-position: -0px -40px; width: 31px; height: 30px; }
     &.net { background-position: -0px -70px; width: 28px; height: 28px; }
     &.vk { background-position: -0px -98px; width: 28px; height: 17px; }

@@ -1,7 +1,7 @@
 window.Vue = require('vue');
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import BootstrapVue from 'bootstrap-vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import BootstrapVue from 'bootstrap-vue';
 var VueResource = require('vue-resource');
 
 Vue.use(VueResource);

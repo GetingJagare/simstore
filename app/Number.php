@@ -4,6 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Number
+ * @package App
+ *
+ * @property int $provider_id
+ * @property int $id
+ */
 class Number extends Model
 {
     //protected $connection = 'partner';

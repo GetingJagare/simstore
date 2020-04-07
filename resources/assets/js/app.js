@@ -119,7 +119,7 @@ window.getGACookies = function () {
     var data = {};
     for (var cookie_key in keys) {
         var value;
-        if (value = this.getCookie(cookie_key)) {
+        if (value = getCookie(cookie_key)) {
             switch (cookie_key) {
                 case '_ga':
                     var matches = value.match(/^\w+\d+\.\d+\.(\d+\.\d+)$/i);

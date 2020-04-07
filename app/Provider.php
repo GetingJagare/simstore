@@ -10,6 +10,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Provider
+ * @package App
+ *
+ * @property string $name
+ */
 class Provider extends Model
 {
     protected $table = 'provider';
