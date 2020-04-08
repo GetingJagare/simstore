@@ -9,7 +9,7 @@
                 <tbody>
                 <tr>
                     <td class="offers-item__operator">
-                        <span class="beeline"></span>
+                        <span :class="{'beeline': !tariff.provider_id || tariff.provider_id === 3, 'megafon': tariff.provider_id === 4}"></span>
                     </td>
                     <td>
                         <div class="offers-item__number">{{ tariff.name }}</div>

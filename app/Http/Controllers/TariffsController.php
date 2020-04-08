@@ -86,8 +86,11 @@ class TariffsController extends Controller
 
         foreach ($tariffs as $tariff) {
             $numberPrices = json_decode($tariff->number_prices, true);
-            if ($number->price > (float)$numberPrices[0] && $number->price <= (float)$numberPrices[1]) {
-                $otherTariffs[] = $tariff;
+
+            if (!empty($numberPrices)) {
+                if ($number->price > (float)$numberPrices[0] && (isset($numberPrices[1])) && $number->price <= (float)$numberPrices[1]) {
+                    $otherTariffs[] = $tariff;
+                }
             }
         }
 
